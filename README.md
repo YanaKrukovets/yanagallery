@@ -49,7 +49,11 @@ Conventions:
 
 ## Photo shot list
 
-Shoot in soft daylight on a cream or warm-white wall to match the palette. Save the files to `public/images/` and update the matching file in `src/content/`.
+Shoot in soft daylight on a cream or warm-white wall to match the palette. Save the files to `public/images/` and update the matching file in `src/content/`:
+
+- `public/images/site/`: hero and other page photos (`src/content/site.ts`)
+- `public/images/collections/`: "Shop by collection" covers, made by `node scripts/collection-covers.mjs`
+- `public/images/products/<slug>/`: one folder per product, named after its slug. `main.jpg` is the first photo, `close.jpg` a close-up, `back.jpg` a postcard back; products with designs use one file per design (e.g. `love-you.jpg`)
 
 | Section | Suggested photo | Ratio |
 | --- | --- | --- |
@@ -82,6 +86,11 @@ All animations respect the system "reduce motion" setting where it matters (marq
 
 ## Next steps
 
-- The cart works fully (add, quantities, remove, subtotal, saved between visits), but **Checkout** currently opens an email with the order filled in. Connect Stripe Checkout, Square, or Shopify to take payment directly on the site.
+- **Checkout uses Stripe.** The bag sends buyers to Stripe's secure payment page; prices always come from `src/content/products.ts` on the server.
+  1. Create a Stripe account, copy `.env.example` to `.env.local`, and paste your **test** secret key (`sk_test_...`).
+  2. Run `npm run dev`, add a piece to the bag and pay with the test card `4242 4242 4242 4242` (any future date, any CVC).
+  3. Set real delivery prices in `shippingOptions` in `src/content/site.ts`.
+  4. To go live: swap in the live key (`sk_live_...`) and set `SITE_URL` on your host (e.g. Vercel). Turn on "Successful payments" emails in Stripe so you hear about each order.
+  5. When an original sells, set `sold: true` on it in `products.ts`.
 - Add pages for the catalogue, collections, and journal posts (`src/app/catalogue/page.tsx` and so on).
 - Add a French version (`/fr`), which matters to Ottawa–Gatineau customers.

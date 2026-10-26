@@ -24,7 +24,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.9, delay: (index % 3) * 0.12, ease: EASE }}
+      transition={{ duration: 0.9, delay: (index % 4) * 0.1, ease: EASE }}
       className="group"
     >
       {/* Product photos already show the framed piece on a wall, so no extra frame here */}
@@ -41,7 +41,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               src={src}
               alt={i === 0 ? `${product.title} by ${shop.artist}` : `${product.title}, close-up`}
               fill
-              sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+              sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
               className={`object-cover transition-[opacity,transform] duration-[1.2s] ease-out group-hover:scale-105 ${
                 i === shown ? "opacity-100" : "opacity-0"
               } ${product.sold ? "grayscale-[40%]" : ""}`}
@@ -49,31 +49,31 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           ))}
         </Link>
         {badge && (
-          <span className="pointer-events-none absolute left-4 top-4 rounded-full bg-cream px-3 py-1 text-[10px] uppercase tracking-[0.2em]">
+          <span className="pointer-events-none absolute left-2.5 top-2.5 rounded-full bg-cream px-2.5 py-0.5 text-[9px] uppercase tracking-[0.18em]">
             {badge}
           </span>
         )}
-        <PhotoDots count={photos.length} shown={shown} onSelect={setShown} className="absolute right-4 top-4" />
+        <PhotoDots count={photos.length} shown={shown} onSelect={setShown} className="absolute right-2.5 top-2.5" />
         <button
           onClick={onAdd}
           disabled={disabled}
-          className="absolute inset-x-6 bottom-4 translate-y-3 rounded-full bg-ink py-3 text-xs uppercase tracking-[0.2em] text-cream opacity-0 transition-all duration-500 hover:bg-bronze focus:translate-y-0 focus:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 disabled:bg-ink/60 sm:inset-x-8 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100"
+          className="absolute inset-x-3 bottom-3 translate-y-3 rounded-full bg-ink py-2 text-[10px] uppercase tracking-[0.18em] text-cream opacity-0 transition-all duration-500 hover:bg-bronze focus:translate-y-0 focus:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 disabled:bg-ink/60 sm:inset-x-4 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100"
         >
           {label}
         </button>
       </div>
 
-      <div className="mt-5 flex items-start justify-between gap-4">
+      <div className="mt-3 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
         <div>
-          <h3 className="font-serif text-xl leading-tight">
+          <h3 className="font-serif text-base leading-tight sm:text-lg">
             <Link href={href} className="hover:text-bronze">
               {product.title}
             </Link>
           </h3>
-          <p className="mt-1 text-sm text-muted">{product.medium}</p>
-          {meta && <p className="mt-0.5 text-sm text-muted">{meta}</p>}
+          <p className="mt-1 text-xs text-muted">{product.medium}</p>
+          {meta && <p className="mt-0.5 text-xs text-muted">{meta}</p>}
         </div>
-        <p className={`whitespace-nowrap font-serif text-lg ${product.sold ? "text-muted line-through" : ""}`}>
+        <p className={`whitespace-nowrap font-serif text-base ${product.sold ? "text-muted line-through" : ""}`}>
           {cad.format(product.price)}
         </p>
       </div>

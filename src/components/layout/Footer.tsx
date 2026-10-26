@@ -43,7 +43,7 @@ export function Footer() {
           </FooterColumn>
           <FooterColumn title="Collections">
             {collections.map((c) => (
-              <li key={c.slug}><Link href={`/#${c.slug}`} className={linkClass}>{c.title}</Link></li>
+              <li key={c.slug}><Link href={`/collections/${c.slug}`} className={linkClass}>{c.title}</Link></li>
             ))}
           </FooterColumn>
           <FooterColumn title="Contact">
@@ -67,7 +67,7 @@ export function Footer() {
         <p>© 2026 {shop.name}. Made in Ottawa.</p>
         <p className="flex gap-6">
           <Link href="/#terms">Terms</Link>
-          <Link href="/#privacy">Privacy</Link>
+          <Link href="/privacy">Privacy</Link>
           <Link href="/#returns">Returns</Link>
         </p>
       </div>

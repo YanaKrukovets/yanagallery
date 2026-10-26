@@ -3,8 +3,8 @@
 import type { Product } from "@/content/products";
 import { useAddToBag } from "@/features/cart/useAddToBag";
 
-export function AddToBagButton({ product }: { product: Product }) {
-  const { onAdd, label, disabled } = useAddToBag(product);
+export function AddToBagButton({ product, design }: { product: Product; design?: string }) {
+  const { onAdd, label, disabled } = useAddToBag(product, design);
   return (
     <button
       onClick={onAdd}

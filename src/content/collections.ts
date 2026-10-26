@@ -1,25 +1,41 @@
-import { unsplash } from "@/lib/images";
+// Collections group the products by theme. Each product picks one with its `collection` field
+// in products.ts, so piece counts and collection pages update on their own.
 
-export const collections = [
+import { products, availableFirst, type Product } from "./products";
+
+export type CollectionSlug = "folk-florals" | "nature-and-sky" | "little-gifts";
+
+export type Collection = {
+  slug: CollectionSlug;
+  title: string;
+  blurb: string;
+  /** Cover for the "Shop by collection" card. Made from the product photos by scripts/collection-covers.mjs. */
+  image: string;
+};
+
+export const collections: Collection[] = [
   {
-    slug: "rideau-and-river",
-    title: "Rideau & River",
-    blurb: "Canal light, open water, and slow summer evenings.",
-    count: 24,
-    image: unsplash("1501785888041-af3ef285b470", 1000),
+    slug: "folk-florals",
+    title: "Folk Florals",
+    blurb: "Traditional folk patterns — bright blooms and a proud rooster on deep black.",
+    image: "/images/collections/folk-florals.jpg",
   },
   {
-    slug: "gatineau-hills",
-    title: "Gatineau Hills",
-    blurb: "Forest trails, fog, and the quiet just across the bridge.",
-    count: 31,
-    image: unsplash("1441974231531-c6227db76b6e", 1000),
+    slug: "nature-and-sky",
+    title: "Nature & Sky",
+    blurb: "Sunsets, northern lights, moonlight, and gardens in bloom.",
+    image: "/images/collections/nature-and-sky.jpg",
   },
   {
-    slug: "capital-winters",
-    title: "Capital Winters",
-    blurb: "Snow, skate trails, and the long blue hour of January.",
-    count: 18,
-    image: unsplash("1483664852095-d6cc6870702d", 1000),
+    slug: "little-gifts",
+    title: "Little Gifts",
+    blurb: "Hand-painted fridge magnets and postcards — small art, easy to give.",
+    image: "/images/collections/little-gifts.jpg",
   },
 ];
+
+export const getCollection = (slug: string) => collections.find((c) => c.slug === slug);
+
+/** Products in a collection, unsold ones first. */
+export const productsIn = (slug: CollectionSlug): Product[] =>
+  availableFirst(products.filter((p) => p.collection === slug));

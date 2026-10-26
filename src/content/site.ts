@@ -13,6 +13,16 @@ export const shop = {
   phone: "+1 (613) 555-0142",
 };
 
+/**
+ * Delivery choices shown on the Stripe checkout page, in whole Canadian dollars.
+ * Placeholder prices — set your real rates before launch.
+ */
+export const shippingOptions = [
+  { label: "Free pickup in Blackburn Hamlet", price: 0, days: [1, 3] },
+  { label: "Local delivery (Gatineau, Kanata, Orléans, Barrhaven)", price: 10, days: [2, 5] },
+  { label: "Shipping across Canada", price: 20, days: [5, 10] },
+] as const;
+
 export type NavLink = { href: string; label: string };
 
 /** Header links. The first half sits left of the logo on desktop, the rest on the right. */
@@ -24,8 +34,8 @@ export const navLinks: NavLink[] = [
 
 export const images = {
   // Composited from the product photos in public/images
-  hero: "/images/hero-gallery-wall.jpg",
-  heroSecondary: "/images/hero-gallery-detail.jpg",
+  hero: "/images/site/hero-gallery-wall.jpg",
+  heroSecondary: "/images/site/hero-gallery-detail.jpg",
   artist: unsplash("1452802447250-470a88ac82bc", 1200),
   artistDetail: unsplash("1499892477393-f675706cbe6e", 800),
   shop: unsplash("1518998053901-5348d3961a04", 1600),

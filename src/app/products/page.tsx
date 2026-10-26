@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { CollectionTabs } from "@/components/ui/CollectionTabs";
 import { ProductGrid } from "@/components/ui/ProductGrid";
 import { SectionHead } from "@/components/ui/SectionHead";
-import { products } from "@/content/products";
+import { availableFirst, products } from "@/content/products";
 import { shop } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -12,8 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function ProductsPage() {
-  // Unsold pieces first; sold ones stay at the end.
-  const all = [...products].sort((a, b) => Number(!!a.sold) - Number(!!b.sold));
+  const all = availableFirst(products);
 
   return (
     <>
@@ -23,6 +23,7 @@ export default function ProductsPage() {
           title={["All", { accent: "products" }]}
           intro={`Every original and print in the shop. ${all.length} ${all.length === 1 ? "piece" : "pieces"}, all painted in Ottawa.`}
         />
+        <CollectionTabs />
         <ProductGrid products={all} />
       </main>
       <Footer />

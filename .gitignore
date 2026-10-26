@@ -40,3 +40,6 @@ next-env.d.ts
 
 # full-size photo originals (web copies live in public/images)
 /originals/
+
+# example env file is safe to commit
+!.env.example

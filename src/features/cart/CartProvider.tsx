@@ -1,10 +1,16 @@
 "use client";
 
 import { createContext, useContext, useMemo, useState, useSyncExternalStore, type ReactNode } from "react";
-import { getProduct, type Product } from "@/content/products";
+import { designOf, getProduct, type Design, type Product } from "@/content/products";
 import * as store from "./store";
 
-export type CartLine = { product: Product; qty: number };
+/** `key` is unique per line; `design` is set for products that come in several designs. */
+export type CartLine = {
+  key: string;
+  product: Product;
+  design?: Design;
+  qty: number;
+};
 
 type Cart = {
   lines: CartLine[];
@@ -13,11 +19,11 @@ type Cart = {
   isOpen: boolean;
   open: () => void;
   close: () => void;
-  add: (product: Product) => void;
-  setQty: (slug: string, qty: number) => void;
-  remove: (slug: string) => void;
+  add: (product: Product, design?: string) => void;
+  setQty: (line: CartLine, qty: number) => void;
+  remove: (line: CartLine) => void;
   clear: () => void;
-  has: (slug: string) => boolean;
+  has: (slug: string, design?: string) => boolean;
   maxFor: (product: Product) => number;
 };
 
@@ -30,7 +36,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Cart>(() => {
     const lines = stored.flatMap((l) => {
       const product = getProduct(l.slug);
-      return product ? [{ product, qty: l.qty }] : [];
+      if (!product) return [];
+      return [
+        {
+          key: store.lineKey(l.slug, l.design),
+          product,
+          design: designOf(product, l.design),
+          qty: l.qty,
+        },
+      ];
     });
     return {
       lines,
@@ -39,11 +53,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       isOpen,
       open: () => setIsOpen(true),
       close: () => setIsOpen(false),
-      add: (product) => store.addOne(product.slug),
-      setQty: store.setQty,
-      remove: (slug) => store.setQty(slug, 0),
+      add: (product, design) => store.addOne(product.slug, design),
+      setQty: (line, qty) => store.setQty(line.product.slug, line.design?.id, qty),
+      remove: (line) => store.setQty(line.product.slug, line.design?.id, 0),
       clear: store.clearCart,
-      has: (slug) => stored.some((l) => l.slug === slug),
+      has: (slug, design) => stored.some((l) => store.lineKey(l.slug, l.design) === store.lineKey(slug, design)),
       maxFor: store.maxFor,
     };
   }, [stored, isOpen]);

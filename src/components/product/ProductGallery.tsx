@@ -43,7 +43,7 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
             alt={i === 0 ? title : `${title}, close-up`}
             fill
             priority={i === 0}
-            sizes="(min-width: 1024px) 55vw, 100vw"
+            sizes="(min-width: 768px) 416px, 320px"
             style={{ transformOrigin: origin, transform: zoomed && i === shown ? `scale(${ZOOM})` : undefined }}
             className={`object-cover transition-[opacity,transform] duration-500 ease-out ${
               i === shown ? "opacity-100" : "opacity-0"
@@ -64,11 +64,11 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
               onClick={() => select(i)}
               aria-label={`Show photo ${i + 1} of ${photos.length}`}
               aria-pressed={i === shown}
-              className={`relative aspect-square w-20 overflow-hidden bg-sand/60 transition-opacity md:w-24 ${
+              className={`relative aspect-square w-16 overflow-hidden bg-sand/60 transition-opacity md:w-20 ${
                 i === shown ? "ring-1 ring-ink ring-offset-2 ring-offset-cream" : "opacity-60 hover:opacity-100"
               }`}
             >
-              <Image src={src} alt="" fill sizes="96px" className="object-cover" />
+              <Image src={src} alt="" fill sizes="80px" className="object-cover" />
             </button>
           ))}
         </div>
