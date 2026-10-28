@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
 
 /** Paragraph where each word brightens as you scroll through it. */
@@ -21,7 +21,8 @@ export function ScrollHighlight({ text, className }: { text: string; className?:
 }
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.15, 1]);
+  const reduce = useReducedMotion();
+  const opacity = useTransform(progress, range, reduce ? [1, 1] : [0.15, 1]);
   return (
     <motion.span style={{ opacity }} className="inline-block">
       {children}&nbsp;

@@ -3,7 +3,7 @@
 @theme {
   --color-ink: #181a2c;
   --color-ink-soft: #434559;
-  --color-muted: #74768b;
+  --color-muted: #64667b; /* darkened from #74768b to pass WCAG AA contrast on cream and sand */
   --color-cream: #fdf9f3;
   --color-sand: #f5e6d2;
   --color-gold: #c2a26f;
@@ -26,6 +26,15 @@ html {
   select,
   summary {
     cursor: pointer;
+  }
+
+  /* Visible focus ring for keyboard users. Bronze reads on light backgrounds, gold on dark ones. */
+  :focus-visible {
+    outline: 2px solid var(--color-bronze);
+    outline-offset: 3px;
+  }
+  .bg-ink :focus-visible {
+    outline-color: var(--color-gold);
   }
 }
 
@@ -58,7 +67,9 @@ body {
   animation: marquee var(--marquee-duration, 40s) linear infinite reverse;
 }
 .marquee-pause:hover .animate-marquee,
-.marquee-pause:hover .animate-marquee-reverse {
+.marquee-pause:hover .animate-marquee-reverse,
+[data-paused] .animate-marquee,
+[data-paused] .animate-marquee-reverse {
   animation-play-state: paused;
 }
 

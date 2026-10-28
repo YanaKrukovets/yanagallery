@@ -37,8 +37,9 @@ export function Artist() {
               Hi, I&apos;m Yana Krukovets — an Ottawa artist making small paintings for cozy walls.
               Some follow the old folk tradition: roosters, curling vines and bright blossoms brushed
               onto a deep black ground. Others drift toward the night sky — a full moon, a lone tree at
-              dusk, cherry blossoms over still water. Each one is hand-painted in acrylic, sealed in
-              glossy resin and set in a natural wood frame.
+              dusk, cherry blossoms over still water. The framed pieces are hand-painted in acrylic,
+              sealed in glossy resin and set in a natural wood frame. I also paint in watercolour and
+              oil — hand-painted postcards and little fridge magnets, perfect for gifting.
             </p>
           </Reveal>
           <Reveal delay={0.3}>

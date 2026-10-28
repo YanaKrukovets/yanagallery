@@ -39,8 +39,8 @@ export function SplitHeading({ segments, as: Tag = "h2", className, delay = 0, i
       initial="hidden"
       {...trigger}
       transition={{ staggerChildren: 0.07, delayChildren: delay }}
-      aria-label={words.map((w) => w.word).join(" ")}
     >
+      <span className="sr-only">{words.map((w) => w.word).join(" ")}</span>
       {words.map(({ word, accent }, i) => (
         <Fragment key={i}>
           <span aria-hidden className="inline-block overflow-hidden pb-[0.12em] align-bottom">

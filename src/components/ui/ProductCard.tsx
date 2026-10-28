@@ -34,7 +34,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         onPointerEnter={(e) => e.pointerType === "mouse" && photos.length > 1 && setShown(1)}
         onPointerLeave={(e) => e.pointerType === "mouse" && setShown(0)}
       >
-        <Link href={href} className="relative block aspect-[3/4]" aria-label={product.title}>
+        <Link href={href} className="relative block aspect-[3/4]" tabIndex={-1} aria-hidden>
           {photos.map((src, i) => (
             <Image
               key={src}
@@ -49,7 +49,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           ))}
         </Link>
         {badge && (
-          <span className="pointer-events-none absolute left-2.5 top-2.5 rounded-full bg-cream px-2.5 py-0.5 text-[9px] uppercase tracking-[0.18em]">
+          <span className="pointer-events-none absolute left-2.5 top-2.5 rounded-full bg-cream px-2.5 py-0.5 text-[10px] uppercase tracking-[0.18em]">
             {badge}
           </span>
         )}
@@ -57,7 +57,8 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         <button
           onClick={onAdd}
           disabled={disabled}
-          className="absolute inset-x-3 bottom-3 translate-y-3 rounded-full bg-ink py-2 text-[10px] uppercase tracking-[0.18em] text-cream opacity-0 transition-all duration-500 hover:bg-bronze focus:translate-y-0 focus:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 disabled:bg-ink/60 sm:inset-x-4 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100"
+          aria-label={`${label}: ${product.title}`}
+          className="absolute inset-x-3 bottom-3 translate-y-3 rounded-full bg-ink py-2 text-[10px] uppercase tracking-[0.18em] text-cream opacity-0 transition-all duration-500 hover:bg-bronze focus:translate-y-0 focus:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 disabled:bg-ink/70 sm:inset-x-4 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100"
         >
           {label}
         </button>

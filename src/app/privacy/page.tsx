@@ -25,8 +25,9 @@ export default function PrivacyPage() {
   return (
     <>
       <Header />
-      <main className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8 md:pt-36">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-3xl px-5 pb-20 pt-28 md:px-8 md:pt-36 outline-none">
         <SectionHead
+          as="h1"
           title={["Privacy", { accent: "policy" }]}
           intro={`Last updated ${LAST_UPDATED}. The short version: I collect only what I need to send you your art, I never sell it, and you can ask me to see or delete it at any time.`}
         />
@@ -34,7 +35,7 @@ export default function PrivacyPage() {
         <div className="space-y-12 text-ink-soft leading-relaxed">
           <Section title="Who I am">
             <p>
-              {shop.name} is a small online art shop run by {shop.artist} in Ottawa, Ontario. I am
+              This is a small online art shop run by {shop.artist} in Ottawa, Ontario. I am
               responsible for the personal information collected through this website, and I am the
               person to contact about anything in this policy: {email}.
             </p>
@@ -93,6 +94,7 @@ export default function PrivacyPage() {
                   rel="noopener noreferrer"
                 >
                   Stripe&apos;s privacy policy
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </a>
                 .
               </li>
@@ -144,25 +146,8 @@ export default function PrivacyPage() {
             </ul>
             <p>
               Write to {email} and I will reply within 30 days. If you are not happy with my answer,
-              you can contact the{" "}
-              <a
-                href="https://www.priv.gc.ca"
-                className="underline underline-offset-4 hover:text-bronze"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Office of the Privacy Commissioner of Canada
-              </a>
-              , or, if you live in Quebec, the{" "}
-              <a
-                href="https://www.cai.gouv.qc.ca"
-                className="underline underline-offset-4 hover:text-bronze"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Commission d&apos;accès à l&apos;information
-              </a>
-              .
+              you can contact the Office of the Privacy Commissioner of Canada, or, if you live in
+              Quebec, the Commission d&apos;accès à l&apos;information.
             </p>
           </Section>
 

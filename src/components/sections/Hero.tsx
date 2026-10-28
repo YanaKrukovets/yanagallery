@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useId, useRef } from "react";
 import { RollText } from "@/components/motion/RollText";
 import { SplitHeading } from "@/components/motion/SplitHeading";
@@ -14,8 +14,9 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const badgePathId = useId();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const smallY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const reduce = useReducedMotion();
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "18%"]);
+  const smallY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "-40%"]);
 
   return (
     <section ref={ref} id="top" className="relative overflow-hidden pt-28 md:pt-36">
@@ -44,8 +45,8 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 1.1, ease: EASE }}
             className="mt-8 max-w-md text-lg leading-relaxed text-ink-soft"
           >
-            Original paintings and signed prints by Ottawa artist Yana Krukovets, delivered to your
-            door.
+            Original paintings and signed prints by Ottawa artist Yana Krukovets. Affordable art for
+            collectors and art lovers alike, delivered to your door.
           </motion.p>
 
           <motion.div
@@ -120,6 +121,7 @@ export function Hero() {
           >
             <motion.svg
               viewBox="0 0 100 100"
+              aria-hidden
               className="absolute inset-0 h-full w-full"
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -131,7 +133,7 @@ export function Hero() {
                 <textPath href={`#${badgePathId}`}>Made in Ottawa · Fait à Ottawa ·</textPath>
               </text>
             </motion.svg>
-            <span className="font-serif text-2xl text-bronze">✦</span>
+            <span aria-hidden className="font-serif text-2xl text-bronze">✦</span>
           </motion.div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 // The artwork for sale. Product photos live in /public/images/products/<slug>/ (main.jpg, close.jpg, designs, back.jpg).
 // Mark one-of-a-kind pieces with `original: true` so they can only be added to the bag once.
+// Keep an original's slug to 31 characters or fewer (checkout tags Stripe payments with it).
 // Every product belongs to one collection (see collections.ts).
-// When a piece sells, set `sold: true`: it stays on the site but can't be bought.
+// Originals paid for online are marked "Sold" on their own (see features/cart/sales.ts).
+// When a piece sells in person, set `sold: true`: it stays on the site but can't be bought.
 // A product sold in several designs lists them in `designs`; buyers pick one on its page.
 
 import type { CollectionSlug } from "./collections";
@@ -30,6 +32,12 @@ export type Product = {
   original?: boolean;
   /** Sold pieces stay on the site with a "Sold" label but can't be added to the bag. */
   sold?: boolean;
+  /**
+   * Weight in grams, for small flat pieces that fit in a Lettermail envelope (postcards,
+   * magnets). Bags with only these pieces can be sent by Lettermail. Leave it out for anything
+   * that needs a box.
+   */
+  letterGrams?: number;
   description?: string;
   details?: { label: string; value: string }[];
   /** Designs to choose from. The first one is the default; its photo should match `image`. */
@@ -102,13 +110,33 @@ export const bestSellers: Product[] = [
       { label: "Ready to hang", value: "Includes a natural rope hanger" },
     ],
   },
+  {
+    slug: "floral-harmony",
+    collection: "folk-florals",
+    title: "Floral Harmony",
+    medium: "Acrylic & resin · square wood frame",
+    price: 35,
+    image: "/images/products/floral-harmony/main.jpg",
+    original: true,
+    description:
+      "Bring warmth and traditional folk art charm into your home with this beautiful, one-of-a-kind floral painting. This original artwork features delicate red, pink, and golden flowers surrounded by flowing green leaves and decorative details on a rich black background. Hand-painted with acrylic paints and finished with a glossy epoxy resin coating for a beautiful, polished look. Presented in a natural wooden square frame, this miniature artwork makes a lovely addition to a gallery wall, cozy living space, or a thoughtful handmade gift. " +
+      uniqueNote,
+    details: [
+      { label: "Artwork", value: "Original, hand-painted" },
+      { label: "Medium", value: "Acrylic paint with epoxy resin coating" },
+      { label: "Frame", value: "Natural wood, square" },
+      { label: "Size", value: "4.9 × 4.9 in (12.4 × 12.4 cm)" },
+      { label: "Style", value: "Traditional folk art, floral, rustic" },
+    ],
+  },
 ];
 
 // Add pieces here to show the "New arrivals" section (hidden while empty).
-// Only the first 3 are shown on the home page, so put the newest at the top.
+// Only the first 4 are shown on the home page, so put the newest at the top.
 export const newArrivals: Product[] = [
   {
     slug: "peaceful-waterfall-magnet",
+    letterGrams: 40, // TODO: estimate — weigh a real magnet
     collection: "little-gifts",
     title: "Peaceful Waterfall",
     medium: "Hand-painted oil fridge magnet",
@@ -118,7 +146,7 @@ export const newArrivals: Product[] = [
     badge: "New",
     original: true,
     description:
-      "A beautiful miniature landscape featuring a bright blue waterfall surrounded by lush green trees, distant mountains, and birds flying across the sky. This one-of-a-kind fridge magnet is individually hand-painted with oil paints and finished with a water-based glossy protective coating. A charming little piece of original art, perfect for decorating your fridge or giving as a thoughtful handmade gift.",
+      "A beautiful miniature landscape featuring a bright blue waterfall surrounded by lush green trees, distant mountains, and birds flying across the sky. This one-of-a-kind fridge magnet is individually hand-painted with oil paints — without a brush, using only fingers — and finished with a water-based glossy protective coating. A charming little piece of original art, perfect for decorating your fridge or giving as a thoughtful handmade gift.",
     details: [
       { label: "Artwork", value: "Original, hand-painted" },
       { label: "Medium", value: "Oil paint" },
@@ -129,6 +157,7 @@ export const newArrivals: Product[] = [
   },
   {
     slug: "autumn-waterfall-magnet",
+    letterGrams: 40, // TODO: estimate — weigh a real magnet
     collection: "little-gifts",
     title: "Autumn Waterfall",
     medium: "Hand-painted oil fridge magnet",
@@ -138,7 +167,7 @@ export const newArrivals: Product[] = [
     badge: "New",
     original: true,
     description:
-      "Bring a touch of nature into your home with this beautiful, one-of-a-kind fridge magnet featuring a peaceful waterfall surrounded by colourful autumn trees. Each magnet is individually hand-painted with oil paints and finished with a water-based glossy coating for a beautiful shine and protection. A lovely little piece of art, perfect for decorating your fridge or giving as a unique handmade gift.",
+      "Bring a touch of nature into your home with this beautiful, one-of-a-kind fridge magnet featuring a peaceful waterfall surrounded by colourful autumn trees. Each magnet is individually hand-painted with oil paints — without a brush, using only fingers — and finished with a water-based glossy coating for a beautiful shine and protection. A lovely little piece of art, perfect for decorating your fridge or giving as a unique handmade gift.",
     details: [
       { label: "Artwork", value: "Original, hand-painted" },
       { label: "Medium", value: "Oil paint" },
@@ -149,6 +178,7 @@ export const newArrivals: Product[] = [
   },
   {
     slug: "christmas-gnome-postcard",
+    letterGrams: 15, // TODO: estimate — weigh a real postcard
     collection: "little-gifts",
     title: "Christmas Gnome",
     medium: "Hand-painted watercolour postcard",
@@ -173,6 +203,7 @@ export const newArrivals: Product[] = [
   },
   {
     slug: "together-panda-postcard",
+    letterGrams: 15, // TODO: estimate — weigh a real postcard
     collection: "little-gifts",
     title: "Together",
     medium: "Hand-painted watercolour postcard",
@@ -261,26 +292,6 @@ export const newArrivals: Product[] = [
       // TODO: add the real size, e.g. { label: "Size", value: "4.9 × 4.9 in (12.4 × 12.4 cm)" },
       { label: "Style", value: "Moon-inspired, celestial, minimalist" },
       { label: "Ready to hang", value: "Includes a natural rope hanger" },
-    ],
-  },
-  {
-    slug: "floral-harmony",
-    collection: "folk-florals",
-    title: "Floral Harmony",
-    medium: "Acrylic & resin · square wood frame",
-    price: 35,
-    image: "/images/products/floral-harmony/main.jpg",
-    badge: "New",
-    original: true,
-    description:
-      "Bring warmth and traditional folk art charm into your home with this beautiful, one-of-a-kind floral painting. This original artwork features delicate red, pink, and golden flowers surrounded by flowing green leaves and decorative details on a rich black background. Hand-painted with acrylic paints and finished with a glossy epoxy resin coating for a beautiful, polished look. Presented in a natural wooden square frame, this miniature artwork makes a lovely addition to a gallery wall, cozy living space, or a thoughtful handmade gift. " +
-      uniqueNote,
-    details: [
-      { label: "Artwork", value: "Original, hand-painted" },
-      { label: "Medium", value: "Acrylic paint with epoxy resin coating" },
-      { label: "Frame", value: "Natural wood, square" },
-      { label: "Size", value: "4.9 × 4.9 in (12.4 × 12.4 cm)" },
-      { label: "Style", value: "Traditional folk art, floral, rustic" },
     ],
   },
   {

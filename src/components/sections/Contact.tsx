@@ -3,7 +3,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RollText } from "@/components/motion/RollText";
 import { SplitHeading } from "@/components/motion/SplitHeading";
 import { images, shop } from "@/content/site";
-import { mailtoHref, telHref } from "@/lib/format";
+import { mailtoHref } from "@/lib/format";
 
 export function Contact() {
   return (
@@ -23,18 +23,12 @@ export function Contact() {
           />
           <Reveal delay={0.2}>
             <p className="mt-6 text-lg text-sand/80">
-              This is an online-only gallery, so there&apos;s no storefront to visit — but you&apos;ll
-              always reach me directly. Ask about a piece, a commission, or a custom size.
+              Ask about a piece, a commission, or a custom size.
             </p>
             <ul className="mt-8 space-y-2">
               <li>
                 <a href={`mailto:${shop.email}`} className="font-serif text-2xl underline decoration-gold underline-offset-4">
                   {shop.email}
-                </a>
-              </li>
-              <li>
-                <a href={telHref(shop.phone)} className="text-sand/80 hover:text-cream">
-                  {shop.phone}
                 </a>
               </li>
             </ul>

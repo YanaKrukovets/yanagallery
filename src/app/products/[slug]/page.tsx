@@ -5,8 +5,9 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ProductBuy } from "@/components/product/ProductBuy";
 import { ProductGrid } from "@/components/ui/ProductGrid";
-import { getProduct, products } from "@/content/products";
+import { availableFirst, getProduct, products } from "@/content/products";
 import { shop } from "@/content/site";
+import { withSales } from "@/features/cart/sales";
 import { cad } from "@/lib/format";
 
 export function generateStaticParams() {
@@ -26,19 +27,18 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
 }
 
 export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
-  const product = getProduct((await params).slug);
+  const slug = (await params).slug;
+  const all = await withSales(products);
+  const product = all.find((p) => p.slug === slug);
   if (!product) notFound();
 
   // Other pieces, unsold ones first.
-  const more = products
-    .filter((p) => p.slug !== product.slug)
-    .sort((a, b) => Number(!!a.sold) - Number(!!b.sold))
-    .slice(0, 4);
+  const more = availableFirst(all.filter((p) => p.slug !== product.slug)).slice(0, 4);
 
   return (
     <>
       <Header />
-      <main className="mx-auto max-w-7xl px-5 pb-20 pt-28 md:px-8 md:pt-36">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-7xl px-5 pb-20 pt-28 md:px-8 md:pt-36 outline-none">
         <Link href="/products" className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink">
           ← All work
         </Link>

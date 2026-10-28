@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RollText } from "@/components/motion/RollText";
 import { navLinks, shop, type NavLink } from "@/content/site";
 import { useCart } from "@/features/cart/CartProvider";
@@ -29,25 +29,35 @@ export function Header() {
     setScrolled(y > 20);
   });
 
+  // Escape closes the mobile menu.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   return (
     <motion.header
       animate={{ y: hidden ? "-110%" : "0%" }}
       transition={{ duration: 0.45, ease: EASE }}
+      // Keyboard users tabbing through the header shouldn't have it slide away.
+      onFocus={() => setHidden(false)}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
         scrolled ? "border-b border-ink/10 bg-cream/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-8">
-        <DesktopNav links={leftLinks} />
+        <DesktopNav links={leftLinks} label="Main" />
 
         <Link href="/#top" className="font-serif text-xl tracking-tight md:absolute md:left-1/2 md:-translate-x-1/2 md:text-2xl">
           {shop.artist}
-          <span className="accent">.</span>
+          <span aria-hidden className="accent">.</span>
         </Link>
 
         <div className="flex items-center gap-6 text-xs uppercase tracking-[0.2em]">
-          <DesktopNav links={rightLinks} />
-          <button onClick={openCart} className="flex items-center gap-2" aria-label={`Open bag, ${count} items`}>
+          <DesktopNav links={rightLinks} label="More" />
+          <button onClick={openCart} className="flex items-center gap-2" aria-label={`Open bag, ${count} ${count === 1 ? "item" : "items"}`}>
             Bag
             <BagCount count={count} />
           </button>
@@ -56,6 +66,7 @@ export function Header() {
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
             {menuOpen ? "Close" : "Menu"}
           </button>
@@ -69,9 +80,9 @@ export function Header() {
   );
 }
 
-function DesktopNav({ links }: { links: NavLink[] }) {
+function DesktopNav({ links, label }: { links: NavLink[]; label: string }) {
   return (
-    <nav className="hidden gap-8 text-xs uppercase tracking-[0.2em] md:flex">
+    <nav aria-label={label} className="hidden gap-8 text-xs uppercase tracking-[0.2em] md:flex">
       {links.map((l) => (
         <Link key={l.href} href={l.href} className="text-ink-soft hover:text-ink">
           <RollText text={l.label} />
@@ -85,6 +96,7 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
   return (
     <motion.nav
       id="mobile-nav"
+      aria-label="Mobile"
       initial={{ height: 0 }}
       animate={{ height: "auto" }}
       exit={{ height: 0 }}

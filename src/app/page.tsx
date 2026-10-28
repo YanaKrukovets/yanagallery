@@ -7,7 +7,6 @@ import { Contact } from "@/components/sections/Contact";
 import { Faq } from "@/components/sections/Faq";
 import { Features } from "@/components/sections/Features";
 import { Hero } from "@/components/sections/Hero";
-import { Journal } from "@/components/sections/Journal";
 import { NewArrivals } from "@/components/sections/NewArrivals";
 import { Philosophy } from "@/components/sections/Philosophy";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -17,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
         <Ticker />
         <Features />
@@ -27,7 +26,7 @@ export default function Home() {
         <Artist />
         <NewArrivals />
         {/* Commissions section hidden for now. To bring it back, import it from "@/components/sections/Commissions" and add <Commissions /> here. */}
-        <Journal />
+        {/* Journal section hidden until there are real posts. To bring it back, import it from "@/components/sections/Journal" and add <Journal /> here. */}
         <Testimonials />
         <Faq />
         <Contact />

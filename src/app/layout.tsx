@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Hedvig_Letters_Sans } from "next/font/google";
 import { CartDrawer } from "@/features/cart/CartDrawer";
 import { CartProvider } from "@/features/cart/CartProvider";
+import { MotionPrefs } from "@/components/motion/MotionPrefs";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -27,10 +28,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-CA" className={`${fraunces.variable} ${hedvig.variable} antialiased`}>
       <body>
-        <CartProvider>
-          {children}
-          <CartDrawer />
-        </CartProvider>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:text-cream"
+        >
+          Skip to content
+        </a>
+        <MotionPrefs>
+          <CartProvider>
+            {children}
+            <CartDrawer />
+          </CartProvider>
+        </MotionPrefs>
       </body>
     </html>
   );

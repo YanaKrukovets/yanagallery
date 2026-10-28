@@ -14,8 +14,8 @@ export function RollText({ text, className }: { text: string; className?: string
       initial="rest"
       whileHover="hover"
       animate="rest"
-      aria-label={text}
     >
+      <span className="sr-only">{text}</span>
       {text.split("").map((ch, i) => {
         const glyph = ch === " " ? NBSP : ch;
         const transition = { duration: 0.35, delay: i * 0.02, ease: EASE };

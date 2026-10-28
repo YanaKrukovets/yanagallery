@@ -14,7 +14,7 @@ export function PhotoDots({
 }) {
   if (count < 2) return null;
   return (
-    <div className={`flex gap-1.5 rounded-full bg-cream/80 px-2.5 py-2 ${className}`}>
+    <div className={`flex rounded-full bg-cream/80 px-1 ${className}`}>
       {Array.from({ length: count }, (_, i) => (
         <button
           key={i}
@@ -22,8 +22,12 @@ export function PhotoDots({
           onClick={() => onSelect(i)}
           aria-label={`Show photo ${i + 1} of ${count}`}
           aria-pressed={i === shown}
-          className={`h-2 w-2 rounded-full transition-colors ${i === shown ? "bg-ink" : "bg-ink/25 hover:bg-ink/50"}`}
-        />
+          className="group/dot grid h-6 w-6 place-items-center rounded-full"
+        >
+          <span
+            className={`h-2 w-2 rounded-full transition-colors ${i === shown ? "bg-ink" : "bg-ink/25 group-hover/dot:bg-ink/50"}`}
+          />
+        </button>
       ))}
     </div>
   );

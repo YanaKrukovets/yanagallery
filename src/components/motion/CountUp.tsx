@@ -23,5 +23,12 @@ export function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
     return () => controls.stop();
   }, [inView, to, suffix, value, reduce]);
 
-  return <span ref={ref}>0{suffix}</span>;
+  return (
+    <>
+      <span ref={ref} aria-hidden>
+        0{suffix}
+      </span>
+      <span className="sr-only">{to.toLocaleString("en-CA") + suffix}</span>
+    </>
+  );
 }

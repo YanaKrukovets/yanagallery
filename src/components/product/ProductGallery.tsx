@@ -13,6 +13,8 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
   const [origin, setOrigin] = useState("50% 50%");
 
   const aim = (e: MouseEvent<HTMLButtonElement>) => {
+    // Keyboard "clicks" have no pointer position: zoom into the centre.
+    if (e.type === "click" && e.detail === 0) return setOrigin("50% 50%");
     const r = e.currentTarget.getBoundingClientRect();
     setOrigin(`${((e.clientX - r.left) / r.width) * 100}% ${((e.clientY - r.top) / r.height) * 100}%`);
   };
@@ -26,7 +28,7 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
     <div className="flex flex-col gap-4">
       <button
         type="button"
-        aria-label={zoomed ? "Zoom out" : "Zoom in"}
+        aria-label={`${shown === 0 ? title : `${title}, close-up`}. ${zoomed ? "Zoom out" : "Zoom in"}`}
         className={`relative block aspect-[4/5] w-full overflow-hidden bg-sand/60 ${zoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
         onClick={(e) => {
           aim(e);
@@ -40,7 +42,7 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
           <Image
             key={src}
             src={src}
-            alt={i === 0 ? title : `${title}, close-up`}
+            alt=""
             fill
             priority={i === 0}
             sizes="(min-width: 768px) 416px, 320px"
@@ -50,7 +52,7 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
             }`}
           />
         ))}
-        <span className="pointer-events-none absolute bottom-4 right-4 rounded-full bg-cream/85 px-3 py-1 text-[10px] uppercase tracking-[0.2em] [@media(hover:hover)]:hidden">
+        <span aria-hidden className="pointer-events-none absolute bottom-4 right-4 rounded-full bg-cream/85 px-3 py-1 text-[10px] uppercase tracking-[0.2em] [@media(hover:hover)]:hidden">
           {zoomed ? "Tap to zoom out" : "Tap to zoom"}
         </span>
       </button>

@@ -29,7 +29,10 @@ export function CollectionTabs({ active }: { active?: string }) {
                 }`}
               >
                 {t.label}
-                <span className={current ? "text-sand/70" : "text-muted"}>{t.count}</span>
+                <span className={current ? "text-sand/70" : "text-muted"}>
+                  {t.count}
+                  <span className="sr-only"> pieces</span>
+                </span>
               </Link>
             </li>
           );

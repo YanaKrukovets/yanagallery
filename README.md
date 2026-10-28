@@ -90,7 +90,7 @@ All animations respect the system "reduce motion" setting where it matters (marq
   1. Create a Stripe account, copy `.env.example` to `.env.local`, and paste your **test** secret key (`sk_test_...`).
   2. Run `npm run dev`, add a piece to the bag and pay with the test card `4242 4242 4242 4242` (any future date, any CVC).
   3. Set real delivery prices in `shippingOptions` in `src/content/site.ts`.
-  4. To go live: swap in the live key (`sk_live_...`) and set `SITE_URL` on your host (e.g. Vercel). Turn on "Successful payments" emails in Stripe so you hear about each order.
-  5. When an original sells, set `sold: true` on it in `products.ts`.
+  4. To go live: swap in the live key (`sk_live_...`) and set `SITE_URL` on your host (e.g. Vercel). Turn on "Successful payments" emails in Stripe so you hear about each order. Each payment in Stripe shows a `delivery` note ("Local pickup…" or "Delivery to K1B 1A1", the postal code typed in the bag). If it doesn't match the shipping address on the order, contact the buyer. Orders where the buyer reached the thank-you page and the address is outside the local delivery area also get a `delivery_check` note.
+  5. Originals paid for online show "Sold" on their own within a few minutes. When a piece sells in person, set `sold: true` on it in `products.ts`.
 - Add pages for the catalogue, collections, and journal posts (`src/app/catalogue/page.tsx` and so on).
 - Add a French version (`/fr`), which matters to Ottawa–Gatineau customers.

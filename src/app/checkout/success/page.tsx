@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { shop } from "@/content/site";
 import { ClearCart } from "@/features/cart/ClearCart";
+import { outsideArea } from "@/features/cart/delivery";
 import { stripe } from "@/lib/stripe";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default function CheckoutSuccessPage({ searchParams }: PageProps<"/checko
   return (
     <>
       <Header />
-      <main className="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-5 pb-20 pt-28 text-center md:pt-36">
+      <main id="main" tabIndex={-1} className="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-5 pb-20 pt-28 text-center md:pt-36 outline-none">
         <Suspense fallback={<p className="text-ink-soft">Confirming your order…</p>}>
           <OrderStatus searchParams={searchParams} />
         </Suspense>
@@ -30,7 +31,9 @@ async function OrderStatus({ searchParams }: Pick<PageProps<"/checkout/success">
   const { session_id } = await searchParams;
   const session = await findSession(session_id);
 
-  if (!session || session.payment_status !== "paid") {
+  // A bank debit can leave a finished checkout "unpaid" for a few days while it goes through.
+  const processing = session?.status === "complete" && session.payment_status === "unpaid";
+  if (!session || (session.payment_status !== "paid" && !processing)) {
     return (
       <>
         <h1 className="font-serif text-4xl md:text-5xl">
@@ -50,6 +53,11 @@ async function OrderStatus({ searchParams }: Pick<PageProps<"/checkout/success">
 
   const name = session.customer_details?.name?.split(" ")[0];
   const email = session.customer_details?.email;
+  const rate = session.shipping_cost?.shipping_rate;
+  const deliveryLabel = rate && typeof rate !== "string" ? (rate.display_name ?? undefined) : undefined;
+  const postalCode = session.collected_information?.shipping_details?.address?.postal_code;
+  const offArea = outsideArea(deliveryLabel, postalCode);
+  if (offArea) await flagDelivery(session.payment_intent, deliveryLabel, postalCode);
 
   return (
     <>
@@ -59,8 +67,15 @@ async function OrderStatus({ searchParams }: Pick<PageProps<"/checkout/success">
       </h1>
       <p className="mt-6 text-ink-soft">
         {email ? <>A receipt is on its way to {email}. </> : null}
+        {processing && <>Your payment is still going through; you&apos;ll get an email once it does. </>}
         Yana will be in touch soon about pickup or delivery.
       </p>
+      {offArea && (
+        <p className="mt-4 text-ink-soft">
+          Your address ({postalCode}) is outside the area for “{deliveryLabel}”, so Yana will email
+          you about the delivery cost or a refund.
+        </p>
+      )}
       <BackLink />
     </>
   );
@@ -69,9 +84,28 @@ async function OrderStatus({ searchParams }: Pick<PageProps<"/checkout/success">
 async function findSession(id: string | string[] | undefined) {
   if (typeof id !== "string" || !id.startsWith("cs_")) return null;
   try {
-    return await stripe().checkout.sessions.retrieve(id);
+    return await stripe().checkout.sessions.retrieve(id, { expand: ["shipping_cost.shipping_rate"] });
   } catch {
     return null;
+  }
+}
+
+/** Notes on the payment in Stripe that the buyer picked local delivery for an address outside its area. */
+async function flagDelivery(
+  payment: string | { id: string } | null,
+  label: string | undefined,
+  postalCode: string | null | undefined,
+) {
+  const id = typeof payment === "string" ? payment : payment?.id;
+  if (!id) return;
+  try {
+    await stripe().paymentIntents.update(id, {
+      metadata: {
+        delivery_check: `Outside the area for "${label}" (address postal code ${postalCode ?? "missing"}). Contact the buyer.`.slice(0, 500),
+      },
+    });
+  } catch (err) {
+    console.error("Couldn't flag the delivery address in Stripe:", err);
   }
 }
 
