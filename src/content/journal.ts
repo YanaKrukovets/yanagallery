@@ -12,6 +12,11 @@ export type Post = {
   date: string;
   minutes: number;
   /**
+   * The post's picture (in public/), shown at the top of the post and in the blog list. `share`
+   * is a 1200 × 630 crop of it for link previews on social media and in chats.
+   */
+  image?: { src: string; share: string; alt: string };
+  /**
    * Product slugs to show in the "From the studio" section at the end of the post. Sold ones
    * are skipped, and other available pieces fill the rest of the row.
    */
@@ -24,11 +29,16 @@ export const posts: Post[] = [
     slug: "halloween-weekend-ottawa-2026",
     title: "An artsy Halloween weekend in Ottawa",
     description:
-      "Day of the Dead altars, Nosferatu with a live choir, a night at the Museum of Nature and a few craft markets: where to find art and handmade things in Ottawa over Halloween weekend, October 30 to November 1, 2026.",
+      "Day of the Dead altars, Nosferatu with a live choir, a museum night and craft fairs: art and handmade things to see in Ottawa over Halloween weekend 2026.",
     date: "2026-10-28",
     minutes: 4,
-    // Night pieces, for Halloween. Moonlight Shadows is shown inside the post instead.
-    featured: ["twilight-tree", "northern-lights-reflection", "midnight-blue-blossom", "wildflower-garden"],
+    image: {
+      src: "/images/blog/halloween-cat-porch.jpg",
+      share: "/images/blog/halloween-cat-porch-share.jpg",
+      alt: "A black cat in a witch hat sitting on a porch beside glowing jack-o'-lanterns, a lantern and autumn leaves",
+    },
+    // Midnight Blue Blossom, Moonlight Shadows and Twilight Tree are shown together inside the post.
+    featured: ["northern-lights-reflection", "wildflower-garden", "folk-rooster", "cherry-blossom-serenity"],
     Body: HalloweenWeekendOttawa2026,
   },
 ];

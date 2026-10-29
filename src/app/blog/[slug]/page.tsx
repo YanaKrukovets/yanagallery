@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
@@ -18,7 +19,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const post = getPost((await params).slug);
   if (!post) return {};
-  return pageMetadata({ title: post.title, description: post.description, path: `/blog/${post.slug}` });
+  return pageMetadata({
+    title: post.title,
+    description: post.description,
+    path: `/blog/${post.slug}`,
+    image: post.image && { url: post.image.share, alt: post.image.alt },
+    publishedTime: post.date,
+  });
 }
 
 /** Four unsold pieces for the end of a post: the post's own picks first, then any others. */
@@ -55,13 +62,25 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
             <time dateTime={post.date}>{postDate(post.date)}</time> · {post.minutes} min read
           </p>
           <h1 className="mt-4 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">{post.title}</h1>
+          {post.image && (
+            <div className="relative mt-10 aspect-[4/3] overflow-hidden bg-sand/60">
+              <Image
+                src={post.image.src}
+                alt={post.image.alt}
+                fill
+                priority
+                sizes="(min-width: 768px) 768px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          )}
           <div className="mt-10 space-y-5 text-lg leading-relaxed text-ink-soft">
             <Body />
           </div>
         </article>
 
         {pieces.length > 0 && (
-          <section aria-label="Art for sale" className="mt-24 border-t border-ink/15 pt-16 md:mt-32 md:pt-20">
+          <section className="mt-24 border-t border-ink/15 pt-16 md:mt-32 md:pt-20">
             <SectionHead
               title={["From the", { accent: "studio" }]}
               intro="Original paintings, postcards and magnets, hand-painted in Ottawa. Free pickup in Blackburn Hamlet, or shipped anywhere in Canada."

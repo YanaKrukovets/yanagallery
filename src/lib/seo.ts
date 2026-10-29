@@ -34,21 +34,28 @@ export function pageMetadata({
   description,
   path,
   ownImage = false,
+  image,
+  publishedTime,
 }: {
   title: string;
   description: string;
   path: string;
   /** True when the page has its own opengraph-image file next to it. */
   ownImage?: boolean;
+  /** A 1200 × 630 picture in public/ to share instead of the default one. */
+  image?: { url: string; alt: string };
+  /** For blog posts (YYYY-MM-DD): shares the page as an article with this publish date. */
+  publishedTime?: string;
 }): Metadata {
   // Leave `images` out entirely when the page has its own file; even `images: undefined` hides it.
-  const images = ownImage ? {} : { images: [defaultShareImage] };
+  const shareImage = image ? { ...defaultShareImage, type: "image/jpeg", ...image } : defaultShareImage;
+  const images = ownImage ? {} : { images: [shareImage] };
   return {
     title,
     description,
     alternates: { canonical: path },
     openGraph: {
-      type: "website",
+      ...(publishedTime ? { type: "article" as const, publishedTime } : { type: "website" as const }),
       siteName: shop.name,
       locale: "en_CA",
       url: path,
@@ -231,6 +238,7 @@ export function blogPostingJsonLd(post: Post) {
     description: post.description,
     url,
     datePublished: post.date,
+    ...(post.image && { image: absoluteUrl(post.image.src) }),
     inLanguage: "en-CA",
     author: { "@id": ids.artist },
     publisher: { "@id": ids.store },

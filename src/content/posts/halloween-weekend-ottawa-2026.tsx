@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { PostProduct } from "@/components/blog/PostProduct";
+import { PostProducts } from "@/components/blog/PostProducts";
 
 // Halloween weekend in Ottawa, Oct 30 – Nov 1, 2026. Dates, times and prices come from
 // event listings checked on October 28, 2026.
@@ -49,10 +49,7 @@ export default function HalloweenWeekendOttawa2026() {
         in a church, on Halloween night is hard to pass up.
       </Event>
 
-      <PostProduct
-        slug="moonlight-shadows"
-        note="If you'd like a bit of Halloween night to keep, this little moon is painted in acrylic and sealed in resin."
-      />
+      <PostProducts slugs={["midnight-blue-blossom", "moonlight-shadows", "twilight-tree"]} />
 
       <Event
         title="Nature Nocturne at the Canadian Museum of Nature"
@@ -123,7 +120,10 @@ function Event({
       <p className="mt-4">{children}</p>
       {link && (
         <p className="mt-3">
-          <Ext href={link.href}>{link.label} →</Ext>
+          <Ext href={link.href}>
+            {link.label}
+            <span className="sr-only">: {title}</span> <span aria-hidden>→</span>
+          </Ext>
         </p>
       )}
     </section>
@@ -140,6 +140,7 @@ function Ext({ href, children }: { href: string; children: ReactNode }) {
       className="text-ink underline decoration-gold underline-offset-4 hover:text-bronze"
     >
       {children}
+      <span className="sr-only"> (opens in a new tab)</span>
     </a>
   );
 }
