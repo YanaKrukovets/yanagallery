@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SectionHead } from "@/components/ui/SectionHead";
+import { pageMetadata } from "@/lib/seo";
 import { shop } from "@/content/site";
 
 // Plain-language privacy policy. Keep it in step with what the site really does:
@@ -10,10 +11,11 @@ import { shop } from "@/content/site";
 // service, add it here and change the date.
 const LAST_UPDATED = "October 23, 2026";
 
-export const metadata: Metadata = {
-  title: `Privacy | ${shop.name}`,
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy",
   description: `How ${shop.name} collects, uses, and protects your personal information.`,
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   const email = (

@@ -6,7 +6,7 @@
 
 import { headers } from "next/headers";
 import { designOf, getProduct } from "@/content/products";
-import { lettermail } from "@/content/site";
+import { lettermail, onlinePayments } from "@/content/site";
 import { stripe } from "@/lib/stripe";
 import { cleanPostalCode, deliveryOptionFor, pickupOption, type Delivery } from "./delivery";
 import { alreadyPaidFor, soldKey } from "./sales";
@@ -70,6 +70,7 @@ export async function startCheckout(
   delivery: Delivery,
   previousSession?: string,
 ): Promise<CheckoutResult> {
+  if (onlinePayments.paused) return { error: onlinePayments.notice };
   if (!Array.isArray(input) || input.length === 0 || input.length > MAX_LINES) {
     return { error: "Your bag is empty." };
   }

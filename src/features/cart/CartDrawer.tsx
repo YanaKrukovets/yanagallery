@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { RollText } from "@/components/motion/RollText";
-import { shop } from "@/content/site";
+import { onlinePayments, shop } from "@/content/site";
 import { cad, mailtoHref } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 import { useCart, type CartLine } from "./CartProvider";
@@ -131,6 +131,7 @@ function CheckoutButton({ lines }: { lines: CartLine[] }) {
     setError(null);
     if (method === "delivery" && !postalCode) {
       setError("Please enter a Canadian postal code, like K1B 1A1.");
+      document.getElementById("postal-code")?.focus();
       return;
     }
     startTransition(async () => {
@@ -151,6 +152,26 @@ function CheckoutButton({ lines }: { lines: CartLine[] }) {
     });
   };
 
+  if (onlinePayments.paused) {
+    return (
+      <div className="mt-6 space-y-5">
+        <p role="status" className="rounded-2xl border border-bronze/40 bg-sand/40 px-4 py-3 text-sm text-ink">
+          {onlinePayments.notice}
+        </p>
+        <a
+          href={viewingEmailHref(lines)}
+          className="flex w-full items-center justify-center gap-3 rounded-full bg-ink py-4 text-sm uppercase tracking-[0.15em] text-cream transition-colors hover:bg-bronze"
+        >
+          <RollText text="Email to order" />
+          <span aria-hidden>✉</span>
+        </a>
+        <p className="text-center text-xs text-muted">
+          Pickup or local delivery in Blackburn Hamlet. Pay in person or by Interac e-Transfer.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-6 space-y-5">
       <div>
@@ -161,6 +182,7 @@ function CheckoutButton({ lines }: { lines: CartLine[] }) {
           postal={postal}
           onPostal={setPostal}
           postalCode={postalCode}
+          invalid={!!error && method === "delivery" && !postalCode}
         />
         <button
           type="button"
@@ -171,7 +193,7 @@ function CheckoutButton({ lines }: { lines: CartLine[] }) {
           {pending ? "Opening secure checkout…" : <RollText text="Pay now" />}
           <span aria-hidden>→</span>
         </button>
-        <p role="status" className={`mt-2 text-center text-xs ${error ? "text-red-700" : "text-muted"}`}>
+        <p id="checkout-status" role="status" className={`mt-2 text-center text-xs ${error ? "text-red-700" : "text-muted"}`}>
           {error ?? "Secure payment by Stripe. Cards, Apple Pay and Google Pay accepted."}
         </p>
       </div>
@@ -203,12 +225,15 @@ function DeliveryChoice({
   postal,
   onPostal,
   postalCode,
+  invalid,
 }: {
   method: Delivery["method"];
   onMethod: (method: Delivery["method"]) => void;
   postal: string;
   onPostal: (postal: string) => void;
   postalCode: string | undefined;
+  /** True after a failed checkout attempt; links the input to the error message. */
+  invalid: boolean;
 }) {
   const option = postalCode && deliveryOptionFor(postalCode);
   const choice = (value: Delivery["method"], label: string) => (
@@ -242,7 +267,9 @@ function DeliveryChoice({
             autoComplete="postal-code"
             placeholder="K1B 1A1"
             maxLength={7}
-            className="mt-1 w-full rounded-full border border-ink/25 bg-transparent px-4 py-2.5 text-sm uppercase focus:border-ink focus:outline-none"
+            aria-invalid={invalid || undefined}
+            aria-describedby={invalid ? "checkout-status" : undefined}
+            className="mt-1 w-full rounded-full border border-ink/50 bg-transparent px-4 py-2.5 text-sm uppercase focus:border-ink aria-invalid:border-red-700"
           />
           {option && (
             <p className="mt-2 text-xs text-ink-soft">
@@ -283,6 +310,12 @@ function viewingEmailHref(lines: CartLine[]) {
       return `- ${name}${qty > 1 ? ` × ${qty}` : ""}, ${cad.format(product.price * qty)}`;
     })
     .join("\n");
+  if (onlinePayments.paused) {
+    return mailtoHref(shop.email, {
+      subject: "I'd like to order some pieces",
+      body: `Hi Yana,\n\nI'd like to buy these pieces:\n\n${items}\n\nI'd like pickup / local delivery (choose one), and I'll pay in person / by Interac e-Transfer (choose one).\n\nThanks,\n`,
+    });
+  }
   return mailtoHref(shop.email, {
     subject: "I'd like to see some pieces in person",
     body: `Hi Yana,\n\nI'd like to see these pieces in person before I buy:\n\n${items}\n\nWhen would be a good time to meet? I'd pay by cash / online (choose one).\n\nThanks,\n`,

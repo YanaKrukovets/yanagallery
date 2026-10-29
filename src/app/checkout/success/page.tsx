@@ -9,8 +9,8 @@ import { outsideArea } from "@/features/cart/delivery";
 import { stripe } from "@/lib/stripe";
 
 export const metadata: Metadata = {
-  title: `Thank you | ${shop.name}`,
-  robots: { index: false },
+  title: "Thank you",
+  robots: { index: false, follow: false },
 };
 
 export default function CheckoutSuccessPage({ searchParams }: PageProps<"/checkout/success">) {

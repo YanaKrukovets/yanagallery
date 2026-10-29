@@ -52,7 +52,7 @@ export function Footer() {
           </FooterColumn>
           <FooterColumn title="Contact">
             <li><a href={`mailto:${shop.email}`} className={linkClass}>{shop.email}</a></li>
-            <li><a href="https://www.instagram.com/sunny_art87/" target="_blank" rel="noopener noreferrer" className={linkClass}>Instagram<span className="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href={shop.instagram} target="_blank" rel="noopener noreferrer" className={linkClass}>Instagram<span className="sr-only"> (opens in a new tab)</span></a></li>
           </FooterColumn>
         </nav>
       </div>

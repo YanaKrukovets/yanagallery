@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import { photosOf, type Product } from "@/content/products";
+import { onlinePayments, shop } from "@/content/site";
+import { mailtoHref } from "@/lib/format";
 import { AddToBagButton } from "./AddToBagButton";
 import { ProductGallery } from "./ProductGallery";
 
@@ -70,6 +72,20 @@ export function ProductBuy({
 
         <div className="mt-8">
           <AddToBagButton product={product} design={design?.id} />
+          {onlinePayments.paused && (
+            <p className="mt-4 rounded-2xl border border-bronze/40 bg-sand/40 px-4 py-3 text-sm text-ink">
+              {onlinePayments.notice}{" "}
+              <a
+                href={mailtoHref(shop.email, {
+                  subject: `I'd like to pick up ${product.title}`,
+                  body: `Hi Yana,\n\nI'd like to buy "${design ? `${product.title} (${design.name})` : product.title}" and pick it up. When would be a good time to meet? I'll pay in person.\n\nThanks,\n`,
+                })}
+                className="break-words underline decoration-gold underline-offset-4 hover:text-bronze"
+              >
+                Email {shop.email}
+              </a>
+            </p>
+          )}
           {afterButton}
         </div>
 

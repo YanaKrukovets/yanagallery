@@ -11,6 +11,8 @@ export function ScrollHighlight({ text, className }: { text: string; className?:
 
   return (
     <p ref={ref} className={className}>
+      {/* Screen readers get the sentence in one piece instead of word by word. */}
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
           {word}
@@ -24,7 +26,7 @@ function Word({ children, progress, range }: { children: string; progress: Motio
   const reduce = useReducedMotion();
   const opacity = useTransform(progress, range, reduce ? [1, 1] : [0.15, 1]);
   return (
-    <motion.span style={{ opacity }} className="inline-block">
+    <motion.span aria-hidden style={{ opacity }} className="inline-block">
       {children}&nbsp;
     </motion.span>
   );

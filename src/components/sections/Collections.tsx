@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHead } from "@/components/ui/SectionHead";
+import { shop } from "@/content/site";
 import { collections, productsIn } from "@/content/collections";
 
 export function Collections() {
@@ -18,7 +19,7 @@ export function Collections() {
               <Link href={`/collections/${c.slug}`} className="group relative block aspect-[3/4] overflow-hidden rounded-t-[200px]">
                 <Image
                   src={c.image}
-                  alt=""
+                  alt={`${c.title} collection: hand-painted pieces by ${shop.artist}`}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"
                   className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110"

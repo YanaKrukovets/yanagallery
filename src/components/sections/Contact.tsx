@@ -11,7 +11,7 @@ export function Contact() {
       <div className="mx-auto grid max-w-7xl overflow-hidden rounded-3xl bg-ink text-cream md:grid-cols-2">
         <ParallaxImage
           src={images.shop}
-          alt="Framed works on white walls"
+          alt="Floral Harmony, a framed folk floral painting, on a warm wall"
           className="min-h-[320px]"
           sizes="(min-width: 768px) 50vw, 100vw"
           strength={40}

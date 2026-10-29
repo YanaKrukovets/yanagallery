@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RollText } from "@/components/motion/RollText";
 import { navLinks, shop, type NavLink } from "@/content/site";
 import { useCart } from "@/features/cart/CartProvider";
@@ -20,6 +20,7 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const { count, open: openCart } = useCart();
 
   // Hide on scroll down, show on scroll up.
@@ -29,10 +30,15 @@ export function Header() {
     setScrolled(y > 20);
   });
 
-  // Escape closes the mobile menu.
+  // Escape closes the mobile menu and puts focus back on its button, so it isn't lost
+  // when the menu links disappear.
   useEffect(() => {
     if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMenuOpen(false);
+      menuButtonRef.current?.focus();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
@@ -62,6 +68,7 @@ export function Header() {
             <BagCount count={count} />
           </button>
           <button
+            ref={menuButtonRef}
             className="md:hidden"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}

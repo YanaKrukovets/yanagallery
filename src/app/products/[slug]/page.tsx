@@ -4,11 +4,13 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ProductBuy } from "@/components/product/ProductBuy";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ProductGrid } from "@/components/ui/ProductGrid";
 import { availableFirst, getProduct, products } from "@/content/products";
 import { shop } from "@/content/site";
 import { withSales } from "@/features/cart/sales";
 import { cad } from "@/lib/format";
+import { breadcrumbJsonLd, pageMetadata, productJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -17,13 +19,23 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const product = getProduct((await params).slug);
   if (!product) return {};
-  const title = `${product.title} | ${shop.name}`;
-  const description = product.description?.split(". ")[0] ?? product.medium;
-  return {
-    title,
+    const firstSentence = product.description?.split(". ")[0];
+  const description = trimTo(
+    `${firstSentence ? `${firstSentence}. ` : ""}${product.medium}, ${cad.format(product.price)} CAD, by Ottawa artist ${shop.artist}.`,
+    160,
+  );
+  return pageMetadata({
+    title: `${product.title} – ${product.original ? "Original " : ""}Hand-Painted Art`,
     description,
-    openGraph: { title, description, images: [product.image] },
-  };
+    path: `/products/${product.slug}`,
+    ownImage: true,
+  });
+}
+
+/** Cuts text at a word boundary so search results don't cut it mid-word. */
+function trimTo(text: string, max: number) {
+  if (text.length <= max) return text;
+  return `${text.slice(0, text.lastIndexOf(" ", max - 1))}…`;
 }
 
 export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
@@ -39,6 +51,14 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
     <>
       <Header />
       <main id="main" tabIndex={-1} className="mx-auto max-w-7xl px-5 pb-20 pt-28 md:px-8 md:pt-36 outline-none">
+        <JsonLd data={productJsonLd(product)} />
+        <JsonLd
+          data={breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Products", path: "/products" },
+            { name: product.title, path: `/products/${product.slug}` },
+          ])}
+        />
         <Link href="/products" className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink">
           ← All work
         </Link>

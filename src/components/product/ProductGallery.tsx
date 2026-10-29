@@ -42,7 +42,7 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
           <Image
             key={src}
             src={src}
-            alt=""
+            alt={i === 0 ? title : `${title}, photo ${i + 1} of ${photos.length}`}
             fill
             priority={i === 0}
             sizes="(min-width: 768px) 416px, 320px"

@@ -14,7 +14,7 @@ export function Ticker() {
     >
       <div
         className="animate-marquee flex w-max gap-12 whitespace-nowrap"
-        style={{ "--marquee-duration": "35s" } as CSSProperties}
+        style={{ "--marquee-duration": "70s" } as CSSProperties}
       >
         {items.map((t, i) => (
           <span key={i} aria-hidden={i >= tickerItems.length} className="flex items-center gap-12 font-serif text-xl italic md:text-2xl">

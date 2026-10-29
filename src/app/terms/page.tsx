@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SectionHead } from "@/components/ui/SectionHead";
+import { pageMetadata } from "@/lib/seo";
 import { canadaPostEstimates, lettermail, shippingOptions, shop } from "@/content/site";
 
 // Plain-language terms of sale. Keep them in step with the FAQ, the shipping
@@ -14,10 +15,11 @@ import { canadaPostEstimates, lettermail, shippingOptions, shop } from "@/conten
 // Stripe Tax in checkout.ts, and update the sales tax line.
 const LAST_UPDATED = "October 27, 2026";
 
-export const metadata: Metadata = {
-  title: `Terms | ${shop.name}`,
+export const metadata: Metadata = pageMetadata({
+  title: "Terms of Sale",
   description: `Terms of sale for ${shop.name}: payment, shipping, returns, commissions, and copyright.`,
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   const email = (

@@ -1,7 +1,4 @@
 // Shop-wide details and the short bits of copy used across the page.
-// Placeholder images are Unsplash stand-ins (see README.md for a shot list).
-
-import { unsplash } from "@/lib/images";
 
 export const shop = {
   name: "Yana Krukovets Gallery",
@@ -9,6 +6,18 @@ export const shop = {
   shortName: "Krukovets",
   tagline: "Ottawa artist · Original art, shop online",
   email: "krukovets.yana@gmail.com",
+  instagram: "https://www.instagram.com/sunny_art87/",
+};
+
+/**
+ * Turn online payment off while there's a problem with it. When `paused` is true, the bag
+ * hides "Pay now", shows `notice` instead, and the server refuses to start a checkout.
+ * Set it back to false to bring online payment back.
+ */
+export const onlinePayments = {
+  paused: true,
+  notice:
+    "Sorry! We're having temporary technical problems with online payment. Right now you can pay in person or by Interac e-Transfer. Pickup and local delivery are available in Blackburn Hamlet. Send me an email and we'll set it up.",
 };
 
 /**
@@ -93,9 +102,10 @@ export const images = {
   // Composited from the product photos in public/images
   hero: "/images/site/hero-gallery-wall.jpg",
   heroSecondary: "/images/site/hero-gallery-detail.jpg",
-  artist: unsplash("1452802447250-470a88ac82bc", 1200),
-  artistDetail: unsplash("1499892477393-f675706cbe6e", 800),
-  shop: unsplash("1518998053901-5348d3961a04", 1600),
+  // Photos of the work. Swap for studio photos of Yana when there are some (see README.md).
+  artist: "/images/products/northern-lights-reflection/main.jpg",
+  artistDetail: "/images/products/cherry-blossom-serenity/main.jpg",
+  shop: "/images/products/floral-harmony/main.jpg",
 };
 
 export const features = [

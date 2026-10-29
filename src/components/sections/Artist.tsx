@@ -14,14 +14,14 @@ export function Artist() {
         <div className="relative">
           <ParallaxImage
             src={images.artist}
-            alt="Well-used paint brushes in Yana's studio"
+            alt="Northern Lights Reflection, a framed painting by Yana, on a sunlit wall"
             className="aspect-[4/5] rounded-b-[200px]"
             sizes="(min-width: 768px) 50vw, 100vw"
           />
           <Reveal className="absolute -right-4 -top-8 hidden w-40 md:block lg:w-48" delay={0.3}>
             <div className="border-[8px] border-cream shadow-2xl">
               <div className="relative aspect-square">
-                <Image src={images.artistDetail} alt="Paint and brushes on a palette" fill sizes="200px" className="object-cover" />
+                <Image src={images.artistDetail} alt="Cherry Blossom Serenity, a framed painting, on a wall" fill sizes="200px" className="object-cover" />
               </div>
             </div>
           </Reveal>

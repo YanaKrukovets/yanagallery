@@ -1,6 +1,6 @@
 # Yana Krukovets Gallery
 
-A one-page online shop for Ottawa artist Yana Krukovets, selling original paintings and signed prints. Built with Next.js 16, Tailwind CSS 4, and Motion. The design uses cream, ink, and gold colours, a Fraunces serif with italic accent words, and slow, soft animations.
+An online shop for Ottawa artist Yana Krukovets, selling original paintings, postcards and magnets. Built with Next.js 16, Tailwind CSS 4, Motion, and Stripe Checkout. The design uses cream, ink, and gold colours, a Fraunces serif with italic accent words, and slow, soft animations.
 
 ```bash
 npm run dev     # http://localhost:3000
@@ -9,26 +9,42 @@ npm run lint
 npm run typecheck
 ```
 
+## Pages
+
+| URL | What it is |
+| --- | --- |
+| `/` | Home page: hero, best sellers, collections, about the artist, new arrivals, FAQ, contact |
+| `/products` | All work |
+| `/products/<slug>` | One piece: photos, design picker, "Add to bag" |
+| `/collections/<slug>` | One collection (`/collections` itself goes to the home page section) |
+| `/blog` | Placeholder ("No posts yet") |
+| `/terms`, `/privacy` | Terms of sale and privacy policy |
+| `/checkout/success` | Thank-you page after a Stripe payment; empties the bag |
+| 404 / 500 | Styled "page not found" and "something went wrong" pages (`app/not-found.tsx`, `app/error.tsx`, `app/global-error.tsx`) |
+
 ## Project structure
 
 ```
 src/
-├── app/                  Routing only: root layout, the home page, global CSS
+├── app/                  Routes, the root layout, error pages, global CSS
 ├── content/              All shop text and data — edit these to change the site
-│   ├── site.ts           Name, contact details, nav, features, stats, hero/about images
-│   ├── products.ts       Artwork for sale (prices, photos, descriptions)
+│   ├── site.ts           Name, email, payment pause switch, delivery prices, nav, features, stats, images
+│   ├── products.ts       Artwork for sale (prices, photos, designs, descriptions)
 │   ├── collections.ts    "Shop by collection" cards
-│   ├── journal.ts        Journal posts
-│   ├── testimonials.ts   Customer quotes
-│   └── faqs.ts           FAQ questions and answers
+│   ├── faqs.ts           FAQ questions and answers
+│   ├── journal.ts        Journal posts (section hidden)
+│   └── testimonials.ts   Sample customer quotes (section hidden)
 ├── components/
-│   ├── layout/           Header and Footer
-│   ├── sections/         One file per page section, in the order listed in app/page.tsx
-│   ├── ui/               Shared building blocks (SectionHead, ProductCard, ProductGrid)
+│   ├── layout/           Header, Footer, and the shared 404/500 layout
+│   ├── sections/         One file per home page section, in the order listed in app/page.tsx
+│   ├── product/          Product page pieces: gallery, design picker, "Add to bag"
+│   ├── ui/               Shared building blocks (SectionHead, ProductCard, ProductGrid, …)
 │   └── motion/           Reusable animations (Reveal, SplitHeading, RollText, CountUp, …)
 ├── features/
-│   └── cart/             Cart store (localStorage), CartProvider + useCart, slide-out CartDrawer
-└── lib/                  Small helpers: price formatting, mailto/tel links, animation easing
+│   └── cart/             Bag (localStorage), slide-out CartDrawer, Stripe checkout, delivery, sold tracking
+└── lib/                  Small helpers: price formatting, mailto links, Stripe client, animation easing
+scripts/
+└── collection-covers.mjs Builds the collection cover images from product photos
 ```
 
 Colours and fonts live in `src/app/globals.css` (`@theme`) and `src/app/layout.tsx`.
@@ -40,33 +56,61 @@ Conventions:
 - Files only get `"use client"` when they need state, effects, or browser APIs. Section files stay server components where they can.
 - New page sections go in `components/sections/` and are added to `app/page.tsx`. Their text goes in `content/`.
 
-## Replace before launch
+## Hidden for now
 
-- **Testimonials** in `src/content/testimonials.ts` are samples. Replace them with real customer reviews (with permission). Don't publish made-up reviews.
-- **Phone, email, bio, and the stats** (120+ works, 10+ years) are placeholders.
-- **Artwork titles, mediums, and prices** are invented. Use your real work. Mark one-of-a-kind pieces with `original: true` so they can only be added to the bag once.
-- **All images** are Unsplash stand-ins. Several show mountains or seascapes, which Ottawa doesn't have.
+These are built but switched off. Each one says how to bring it back:
 
-## Photo shot list
+- **Testimonials**: the quotes in `src/content/testimonials.ts` are samples. Add real customer reviews (with permission), then put `<Testimonials />` back in `app/page.tsx`. Don't publish made-up reviews.
+- **Journal** and **Commissions** sections: commented out in `app/page.tsx`.
+- **Newsletter sign-up** in the footer: `SHOW_NEWSLETTER` in `components/layout/Footer.tsx`. It isn't connected to a newsletter provider yet.
 
-Shoot in soft daylight on a cream or warm-white wall to match the palette. Save the files to `public/images/` and update the matching file in `src/content/`:
+## Online payments
+
+- **Pausing payments.** `onlinePayments` in `src/content/site.ts`. While `paused` is `true`, the bag hides "Pay now" and offers "Email to pick up" instead, product pages show the notice with an email link, and the server refuses to start a checkout. Set it to `false` to turn payments back on.
+- **Stripe setup.** The bag sends buyers to Stripe's secure payment page. Prices always come from `src/content/products.ts` on the server.
+  1. Copy `.env.example` to `.env.local` and paste your **test** secret key (`sk_test_...`).
+  2. Run `npm run dev`, add a piece to the bag and pay with the test card `4242 4242 4242 4242` (any future date, any CVC).
+  3. Set real delivery prices in `shippingOptions` in `src/content/site.ts`.
+  4. To go live: swap in the live key (`sk_live_...`) and set `SITE_URL` on your host (e.g. Vercel). Turn on "Successful payments" emails in Stripe so you hear about each order.
+- **Delivery notes.** Each payment in Stripe shows a `delivery` note ("Local pickup…" or "Delivery to K1B 1A1", the postal code typed in the bag). If it doesn't match the shipping address on the order, contact the buyer. Orders where the buyer reached the thank-you page and the address is outside the local delivery area also get a `delivery_check` note.
+- **Sold originals.** Originals paid for online show "Sold" on their own within a few minutes. When a piece sells in person, set `sold: true` on it in `products.ts`.
+
+## Search engines and AI search
+
+The live address is `https://ottawaartist.ca` (`siteUrl` in `src/lib/seo.ts`; `SITE_URL` overrides it). Everything below is built from the `content/` files, so new products show up on their own.
+
+- `/sitemap.xml` and `/robots.txt` (`app/sitemap.ts`, `app/robots.ts`). Robots welcomes AI search crawlers (ChatGPT, Claude, Perplexity, Gemini and others) and keeps `/checkout/` out.
+- `/llms.txt` (`app/llms.txt/route.ts`): a plain-text summary of the shop, artwork, prices, delivery and FAQ for AI assistants.
+- Structured data (`src/lib/seo.ts`): shop, artist and website on every page; product, price and stock on product pages; FAQ on the home page; breadcrumbs and item lists on product and collection pages.
+- Every page has a canonical link and share card (`pageMetadata` in `src/lib/seo.ts`). The blog is marked noindex until it has posts.
+- Share pictures (1200×630, for Facebook, X, iMessage…) are drawn at build time by `src/lib/shareImage.tsx`: one per product, one per collection (`opengraph-image.tsx` next to each page) and a default (`app/opengraph-image.tsx`) for everything else.
+
+After launch: add the site to [Google Search Console](https://search.google.com/search-console) and [Bing Webmaster Tools](https://www.bing.com/webmasters) (Bing also feeds ChatGPT and Copilot), submit `https://ottawaartist.ca/sitemap.xml`, and paste the verification codes into `verification` in `app/layout.tsx`.
+
+## Placeholders to replace
+
+- **Stats** in `src/content/site.ts` (50+ works, 5+ years) are placeholders. Use your real numbers.
+- **Unsplash stock photos** are left only in the hidden Journal section (`src/content/journal.ts`).
+- **About the artist** and **Contact** photos are room shots of framed pieces (Northern Lights Reflection, Cherry Blossom Serenity, Floral Harmony) (`images` in `src/content/site.ts`). Swap them for studio photos when you have some (see the list below).
+
+Everything else (products, hero, collection covers) uses real photos.
+
+## Photos
+
+Save files to `public/images/` and update the matching file in `src/content/`:
 
 - `public/images/site/`: hero and other page photos (`src/content/site.ts`)
-- `public/images/collections/`: "Shop by collection" covers, made by `node scripts/collection-covers.mjs`
 - `public/images/products/<slug>/`: one folder per product, named after its slug. `main.jpg` is the first photo, `close.jpg` a close-up, `back.jpg` a postcard back; products with designs use one file per design (e.g. `love-you.jpg`)
+- `public/images/collections/`: "Shop by collection" covers. Rebuild them with `node scripts/collection-covers.mjs` after changing product photos (needs `sharp`, which comes with Next.js).
+
+Shoot in soft daylight on a cream or warm-white wall to match the palette. Photos still needed:
 
 | Section | Suggested photo | Ratio |
 | --- | --- | --- |
-| Hero (main) | A piece from your shop in a real Ottawa living room, ideally with a window and warm light | 4:5 |
-| Hero (small frame) | Close-up of a frame corner: wood grain, mat bevel, and signature | 3:4 |
-| Product cards | The finished, framed piece on a wall, in soft daylight | 3:4 |
-| Rideau & River | Rideau Canal at golden hour, Dow's Lake, or the Ottawa River from Westboro Beach | 3:4 |
-| Gatineau Hills | Pink Lake lookout, Champlain Lookout in fall, or a misty Wolf Trail | 3:4 |
-| Capital Winters | Skaters on the canal, Parliament in snow, or Winterlude ice sculptures | 3:4 |
 | About the artist | Yana at work in the studio (hands, brushes, easel) | 4:5 |
 | About (detail) | Palette or paints, shot from above | 1:1 |
-| Journal | Gallery wall in a Centretown apartment; frame samples on a counter; tulips at Commissioners Park | 4:3 |
 | Contact | A styled flat-lay of a few pieces being wrapped for shipping | 4:3 |
+| Journal (when it returns) | A gallery wall at home; frame samples on a counter; tulips at Commissioners Park | 4:3 |
 
 ## Animations
 
@@ -78,19 +122,13 @@ Shoot in soft daylight on a cream or warm-white wall to match the palette. Save 
 - **Collections**: arched cards that zoom on hover, with a short description that fades in.
 - **Philosophy quote**: each word lights up as you scroll past it.
 - **About the artist**: parallax photo, and the numbers count up when they come into view.
-- **Testimonials**: two rows scrolling in opposite directions; they pause on hover.
 - **FAQ**: smooth open and close, with the + turning into ×.
 - **Footer**: a large "Krukovets." wordmark rises into place.
 
 All animations respect the system "reduce motion" setting where it matters (marquees stop, counters jump to the final number).
 
-## Next steps
+## Ideas for later
 
-- **Checkout uses Stripe.** The bag sends buyers to Stripe's secure payment page; prices always come from `src/content/products.ts` on the server.
-  1. Create a Stripe account, copy `.env.example` to `.env.local`, and paste your **test** secret key (`sk_test_...`).
-  2. Run `npm run dev`, add a piece to the bag and pay with the test card `4242 4242 4242 4242` (any future date, any CVC).
-  3. Set real delivery prices in `shippingOptions` in `src/content/site.ts`.
-  4. To go live: swap in the live key (`sk_live_...`) and set `SITE_URL` on your host (e.g. Vercel). Turn on "Successful payments" emails in Stripe so you hear about each order. Each payment in Stripe shows a `delivery` note ("Local pickup…" or "Delivery to K1B 1A1", the postal code typed in the bag). If it doesn't match the shipping address on the order, contact the buyer. Orders where the buyer reached the thank-you page and the address is outside the local delivery area also get a `delivery_check` note.
-  5. Originals paid for online show "Sold" on their own within a few minutes. When a piece sells in person, set `sold: true` on it in `products.ts`.
-- Add pages for the catalogue, collections, and journal posts (`src/app/catalogue/page.tsx` and so on).
+- Set `metadataBase` in `app/layout.tsx` to the live address so link previews on social media show the right image.
+- Add `sitemap.ts` and `robots.ts` in `src/app/` for search engines.
 - Add a French version (`/fr`), which matters to Ottawa–Gatineau customers.
