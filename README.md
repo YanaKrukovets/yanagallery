@@ -77,7 +77,7 @@ These are built but switched off. Each one says how to bring it back:
 
 ## Search engines and AI search
 
-The live address is `https://ottawaartist.ca` (`siteUrl` in `src/lib/seo.ts`; `SITE_URL` overrides it). Everything below is built from the `content/` files, so new products show up on their own.
+The live address is `https://artistyana.com` (`siteUrl` in `src/lib/seo.ts`; `SITE_URL` overrides it). Everything below is built from the `content/` files, so new products show up on their own.
 
 - `/sitemap.xml` and `/robots.txt` (`app/sitemap.ts`, `app/robots.ts`). Robots welcomes AI search crawlers (ChatGPT, Claude, Perplexity, Gemini and others) and keeps `/checkout/` out.
 - `/llms.txt` (`app/llms.txt/route.ts`): a plain-text summary of the shop, artwork, prices, delivery and FAQ for AI assistants.
@@ -85,7 +85,7 @@ The live address is `https://ottawaartist.ca` (`siteUrl` in `src/lib/seo.ts`; `S
 - Every page has a canonical link and share card (`pageMetadata` in `src/lib/seo.ts`). The blog is marked noindex until it has posts.
 - Share pictures (1200×630, for Facebook, X, iMessage…) are drawn at build time by `src/lib/shareImage.tsx`: one per product, one per collection (`opengraph-image.tsx` next to each page) and a default (`app/opengraph-image.tsx`) for everything else.
 
-After launch: add the site to [Google Search Console](https://search.google.com/search-console) and [Bing Webmaster Tools](https://www.bing.com/webmasters) (Bing also feeds ChatGPT and Copilot), submit `https://ottawaartist.ca/sitemap.xml`, and paste the verification codes into `verification` in `app/layout.tsx`.
+After launch: add the site to [Google Search Console](https://search.google.com/search-console) and [Bing Webmaster Tools](https://www.bing.com/webmasters) (Bing also feeds ChatGPT and Copilot), submit `https://artistyana.com/sitemap.xml`, and paste the verification codes into `verification` in `app/layout.tsx`.
 
 ## Placeholders to replace
 

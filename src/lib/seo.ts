@@ -8,9 +8,9 @@ import { photosOf, type Product } from "@/content/products";
 import { images, shop } from "@/content/site";
 
 /** The live address. `SITE_URL` on the host overrides it (e.g. for a preview deploy). */
-export const siteUrl = (process.env.SITE_URL || "https://ottawaartist.ca").replace(/\/$/, "");
+export const siteUrl = (process.env.SITE_URL || "https://artistyana.com").replace(/\/$/, "");
 
-/** Turns a path like "/products" into "https://ottawaartist.ca/products". */
+/** Turns a path like "/products" into "https://artistyana.com/products". */
 export const absoluteUrl = (path = "/") => new URL(path, `${siteUrl}/`).toString();
 
 /** The default share picture (app/opengraph-image.tsx), for pages that don't make their own. */
