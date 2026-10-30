@@ -85,7 +85,7 @@ export default function HalloweenWeekendOttawa2026() {
         Once the pumpkins are gone, craft fair season starts. The{" "}
         <ExtLink href="https://www.eventbrite.com/e/manotick-artisan-fair-tickets-1999894358863">Manotick Artisan Fair</ExtLink>{" "}
         is next weekend, November 7 and 8. Later in the month there&apos;s the{" "}
-        <ExtLink href="https://gnag.ca/gnag-events/craft/">Glebe Craft &amp; Artisan Fair</ExtLink> and the{" "}
+        <ExtLink href="https://gnag.ca/events/craft/">Glebe Craft &amp; Artisan Fair</ExtLink> and the{" "}
         <ExtLink href="https://www.eventbrite.ca/e/2026-hintonburg-artisan-craft-fair-tickets-2002668370005">
           Hintonburg Artisan Craft Fair
         </ExtLink>{" "}

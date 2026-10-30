@@ -51,16 +51,16 @@ export default function HandmadeChristmasGiftsOttawa2026() {
       <p>
         These are my framed pieces. Each one is about 5 inches across, painted in acrylic, sealed
         in glossy epoxy resin and set in a natural wood frame with a rope hanger. They&apos;re all
-        $35, and each is one of a kind. Once it&apos;s gone, it&apos;s gone.
+        $35 and one of a kind, so when one sells, it&apos;s gone for good.
       </p>
       <p>
-        <strong className="font-normal text-ink">For a new home or a hostess gift:</strong> the{" "}
-        <InLink href="/collections/folk-florals">folk art florals</InLink> are bright flowers on a
+        For a new home or a hostess gift, try the{" "}
+        <InLink href="/collections/folk-florals">folk art florals</InLink>: bright flowers on a
         deep black ground, in a traditional folk art style. They look good in a kitchen and
         cheer up a dark entryway in February.
       </p>
       <p>
-        <strong className="font-normal text-ink">For someone who loves the outdoors:</strong> the{" "}
+        For someone who loves the outdoors, the{" "}
         <InLink href="/collections/nature-and-sky">Nature &amp; Sky</InLink> pieces have northern
         lights, moonlit trees, sunsets and gardens. If they spend their summers at a cottage or
         their winters wishing for one, start here.
@@ -87,7 +87,7 @@ export default function HandmadeChristmasGiftsOttawa2026() {
         find gifts made by local artists. The{" "}
         <ExtLink href="https://www.eventbrite.com/e/manotick-artisan-fair-tickets-1999894358863">Manotick Artisan Fair</ExtLink>{" "}
         is on November 7 and 8. Later in the month there&apos;s the{" "}
-        <ExtLink href="https://gnag.ca/gnag-events/craft/">Glebe Craft &amp; Artisan Fair</ExtLink> and the{" "}
+        <ExtLink href="https://gnag.ca/events/craft/">Glebe Craft &amp; Artisan Fair</ExtLink> and the{" "}
         <ExtLink href="https://www.eventbrite.ca/e/2026-hintonburg-artisan-craft-fair-tickets-2002668370005">
           Hintonburg Artisan Craft Fair
         </ExtLink>{" "}
