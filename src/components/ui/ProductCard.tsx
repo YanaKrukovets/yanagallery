@@ -11,7 +11,15 @@ import { cad } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 import { PhotoDots } from "./PhotoDots";
 
-export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
+export function ProductCard({
+  product,
+  index = 0,
+  headingLevel: Heading = "h3",
+}: {
+  product: Product;
+  index?: number;
+  headingLevel?: "h2" | "h3";
+}) {
   const { onAdd, label, disabled } = useAddToBag(product);
   const photos = photosOf(product);
   const [shown, setShown] = useState(0);
@@ -66,11 +74,11 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
 
       <div className="mt-3 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
         <div>
-          <h3 className="font-serif text-base leading-tight sm:text-lg">
+          <Heading className="font-serif text-base leading-tight sm:text-lg">
             <Link href={href} className="hover:text-bronze">
               {product.title}
             </Link>
-          </h3>
+          </Heading>
           <p className="mt-1 text-xs text-muted">{product.medium}</p>
           {meta && <p className="mt-0.5 text-xs text-muted">{meta}</p>}
         </div>

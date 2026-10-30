@@ -9,6 +9,8 @@ export type Collection = {
   slug: CollectionSlug;
   title: string;
   blurb: string;
+  /** The page title in search results, worded the way people search. */
+  seoTitle: string;
   /** Cover for the "Shop by collection" card. Made from the product photos by scripts/collection-covers.mjs. */
   image: string;
 };
@@ -17,19 +19,22 @@ export const collections: Collection[] = [
   {
     slug: "folk-florals",
     title: "Folk Florals",
+    seoTitle: "Folk Art Florals, Painted in Ottawa",
     blurb: "Traditional folk patterns — bright blooms and a proud rooster on deep black.",
     image: "/images/collections/folk-florals.jpg",
   },
   {
     slug: "nature-and-sky",
     title: "Nature & Sky",
+    seoTitle: "Landscape & Night Sky Art, Ottawa",
     blurb: "Sunsets, northern lights, moonlight, and gardens in bloom.",
     image: "/images/collections/nature-and-sky.jpg",
   },
   {
     slug: "little-gifts",
     title: "Little Gifts",
-    blurb: "Hand-painted fridge magnets and postcards — small art, easy to give.",
+    seoTitle: "Handmade Magnets & Postcards, Ottawa",
+    blurb: "Hand-painted fridge magnets and postcards — small handmade gifts, easy to give.",
     image: "/images/collections/little-gifts.jpg",
   },
 ];

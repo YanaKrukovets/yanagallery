@@ -4,7 +4,7 @@ export const shop = {
   name: "Yana Krukovets Gallery",
   artist: "Yana Krukovets",
   shortName: "Krukovets",
-  tagline: "Ottawa artist · Original art, shop online",
+  tagline: "Ottawa artist · Handmade art & gifts",
   email: "krukovets.yana@gmail.com",
   instagram: "https://www.instagram.com/sunny_art87/",
 };
@@ -93,7 +93,8 @@ export type NavLink = { href: string; label: string };
 /** Header links. The first half sits left of the logo on desktop, the rest on the right. */
 export const navLinks: NavLink[] = [
   { href: "/products", label: "Products" },
-  { href: "/#collections", label: "Collections" },
+  { href: "/gifts", label: "Gifts" },
+  { href: "/collections", label: "Collections" },
   { href: "/blog", label: "Blog" },
   { href: "/#contact", label: "Contact" },
 ];
@@ -115,7 +116,7 @@ export const features = [
   },
   {
     title: "Made by hand",
-    body: "One-of-a-kind originals, plus small-edition prints signed by the artist.",
+    body: "Every piece is a one-of-a-kind original, painted by hand. No prints, no copies.",
   },
   {
     title: "Affordable art",
@@ -132,7 +133,7 @@ export const tickerItems = [
   "Painted in Ottawa",
   "Free pickup & delivery in Blackburn Hamlet",
   "Bonjour · Hello",
-  "Originals & signed prints",
+  "One-of-a-kind originals",
   "Affordable art for collectors & art lovers",
   "Shop online, delivered to your door",
 ];

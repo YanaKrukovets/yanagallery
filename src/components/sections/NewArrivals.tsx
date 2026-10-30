@@ -13,7 +13,7 @@ export async function NewArrivals() {
     <section id="new-arrivals" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-20 md:px-8 md:py-28">
       <SectionHead
         title={["Fresh from the", { accent: "workbench" }]}
-        intro="New paintings and prints, fresh off the easel this month."
+        intro="New paintings and little gifts, fresh off the easel this month."
       />
       <ProductGrid products={await withSales(newArrivals.slice(0, MAX_NEW_ARRIVALS))} />
     </section>

@@ -14,6 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [absoluteUrl(images.hero), absoluteUrl(images.heroSecondary)],
     },
     { url: absoluteUrl("/products"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/gifts"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/collections"), changeFrequency: "weekly", priority: 0.85 },
     ...collections.map((c) => ({
       url: absoluteUrl(`/collections/${c.slug}`),
       changeFrequency: "weekly" as const,

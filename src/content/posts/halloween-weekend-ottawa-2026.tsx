@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ExtLink } from "@/components/blog/PostElements";
 import { PostProducts } from "@/components/blog/PostProducts";
 
 // Halloween weekend in Ottawa, Oct 30 – Nov 1, 2026. Dates, times and prices come from
@@ -72,9 +73,9 @@ export default function HalloweenWeekendOttawa2026() {
 
       <Event title="For the little ones" when="Saturday, Oct 31">
         Two easy ones for Saturday. The Richmond branch of the library has a free drop-in{" "}
-        <Ext href="https://booking.biblioottawalibrary.ca/en?text=halloween">Halloween craft</Ext> at
+        <ExtLink href="https://booking.biblioottawalibrary.ca/en?text=halloween">Halloween craft</ExtLink> at
         10:30 am. And Watson&apos;s Mill in Manotick has a{" "}
-        <Ext href="https://www.todocanada.ca/halloween-in-ottawa/">Children&apos;s Halloween Spooktacular</Ext>{" "}
+        <ExtLink href="https://www.todocanada.ca/halloween-in-ottawa/">Children&apos;s Halloween Spooktacular</ExtLink>{" "}
         with crafts, games, a photo booth and a gentle version of the mill&apos;s haunted maze (no
         one jumps out at you). It&apos;s meant for ages 3 to 8.
       </Event>
@@ -82,19 +83,19 @@ export default function HalloweenWeekendOttawa2026() {
       <h2 className="mt-14 font-serif text-2xl text-ink md:text-3xl">After Halloween</h2>
       <p>
         Once the pumpkins are gone, craft fair season starts. The{" "}
-        <Ext href="https://www.eventbrite.com/e/manotick-artisan-fair-tickets-1999894358863">Manotick Artisan Fair</Ext>{" "}
+        <ExtLink href="https://www.eventbrite.com/e/manotick-artisan-fair-tickets-1999894358863">Manotick Artisan Fair</ExtLink>{" "}
         is next weekend, November 7 and 8. Later in the month there&apos;s the{" "}
-        <Ext href="https://gnag.ca/gnag-events/craft/">Glebe Craft &amp; Artisan Fair</Ext> and the{" "}
-        <Ext href="https://www.eventbrite.ca/e/2026-hintonburg-artisan-craft-fair-tickets-2002668370005">
+        <ExtLink href="https://gnag.ca/gnag-events/craft/">Glebe Craft &amp; Artisan Fair</ExtLink> and the{" "}
+        <ExtLink href="https://www.eventbrite.ca/e/2026-hintonburg-artisan-craft-fair-tickets-2002668370005">
           Hintonburg Artisan Craft Fair
-        </Ext>{" "}
+        </ExtLink>{" "}
         on November 28. If you&apos;re starting on holiday gifts, those are good places to find
         something made by hand.
       </p>
       <p>
         I got the times and prices from event listings, so check the links before you head out.
         Ottawa Tourism also has a longer{" "}
-        <Ext href="https://ottawatourism.ca/en/ottawa-insider/halloweekend-in-ottawa">Halloween weekend guide</Ext>{" "}
+        <ExtLink href="https://ottawatourism.ca/en/ottawa-insider/halloweekend-in-ottawa">Halloween weekend guide</ExtLink>{" "}
         if you want haunted farms after all.
       </p>
       <p>Happy Halloween!</p>
@@ -120,27 +121,12 @@ function Event({
       <p className="mt-4">{children}</p>
       {link && (
         <p className="mt-3">
-          <Ext href={link.href}>
+          <ExtLink href={link.href}>
             {link.label}
             <span className="sr-only">: {title}</span> <span aria-hidden>→</span>
-          </Ext>
+          </ExtLink>
         </p>
       )}
     </section>
-  );
-}
-
-/** A link to another website, opened in a new tab. */
-function Ext({ href, children }: { href: string; children: ReactNode }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-ink underline decoration-gold underline-offset-4 hover:text-bronze"
-    >
-      {children}
-      <span className="sr-only"> (opens in a new tab)</span>
-    </a>
   );
 }

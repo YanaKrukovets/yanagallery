@@ -24,7 +24,7 @@ const hedvig = Hedvig_Letters_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `Ottawa Artist ${shop.artist} | Original Hand-Painted Art`,
+    default: `Ottawa Artist ${shop.artist} | Handmade Art & Gifts`,
     // Pages set a short title, e.g. "Products", and this adds the shop name.
     template: `%s | ${shop.name}`,
   },
@@ -45,6 +45,11 @@ export const metadata: Metadata = {
     "hand-painted postcards",
     "hand-painted fridge magnets",
     "art gifts Ottawa",
+    "handmade gifts Ottawa",
+    "handmade Christmas gifts Ottawa",
+    "local artist Ottawa",
+    "gifts made in Ottawa",
+    "handmade gifts Canada",
     shop.artist,
   ],
   alternates: { canonical: "/" },

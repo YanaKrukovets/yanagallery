@@ -36,7 +36,7 @@ export function Hero() {
             immediate
             delay={0.3}
             className="font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
-            segments={["Art made in the", { accent: "capital," }, "for the walls you", { accent: "come home to." }]}
+            segments={["Handmade art from", { accent: "Ottawa," }, "for the walls you", { accent: "come home to." }]}
           />
 
           <motion.p
@@ -45,8 +45,8 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 1.1, ease: EASE }}
             className="mt-8 max-w-md text-lg leading-relaxed text-ink-soft"
           >
-            Original paintings and signed prints by Ottawa artist Yana Krukovets. Affordable art for
-            collectors and art lovers alike, delivered to your door.
+            Original paintings and small handmade gifts, hand-painted by Ottawa artist Yana
+            Krukovets. Affordable art for collectors and art lovers alike, delivered to your door.
           </motion.p>
 
           <motion.div

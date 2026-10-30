@@ -2,6 +2,7 @@
 
 import type { ComponentType } from "react";
 import HalloweenWeekendOttawa2026 from "@/content/posts/halloween-weekend-ottawa-2026";
+import HandmadeChristmasGiftsOttawa2026 from "@/content/posts/handmade-christmas-gifts-ottawa-2026";
 
 export type Post = {
   slug: string;
@@ -25,6 +26,16 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    slug: "handmade-christmas-gifts-ottawa-2026",
+    title: "Handmade Christmas gifts from Ottawa, all under $40",
+    description:
+      "Hand-painted gift ideas from my Ottawa studio, from $2 postcards to $35 framed originals, plus where to find handmade gifts at Ottawa craft fairs this season.",
+    date: "2026-10-30",
+    minutes: 4,
+    featured: ["folk-flowers", "twilight-tree", "cherry-blossom-serenity", "midnight-blue-blossom"],
+    Body: HandmadeChristmasGiftsOttawa2026,
+  },
   {
     slug: "halloween-weekend-ottawa-2026",
     title: "An artsy Halloween weekend in Ottawa",

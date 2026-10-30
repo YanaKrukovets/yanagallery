@@ -22,7 +22,7 @@ const defaultShareImage = {
   alt: `Hand-painted art by Ottawa artist ${shop.artist}`,
 };
 
-export const siteDescription = `Original hand-painted art by Ottawa artist ${shop.artist}: folk art florals, night skies and landscapes in acrylic and resin, plus hand-painted postcards and fridge magnets. Shop online, with free pickup in Blackburn Hamlet and shipping across Canada.`;
+export const siteDescription = `Original hand-painted art and handmade gifts by Ottawa artist ${shop.artist}: folk art florals, night skies and landscapes in acrylic and resin, plus hand-painted postcards and fridge magnets. Shop online, with free pickup in Blackburn Hamlet and shipping across Canada.`;
 
 /**
  * Title, description, canonical link and share card for one page. Next.js replaces a parent's

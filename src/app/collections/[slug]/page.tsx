@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: PageProps<"/collections/[slug
   const collection = getCollection((await params).slug);
   if (!collection) return {};
   return pageMetadata({
-    title: `${collection.title} – Hand-Painted Art from Ottawa`,
-    description: `${collection.blurb} Original hand-painted pieces by Ottawa artist ${shop.artist}, shipped across Canada.`,
+    title: collection.seoTitle,
+    description: `${collection.blurb} Handmade originals by Ottawa artist ${shop.artist}, shipped across Canada.`,
     path: `/collections/${collection.slug}`,
     ownImage: true,
   });
@@ -41,21 +41,22 @@ export default async function CollectionPage({ params }: PageProps<"/collections
         <JsonLd
           data={breadcrumbJsonLd([
             { name: "Home", path: "/" },
+            { name: "Collections", path: "/collections" },
             { name: collection.title, path: `/collections/${collection.slug}` },
           ])}
         />
-        <Link href="/#collections" className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink">
+        <Link href="/collections" className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink">
           ← All collections
         </Link>
         <div className="mt-6">
           <SectionHead
           as="h1"
             title={[{ accent: collection.title }]}
-            intro={`${collection.blurb} ${items.length} ${items.length === 1 ? "piece" : "pieces"}.`}
+            intro={`${collection.blurb} Hand-painted in Ottawa. ${items.length} ${items.length === 1 ? "piece" : "pieces"}.`}
           />
         </div>
         <CollectionTabs active={collection.slug} />
-        <ProductGrid products={items} />
+        <ProductGrid products={items} headingLevel="h2" />
       </main>
       <Footer />
     </>

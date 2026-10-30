@@ -56,7 +56,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-8">
         <DesktopNav links={leftLinks} label="Main" />
 
-        <Link href="/#top" className="font-serif text-xl tracking-tight md:absolute md:left-1/2 md:-translate-x-1/2 md:text-2xl">
+        <Link href="/#top" className="font-serif text-xl tracking-tight md:text-2xl lg:absolute lg:left-1/2 lg:-translate-x-1/2">
           {shop.artist}
           <span aria-hidden className="accent">.</span>
         </Link>
@@ -69,7 +69,7 @@ export function Header() {
           </button>
           <button
             ref={menuButtonRef}
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
@@ -89,7 +89,7 @@ export function Header() {
 
 function DesktopNav({ links, label }: { links: NavLink[]; label: string }) {
   return (
-    <nav aria-label={label} className="hidden gap-8 text-xs uppercase tracking-[0.2em] md:flex">
+    <nav aria-label={label} className="hidden gap-8 text-xs uppercase tracking-[0.2em] lg:flex">
       {links.map((l) => (
         <Link key={l.href} href={l.href} className="text-ink-soft hover:text-ink">
           <RollText text={l.label} />
@@ -107,7 +107,7 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
       initial={{ height: 0 }}
       animate={{ height: "auto" }}
       exit={{ height: 0 }}
-      className="overflow-hidden bg-cream md:hidden"
+      className="overflow-hidden bg-cream lg:hidden"
     >
       <ul className="flex flex-col gap-4 px-5 pb-8 pt-2">
         {navLinks.map((l, i) => (

@@ -64,6 +64,7 @@ ${posts.map((p) => `- [${p.title}](${absoluteUrl(`/blog/${p.slug}`)}): ${p.descr
 ## Pages
 
 - [All products](${absoluteUrl("/products")}): every piece in the shop
+- [Handmade gifts from Ottawa](${absoluteUrl("/gifts")}): gift ideas by price and occasion, from $2 postcards to framed originals
 - [Terms of sale](${absoluteUrl("/terms")}): payment, shipping, returns, commissions and copyright
 - [Privacy policy](${absoluteUrl("/privacy")})
 `;

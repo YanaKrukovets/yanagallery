@@ -41,6 +41,7 @@ export function Footer() {
         <nav aria-label="Footer" className={`grid grid-cols-2 gap-8 text-sm md:grid-cols-3 ${SHOW_NEWSLETTER ? "md:col-span-7" : "md:col-span-12"}`}>
           <FooterColumn title="Shop">
             <li><Link href="/products" className={linkClass}>All work</Link></li>
+            <li><Link href="/gifts" className={linkClass}>Gifts</Link></li>
             {newArrivals.length > 0 && (
               <li><Link href="/#new-arrivals" className={linkClass}>New arrivals</Link></li>
             )}
