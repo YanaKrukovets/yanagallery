@@ -18,7 +18,7 @@ export default function BlogPage() {
   return (
     <>
       <Header />
-      <main id="main" tabIndex={-1} className="mx-auto max-w-3xl px-5 pb-20 pt-28 outline-none md:px-8 md:pt-36">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-5xl px-5 pb-20 pt-28 outline-none md:px-8 md:pt-36">
         <SectionHead as="h1" title={["Stories from the", { accent: "studio" }]} />
         <ul className="divide-y divide-ink/15 border-y border-ink/15">
           {posts.map((p) => (
@@ -33,7 +33,7 @@ export default function BlogPage() {
                       src={p.image.src}
                       alt=""
                       fill
-                      sizes="(min-width: 768px) 300px, (min-width: 640px) 40vw, 100vw"
+                      sizes="(min-width: 1024px) 400px, (min-width: 640px) 40vw, 100vw"
                       className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                     />
                   </div>
