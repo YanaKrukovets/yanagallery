@@ -1,6 +1,7 @@
 // Blog posts, newest first. Each post's text lives in its own file in content/posts/.
 
 import type { ComponentType } from "react";
+import ArtTherapyOttawa2026 from "@/content/posts/art-therapy-ottawa-2026";
 import HalloweenWeekendOttawa2026 from "@/content/posts/halloween-weekend-ottawa-2026";
 import HandmadeChristmasGiftsOttawa2026 from "@/content/posts/handmade-christmas-gifts-ottawa-2026";
 import OttawaChristmasMarkets2026 from "@/content/posts/ottawa-christmas-markets-2026";
@@ -32,6 +33,22 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    slug: "art-therapy-ottawa-2026",
+    title: "Art therapy in Ottawa: groups, drop-ins and calm art-making this winter",
+    description:
+      "Free art groups for mental health, art therapy drop-ins and relaxed art-making sessions in Ottawa and Toronto for winter 2026, with dates, prices and how to find an art therapist.",
+    date: "2026-11-01",
+    minutes: 5,
+    image: {
+      src: "/images/blog/art-therapy-ottawa.jpg",
+      share: "/images/blog/art-therapy-ottawa-share.jpg",
+      alt: "A small painting of snowy pine trees at sunset on a wooden easel, beside a jar of brushes, a watercolour palette, a mug of tea and a glowing candle, in a cozy art studio with a window looking out on Parliament Hill in the snow",
+    },
+    featured: ["cherry-blossom-serenity", "twilight-tree", "wildflower-garden", "autumn-waterfall-magnet"],
+    mentions: ["northern-lights-reflection", "moonlight-shadows", "peaceful-waterfall-magnet"],
+    Body: ArtTherapyOttawa2026,
+  },
   {
     slug: "ottawa-christmas-markets-2026",
     title: "Ottawa Christmas markets 2026: dates, locations and what to buy",
