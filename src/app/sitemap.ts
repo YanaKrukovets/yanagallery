@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: p.date,
       changeFrequency: "monthly" as const,
       priority: 0.5,
+      ...(p.image && { images: [absoluteUrl(p.image.src)] }),
     })),
     { url: absoluteUrl("/terms"), changeFrequency: "yearly", priority: 0.3 },
     { url: absoluteUrl("/privacy"), changeFrequency: "yearly", priority: 0.3 },

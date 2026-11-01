@@ -1,5 +1,4 @@
-import type { ReactNode } from "react";
-import { ExtLink } from "@/components/blog/PostElements";
+import { Event, ExtLink } from "@/components/blog/PostElements";
 import { PostProducts } from "@/components/blog/PostProducts";
 
 // Halloween weekend in Ottawa, Oct 30 – Nov 1, 2026. Dates, times and prices come from
@@ -100,33 +99,5 @@ export default function HalloweenWeekendOttawa2026() {
       </p>
       <p>Happy Halloween!</p>
     </>
-  );
-}
-
-function Event({
-  title,
-  when,
-  link,
-  children,
-}: {
-  title: string;
-  when: string;
-  link?: { href: string; label: string };
-  children: ReactNode;
-}) {
-  return (
-    <section className="mt-14">
-      <h2 className="font-serif text-2xl text-ink md:text-3xl">{title}</h2>
-      <p className="mt-2 text-xs uppercase tracking-[0.15em] text-bronze">{when}</p>
-      <p className="mt-4">{children}</p>
-      {link && (
-        <p className="mt-3">
-          <ExtLink href={link.href}>
-            {link.label}
-            <span className="sr-only">: {title}</span> <span aria-hidden>→</span>
-          </ExtLink>
-        </p>
-      )}
-    </section>
   );
 }

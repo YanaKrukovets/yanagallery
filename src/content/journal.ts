@@ -3,6 +3,7 @@
 import type { ComponentType } from "react";
 import HalloweenWeekendOttawa2026 from "@/content/posts/halloween-weekend-ottawa-2026";
 import HandmadeChristmasGiftsOttawa2026 from "@/content/posts/handmade-christmas-gifts-ottawa-2026";
+import OttawaChristmasMarkets2026 from "@/content/posts/ottawa-christmas-markets-2026";
 
 export type Post = {
   slug: string;
@@ -22,10 +23,38 @@ export type Post = {
    * are skipped, and other available pieces fill the rest of the row.
    */
   featured?: string[];
+  /**
+   * Product slugs the post's text writes about (its links and in-post product rows). Each of
+   * those product pages links back to the post.
+   */
+  mentions?: string[];
   Body: ComponentType;
 };
 
 export const posts: Post[] = [
+  {
+    slug: "ottawa-christmas-markets-2026",
+    title: "Ottawa Christmas markets 2026: dates, locations and what to buy",
+    description:
+      "Every Ottawa Christmas market worth a visit in 2026, from Lansdowne and the Museum of History to Watson's Mill and the Originals sale, with dates, addresses, prices and gift ideas.",
+    date: "2026-11-01",
+    minutes: 5,
+    image: {
+      src: "/images/blog/ottawa-christmas-markets.jpg",
+      share: "/images/blog/ottawa-christmas-markets-share.jpg",
+      alt: "Handmade gifts on a snowy wooden table, including a robin card, a small painting of Parliament Hill on an easel, a maple leaf mug and a knit scarf, in front of lit Christmas market stalls with Parliament Hill behind at sunset",
+    },
+    featured: ["christmas-gnome-postcard", "happy-snowman-postcard", "autumn-waterfall-magnet", "twilight-tree"],
+    mentions: [
+      "christmas-gnome-postcard",
+      "penguin-christmas-card",
+      "christmas-cat-card",
+      "peaceful-waterfall-magnet",
+      "folk-flowers",
+      "midnight-companion",
+    ],
+    Body: OttawaChristmasMarkets2026,
+  },
   {
     slug: "handmade-christmas-gifts-ottawa-2026",
     title: "Handmade Christmas gifts from Ottawa, all under $40",
@@ -33,7 +62,24 @@ export const posts: Post[] = [
       "Hand-painted gift ideas from my Ottawa studio, from $2 postcards to $35 framed originals, plus where to find handmade gifts at Ottawa craft fairs this season.",
     date: "2026-10-30",
     minutes: 4,
+    image: {
+      src: "/images/blog/handmade-christmas-gifts-ottawa.jpg",
+      share: "/images/blog/handmade-christmas-gifts-ottawa-share.jpg",
+      alt: "Hand-painted Christmas gifts on a wooden table, including snowman and penguin cards and small painted tiles, beside a gift tag reading \"Handmade Christmas Gifts from Ottawa, all under $40\", with Parliament Hill behind",
+    },
     featured: ["folk-flowers", "twilight-tree", "cherry-blossom-serenity", "midnight-blue-blossom"],
+    mentions: [
+      "christmas-gnome-postcard",
+      "happy-snowman-postcard",
+      "penguin-christmas-card",
+      "winter-bird-christmas-card",
+      "together-panda-postcard",
+      "peaceful-waterfall-magnet",
+      "autumn-waterfall-magnet",
+      "northern-lights-reflection",
+      "folk-rooster",
+      "moonlight-shadows",
+    ],
     Body: HandmadeChristmasGiftsOttawa2026,
   },
   {
@@ -50,11 +96,33 @@ export const posts: Post[] = [
     },
     // Midnight Blue Blossom, Moonlight Shadows and Twilight Tree are shown together inside the post.
     featured: ["northern-lights-reflection", "wildflower-garden", "folk-rooster", "cherry-blossom-serenity"],
+    mentions: ["midnight-blue-blossom", "moonlight-shadows", "twilight-tree"],
     Body: HalloweenWeekendOttawa2026,
   },
 ];
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
+
+/** Every product a post writes about or features at the end. */
+const productsOf = (post: Post) => new Set([...(post.mentions ?? []), ...(post.featured ?? [])]);
+
+/** Posts that write about or feature a product, newest first. */
+export const postsAbout = (productSlug: string) => posts.filter((p) => productsOf(p).has(productSlug));
+
+/**
+ * Other posts to read next: the ones sharing the most products with this post first, then the
+ * newest. Every post links to its neighbours this way without adding links by hand.
+ */
+export function relatedPosts(post: Post, count = 3) {
+  const own = productsOf(post);
+  const shared = (p: Post) => [...productsOf(p)].filter((slug) => own.has(slug)).length;
+  return posts
+    .filter((p) => p.slug !== post.slug)
+    .map((p, i) => ({ p, score: shared(p), i }))
+    .sort((a, b) => b.score - a.score || a.i - b.i)
+    .slice(0, count)
+    .map(({ p }) => p);
+}
 
 /** "2026-10-28" → "October 28, 2026". Read as UTC so the day doesn't shift with the time zone. */
 export const postDate = (date: string) =>

@@ -108,7 +108,10 @@ export default function HandmadeChristmasGiftsOttawa2026() {
         <ExtLink href="https://www.eventbrite.ca/e/2026-hintonburg-artisan-craft-fair-tickets-2002668370005">
           Hintonburg Artisan Craft Fair
         </ExtLink>{" "}
-        on November 28. Check the links for times before you go.
+        on November 28. Check the links for times before you go. For the bigger Christmas
+        markets, like Lansdowne and the Museum of History, see my{" "}
+        <InLink href="/blog/ottawa-christmas-markets-2026">Ottawa Christmas markets 2026</InLink>{" "}
+        guide.
       </p>
       <p>
         Whatever you choose, from me or from another maker, thank you for buying handmade this

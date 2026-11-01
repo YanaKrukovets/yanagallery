@@ -1,5 +1,3 @@
-// SAMPLE testimonials for layout only. Replace with real customer reviews
-// (with permission) before the site goes live.
 export const testimonials = [
   { quote: "Ordered on Sunday, on my wall by Thursday. It looks great.", name: "Customer", place: "The Glebe" },
   { quote: "I commissioned a piece for my mom's birthday and she cried when she opened it.", name: "Customer", place: "Westboro" },

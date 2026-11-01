@@ -28,3 +28,32 @@ export function ExtLink({ href, children }: { href: string; children: ReactNode 
     </a>
   );
 }
+
+/** One event in a roundup post: a heading, a small "when and where" line, text and a link. */
+export function Event({
+  title,
+  when,
+  link,
+  children,
+}: {
+  title: string;
+  when: string;
+  link?: { href: string; label: string };
+  children: ReactNode;
+}) {
+  return (
+    <section className="mt-14">
+      <h2 className="font-serif text-2xl text-ink md:text-3xl">{title}</h2>
+      <p className="mt-2 text-xs uppercase tracking-[0.15em] text-bronze">{when}</p>
+      <p className="mt-4">{children}</p>
+      {link && (
+        <p className="mt-3">
+          <ExtLink href={link.href}>
+            {link.label}
+            <span className="sr-only">: {title}</span> <span aria-hidden>→</span>
+          </ExtLink>
+        </p>
+      )}
+    </section>
+  );
+}

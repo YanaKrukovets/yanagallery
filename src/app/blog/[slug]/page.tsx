@@ -7,7 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ProductGrid } from "@/components/ui/ProductGrid";
 import { SectionHead } from "@/components/ui/SectionHead";
-import { getPost, postDate, posts, type Post } from "@/content/journal";
+import { getPost, postDate, posts, relatedPosts, type Post } from "@/content/journal";
 import { products } from "@/content/products";
 import { withSales } from "@/features/cart/sales";
 import { blogPostingJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -41,6 +41,7 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
   if (!post) notFound();
   const { Body } = post;
   const pieces = await piecesFor(post);
+  const related = relatedPosts(post);
 
   return (
     <>
@@ -78,6 +79,39 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
             <Body />
           </div>
         </article>
+
+        {related.length > 0 && (
+          <section className="mt-24 border-t border-ink/15 pt-16 md:mt-32 md:pt-20">
+            <SectionHead
+              title={["More from the", { accent: "blog" }]}
+              link={{ href: "/blog", label: "All posts" }}
+            />
+            <ul className="grid gap-10 md:grid-cols-3">
+              {related.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/blog/${p.slug}`} className="group block">
+                    {p.image && (
+                      <div className="relative aspect-[4/3] overflow-hidden bg-sand/60">
+                        <Image
+                          src={p.image.src}
+                          alt=""
+                          fill
+                          sizes="(min-width: 768px) 400px, 100vw"
+                          className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    <p className="mt-5 text-xs uppercase tracking-[0.2em] text-muted">
+                      <time dateTime={p.date}>{postDate(p.date)}</time> · {p.minutes} min read
+                    </p>
+                    <h3 className="mt-3 font-serif text-2xl leading-snug group-hover:text-bronze">{p.title}</h3>
+                    <p className="mt-3 leading-relaxed text-ink-soft">{p.description}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {pieces.length > 0 && (
           <section className="mt-24 border-t border-ink/15 pt-16 md:mt-32 md:pt-20">

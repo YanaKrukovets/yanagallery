@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { ProductBuy } from "@/components/product/ProductBuy";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ProductGrid } from "@/components/ui/ProductGrid";
+import { postsAbout } from "@/content/journal";
 import { availableFirst, getProduct, products } from "@/content/products";
 import { shop } from "@/content/site";
 import { withSales } from "@/features/cart/sales";
@@ -60,6 +61,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   if (!product) notFound();
 
   // Other pieces, unsold ones first.
+  const stories = postsAbout(product.slug).slice(0, 3);
   const more = availableFirst(all.filter((p) => p.slug !== product.slug)).slice(0, 4);
 
   return (
@@ -121,6 +123,24 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 </div>
               ))}
             </dl>
+          )}
+
+          {stories.length > 0 && (
+            <div className="mt-10">
+              <p className="text-xs uppercase tracking-[0.2em] text-muted">On the blog</p>
+              <ul className="mt-3 space-y-2">
+                {stories.map((p) => (
+                  <li key={p.slug}>
+                    <Link
+                      href={`/blog/${p.slug}`}
+                      className="font-serif text-lg leading-snug underline decoration-gold underline-offset-4 hover:text-bronze"
+                    >
+                      {p.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </ProductBuy>
 
