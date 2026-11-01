@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { photosOf, sizeOf, type Product } from "@/content/products";
+import { altOf, photosOf, sizeOf, type Product } from "@/content/products";
 import { shop } from "@/content/site";
 import { useAddToBag } from "@/features/cart/useAddToBag";
 import { cad } from "@/lib/format";
@@ -47,7 +47,7 @@ export function ProductCard({
             <Image
               key={src}
               src={src}
-              alt={i === 0 ? `${product.title} by ${shop.artist}` : `${product.title}, close-up`}
+              alt={altOf(product, src, i === 0 ? `${product.title} by ${shop.artist}` : `${product.title}, photo ${i + 1}`)}
               fill
               sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
               className={`object-cover transition-[opacity,transform] duration-[1.2s] ease-out group-hover:scale-105 ${

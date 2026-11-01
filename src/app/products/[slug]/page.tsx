@@ -19,17 +19,32 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const product = getProduct((await params).slug);
   if (!product) return {};
-    const firstSentence = product.description?.split(". ")[0];
+  const isGift = product.collection === "little-gifts";
+  const oneOfAKind = product.original ? "one-of-a-kind " : "";
+  // Search keywords and "Ottawa" go first: Google cuts descriptions at about 160 characters.
+  const kind = isGift
+    ? `${oneOfAKind}${product.medium.toLowerCase()}, a handmade gift`
+    : `${oneOfAKind}original hand-painted art`;
+  const firstSentence = product.description?.split(". ")[0];
   const description = trimTo(
-    `${firstSentence ? `${firstSentence}. ` : ""}${product.medium}, ${cad.format(product.price)} CAD, by Ottawa artist ${shop.artist}.`,
+    `${product.title}: ${kind} by Ottawa artist ${shop.artist}, ${cad.format(product.price)} CAD.${firstSentence ? ` ${firstSentence}.` : ""}`,
     160,
   );
   return pageMetadata({
-    title: `${product.title} – ${product.original ? "Original " : ""}Hand-Painted Art`,
+    title: `${product.title} – ${isGift ? giftType(product.medium) : `${product.original ? "Original " : ""}Hand-Painted Art`}`,
     description,
     path: `/products/${product.slug}`,
     ownImage: true,
   });
+}
+
+/**
+ * What a small gift is, the way people search for it: "Hand-painted watercolour Christmas card"
+ * becomes "Hand-Painted Christmas Card".
+ */
+function giftType(medium: string) {
+  const item = medium.replace(/^hand-painted\s+(oil|watercolour|acrylic)?\s*/i, "");
+  return `Hand-Painted ${item.replace(/\b\w/g, (c) => c.toUpperCase())}`;
 }
 
 /** Cuts text at a word boundary so search results don't cut it mid-word. */

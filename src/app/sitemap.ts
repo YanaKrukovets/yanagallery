@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { collections } from "@/content/collections";
 import { posts } from "@/content/journal";
-import { photosOf, products } from "@/content/products";
+import { allPhotosOf, products } from "@/content/products";
 import { images } from "@/content/site";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/products/${p.slug}`),
       changeFrequency: "weekly" as const,
       priority: 0.7,
-      images: photosOf(p).map((src) => absoluteUrl(src)),
+      images: allPhotosOf(p).map((src) => absoluteUrl(src)),
     })),
     { url: absoluteUrl("/blog"), changeFrequency: "weekly", priority: 0.6 },
     ...posts.map((p) => ({

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, type ReactNode } from "react";
-import { photosOf, type Product } from "@/content/products";
+import { altOf, photosOf, type Product } from "@/content/products";
 import { onlinePayments, shop } from "@/content/site";
 import { mailtoHref } from "@/lib/format";
 import { AddToBagButton } from "./AddToBagButton";
@@ -31,13 +31,18 @@ export function ProductBuy({
   const designs = product.designs;
   const [designId, setDesignId] = useState(designs?.[0]?.id);
   const design = designs?.find((d) => d.id === designId);
-  const photos = design ? [design.image, ...(product.gallery ?? [])] : photosOf(product);
+  const srcs = design ? [design.image, ...(product.gallery ?? [])] : photosOf(product);
+  const name = design ? `${alt}, ${design.name} design` : alt;
+  const photos = srcs.map((src, i) => ({
+    src,
+    alt: altOf(product, src, i === 0 ? name : `${name}, photo ${i + 1} of ${srcs.length}`),
+  }));
 
   return (
     <div className="mt-8 flex flex-col gap-10 md:flex-row md:items-start md:gap-14">
       <div className="mx-auto w-full max-w-[min(20rem,50vh)] md:mx-0 md:w-[min(26rem,60vh)] md:max-w-none md:shrink-0">
         {/* Keyed by design so a new choice starts on its front photo. */}
-        <ProductGallery key={design?.id} photos={photos} title={design ? `${alt}, ${design.name} design` : alt} />
+        <ProductGallery key={design?.id} photos={photos} />
       </div>
 
       <div className="md:max-w-xl md:flex-1 md:pt-4">

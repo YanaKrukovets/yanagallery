@@ -7,7 +7,9 @@ import { useState, type MouseEvent } from "react";
 const ZOOM = 2.2;
 
 /** Large photo with thumbnails. Hover with a mouse, or tap, to zoom into the brushwork. */
-export function ProductGallery({ photos, title }: { photos: string[]; title: string }) {
+export type Photo = { src: string; alt: string };
+
+export function ProductGallery({ photos }: { photos: Photo[] }) {
   const [shown, setShown] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   const [origin, setOrigin] = useState("50% 50%");
@@ -28,7 +30,7 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
     <div className="flex flex-col gap-4">
       <button
         type="button"
-        aria-label={`${shown === 0 ? title : `${title}, close-up`}. ${zoomed ? "Zoom out" : "Zoom in"}`}
+        aria-label={`${photos[shown].alt}. ${zoomed ? "Zoom out" : "Zoom in"}`}
         className={`relative block aspect-[4/5] w-full overflow-hidden bg-sand/60 ${zoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
         onClick={(e) => {
           aim(e);
@@ -38,11 +40,11 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
         onPointerEnter={(e) => e.pointerType === "mouse" && (aim(e), setZoomed(true))}
         onPointerLeave={(e) => e.pointerType === "mouse" && setZoomed(false)}
       >
-        {photos.map((src, i) => (
+        {photos.map(({ src, alt }, i) => (
           <Image
             key={src}
             src={src}
-            alt={i === 0 ? title : `${title}, photo ${i + 1} of ${photos.length}`}
+            alt={alt}
             fill
             priority={i === 0}
             sizes="(min-width: 768px) 416px, 320px"
@@ -59,7 +61,7 @@ export function ProductGallery({ photos, title }: { photos: string[]; title: str
 
       {photos.length > 1 && (
         <div className="flex gap-3">
-          {photos.map((src, i) => (
+          {photos.map(({ src }, i) => (
             <button
               key={src}
               type="button"

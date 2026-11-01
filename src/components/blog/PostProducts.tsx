@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/content/products";
+import { altOf, products } from "@/content/products";
 import { shop } from "@/content/site";
 import { withSales } from "@/features/cart/sales";
 import { cad } from "@/lib/format";
@@ -25,7 +25,7 @@ export async function PostProducts({ slugs }: { slugs: string[] }) {
               <div className="relative aspect-square overflow-hidden bg-sand/60">
                 <Image
                   src={p.image}
-                  alt={`${p.title} by ${shop.artist}`}
+                  alt={altOf(p, p.image, `${p.title} by ${shop.artist}`)}
                   fill
                   sizes="(min-width: 768px) 240px, 30vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

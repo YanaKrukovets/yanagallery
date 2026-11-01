@@ -4,7 +4,7 @@
 import type { Metadata } from "next";
 import { collections } from "@/content/collections";
 import type { Post } from "@/content/journal";
-import { photosOf, type Product } from "@/content/products";
+import { allPhotosOf, type Product } from "@/content/products";
 import { images, shop } from "@/content/site";
 
 /** The live address. `SITE_URL` on the host overrides it (e.g. for a preview deploy). */
@@ -172,7 +172,7 @@ export function productJsonLd(product: Product) {
     name: product.title,
     url,
     sku: product.slug,
-    image: photosOf(product).map((src) => absoluteUrl(src)),
+    image: allPhotosOf(product).map((src) => absoluteUrl(src)),
     description: product.description ?? product.medium,
     category: collection?.title,
     material: detail("Medium"),

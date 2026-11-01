@@ -27,6 +27,23 @@ export default function HandmadeChristmasGiftsOttawa2026() {
         tiny painting.
       </p>
       <p>
+        New this season is the <InLink href="/products/happy-snowman-postcard">Happy Snowman</InLink>:
+        a smiling blue snowman in a red scarf, with snowflakes and little gold splashes. The back is
+        a classic postcard layout, so you can write a note, add a stamp and mail it. It&apos;s $3.
+      </p>
+      <p>
+        Two more Christmas cards are new this year too. The{" "}
+        <InLink href="/products/penguin-christmas-card">Cute Penguin</InLink> is a round little
+        penguin in a red knitted hat, and you can pick the word painted under it: &ldquo;Bright&rdquo;,
+        &ldquo;Joy&rdquo; or &ldquo;Happy&rdquo;. The{" "}
+        <InLink href="/products/winter-bird-christmas-card">Winter Bird</InLink> sits on a pine
+        branch with red berries, with &ldquo;Happy, Bright, Joy&rdquo; lettered by hand below. Both
+        are $3, painted in watercolour with gold accents, and have a postcard back for your message.
+      </p>
+
+      <PostProducts slugs={["happy-snowman-postcard", "penguin-christmas-card", "winter-bird-christmas-card"]} />
+
+      <p>
         For someone you love, the <InLink href="/products/together-panda-postcard">Together</InLink>{" "}
         postcards show two pandas under a heart balloon. They come in five versions, from
         &ldquo;Love you&rdquo; to no words at all. They&apos;re $2 each, and they&apos;re lovely

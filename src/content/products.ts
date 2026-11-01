@@ -42,6 +42,11 @@ export type Product = {
   details?: { label: string; value: string }[];
   /** Designs to choose from. The first one is the default; its photo should match `image`. */
   designs?: Design[];
+  /**
+   * Alt text for photos, keyed by photo path. Describe what the photo shows, for screen readers
+   * and image search. Photos left out get a plain default naming the piece.
+   */
+  alts?: Record<string, string>;
 };
 
 const uniqueNote = "Each piece is individually hand-painted, making it truly unique.";
@@ -202,6 +207,112 @@ export const newArrivals: Product[] = [
     ],
   },
   {
+    slug: "happy-snowman-postcard",
+    letterGrams: 15, // TODO: estimate — weigh a real postcard
+    collection: "little-gifts",
+    original: true,
+    title: "Happy Snowman",
+    medium: "Hand-painted watercolour postcard",
+    price: 3,
+    image: "/images/products/happy-snowman-postcard/front.jpg",
+    gallery: [
+      "/images/products/happy-snowman-postcard/back.jpg",
+      "/images/products/happy-snowman-postcard/both-sides.jpg",
+    ],
+    alts: {
+      "/images/products/happy-snowman-postcard/front.jpg":
+        "Hand-painted watercolour postcard of a smiling blue snowman with a carrot nose and a red scarf, surrounded by blue snowflakes and gold splatter",
+      "/images/products/happy-snowman-postcard/back.jpg":
+        "Back of the snowman postcard: a stamp box, address lines and space for a message, with a few gold paint dots",
+      "/images/products/happy-snowman-postcard/both-sides.jpg":
+        "Front and back of the Happy Snowman postcard side by side on a wooden table with pine branches and a pine cone",
+    },
+    badge: "New",
+    description:
+      "Bring a little winter magic to someone special with this cheerful, hand-painted snowman postcard! Featuring a smiling blue snowman, a cozy red scarf, and playful snowflakes with delicate golden accents. Each postcard is an original, one-of-a-kind piece of art, perfect for Christmas greetings, holiday gifts, or seasonal decoration.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.9 × 5.9 in (10 × 15 cm)" },
+      { label: "Back", value: "Traditional postcard layout with space for a message, address, and stamp" },
+      { label: "Style", value: "Cheerful winter and Christmas illustration" },
+      { label: "Perfect for", value: "Christmas cards, holiday greetings, stocking stuffers, or winter decor" },
+    ],
+  },
+  {
+    slug: "penguin-christmas-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "little-gifts",
+    title: "Cute Penguin",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/penguin-christmas-card/bright.jpg",
+    // The back of the card, shown after the chosen design.
+    gallery: ["/images/products/penguin-christmas-card/back.jpg"],
+    badge: "New",
+    designs: [
+      { id: "bright", name: "Bright", image: "/images/products/penguin-christmas-card/bright.jpg" },
+      { id: "joy", name: "Joy", image: "/images/products/penguin-christmas-card/joy.jpg" },
+      { id: "happy", name: "Happy", image: "/images/products/penguin-christmas-card/happy.jpg" },
+    ],
+    alts: {
+      "/images/products/penguin-christmas-card/bright.jpg":
+        "Hand-painted watercolour Christmas card of a round brown penguin in a red knitted hat, with stars, gold splatter and the word “bright” in ink",
+      "/images/products/penguin-christmas-card/joy.jpg":
+        "Hand-painted watercolour Christmas card of a smiling brown penguin in a red knitted hat, with stars, gold splatter and the word “joy” in ink",
+      "/images/products/penguin-christmas-card/happy.jpg":
+        "Hand-painted watercolour Christmas card of a brown penguin in a red star-patterned hat, with stars, gold splatter and the word “happy” in ink",
+      "/images/products/penguin-christmas-card/back.jpg":
+        "Back of the card: a white postcard layout with a stamp box, address lines and space for a message",
+    },
+    description:
+      "Add a little warmth and joy to the holiday season with this adorable, original hand-painted Christmas card featuring a cheerful penguin in a festive red hat. Each card is individually painted with watercolours on paper, making every piece unique. Decorated with delicate snowflakes and golden accents. Perfect for Christmas greetings, holiday gifts, or festive decorations!",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.9 × 5.9 in (10 × 15 cm)" },
+      { label: "Designs", value: "Bright, Joy, Happy" },
+      { label: "Back", value: "Postcard layout with space for a message, address, and stamp" },
+      { label: "Style", value: "Cute, whimsical Christmas illustration" },
+      { label: "Perfect for", value: "Christmas greetings, holiday gifts, stocking stuffers, or festive decor" },
+    ],
+  },
+  {
+    slug: "winter-bird-christmas-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "little-gifts",
+    title: "Winter Bird",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/winter-bird-christmas-card/bright-joy.jpg",
+    // The back of the card, shown after the chosen design.
+    gallery: ["/images/products/winter-bird-christmas-card/back.jpg"],
+    badge: "New",
+    designs: [
+      { id: "bright-joy", name: "Happy Bright Joy", image: "/images/products/winter-bird-christmas-card/bright-joy.jpg" },
+      { id: "joy-bright", name: "Happy Joy Bright", image: "/images/products/winter-bird-christmas-card/joy-bright.jpg" },
+    ],
+    alts: {
+      "/images/products/winter-bird-christmas-card/bright-joy.jpg":
+        "Hand-painted watercolour Christmas card of a little brown and golden bird on a pine branch with red berries, with stars, gold splatter and the words “Happy Bright Joy”",
+      "/images/products/winter-bird-christmas-card/joy-bright.jpg":
+        "Hand-painted watercolour Christmas card of a little brown and golden bird on a pine branch with red berries, with stars, gold splatter and the words “Happy Joy Bright”",
+      "/images/products/winter-bird-christmas-card/back.jpg":
+        "Back of the card: a white postcard layout with a stamp box, address lines and space for a message",
+    },
+    description:
+      "Send a little winter cheer with this sweet, original hand-painted Christmas card featuring a cozy little bird perched on a pine branch with red berries. Each card is individually painted with watercolours on paper, making every piece unique. Decorated with delicate snowflakes and golden accents, with “Happy, Bright, Joy” hand-lettered below. Perfect for Christmas greetings, holiday gifts, or festive decorations!",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.9 × 5.9 in (10 × 15 cm)" },
+      { label: "Designs", value: "Happy Bright Joy, Happy Joy Bright" },
+      { label: "Back", value: "Postcard layout with space for a message, address, and stamp" },
+      { label: "Style", value: "Cozy, nature-inspired Christmas illustration" },
+      { label: "Perfect for", value: "Christmas greetings, holiday gifts, stocking stuffers, or festive decor" },
+    ],
+  },
+  {
     slug: "together-panda-postcard",
     letterGrams: 15, // TODO: estimate — weigh a real postcard
     collection: "little-gifts",
@@ -350,6 +461,14 @@ export const sizeOf = (product: Product) => product.details?.find((d) => d.label
 
 /** Every photo of a product: the main one first, then the gallery. */
 export const photosOf = (product: Product) => [product.image, ...(product.gallery ?? [])];
+
+/** Every photo plus each design's photo, without repeats. For the sitemap and search data. */
+export const allPhotosOf = (product: Product) => [
+  ...new Set([...photosOf(product), ...(product.designs?.map((d) => d.image) ?? [])]),
+];
+
+/** Alt text for one of a product's photos: its own from `alts`, or the given fallback. */
+export const altOf = (product: Product, src: string, fallback: string) => product.alts?.[src] ?? fallback;
 
 /** Finds a product's design by id. Returns undefined for products without designs. */
 export const designOf = (product: Product, id: string | undefined) => product.designs?.find((d) => d.id === id);
