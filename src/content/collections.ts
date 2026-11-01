@@ -3,7 +3,7 @@
 
 import { products, availableFirst, type Product } from "./products";
 
-export type CollectionSlug = "folk-florals" | "nature-and-sky" | "little-gifts";
+export type CollectionSlug = "folk-florals" | "nature-and-sky" | "cats" | "little-gifts";
 
 export type Collection = {
   slug: CollectionSlug;
@@ -29,6 +29,13 @@ export const collections: Collection[] = [
     seoTitle: "Landscape & Night Sky Art, Ottawa",
     blurb: "Sunsets, northern lights, moonlight, and gardens in bloom.",
     image: "/images/collections/nature-and-sky.jpg",
+  },
+  {
+    slug: "cats",
+    title: "Cats",
+    seoTitle: "Original Cat Paintings, Ottawa",
+    blurb: "Quiet cats in oil on glass, with thick, textured brushstrokes in burgundy and midnight blue.",
+    image: "/images/collections/cats.jpg",
   },
   {
     slug: "little-gifts",

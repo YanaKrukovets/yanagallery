@@ -8,6 +8,7 @@ import sharp from "sharp";
 const covers = {
   "folk-florals": ["folk-rooster/main", "folk-flowers/main", "midnight-blue-blossom/main"],
   "nature-and-sky": ["northern-lights-reflection/main", "twilight-tree/main", "cherry-blossom-serenity/main"],
+  "cats": ["quiet-companion/main", "midnight-companion/main", "christmas-cat-card/main"],
   "little-gifts": ["together-panda-postcard/together", "peaceful-waterfall-magnet/main", "christmas-gnome-postcard/love-letter"],
 };
 
@@ -20,6 +21,9 @@ const focus = {
   "northern-lights-reflection/main": [0.52, 0.41, 0.75],
   "twilight-tree/main": [0.52, 0.41, 0.75],
   "cherry-blossom-serenity/main": [0.52, 0.41, 0.75],
+  "quiet-companion/main": [0.5, 0.41, 0.7],
+  "midnight-companion/main": [0.5, 0.42, 0.72],
+  "christmas-cat-card/main": [0.52, 0.52, 0.88],
   "together-panda-postcard/together": [0.48, 0.5, 0.92],
   "peaceful-waterfall-magnet/main": [0.58, 0.47, 0.7],
   "christmas-gnome-postcard/love-letter": [0.48, 0.52, 0.88],

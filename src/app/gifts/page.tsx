@@ -16,7 +16,7 @@ import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, pageMetadata } from "@/lib
 
 export const metadata: Metadata = pageMetadata({
   title: "Handmade Gifts from Ottawa",
-  description: `Handmade gifts by Ottawa artist ${shop.artist}: hand-painted fridge magnets and postcards under $20, framed original art under $40. Free pickup in Blackburn Hamlet.`,
+  description: `Handmade gifts by Ottawa artist ${shop.artist}: hand-painted Christmas cards, postcards and magnets under $20, framed originals and cat paintings. Free Ottawa pickup.`,
   path: "/gifts",
 });
 
@@ -26,7 +26,7 @@ const priceGroups: { under: number; title: Segment[]; intro: string }[] = [
     under: 20,
     title: ["Gifts under", { accent: "$20" }],
     intro:
-      "Hand-painted fridge magnets and watercolour postcards. Small enough for a stocking or a card.",
+      "Hand-painted Christmas cards, watercolour postcards and fridge magnets. Small enough for a stocking or a card.",
   },
   {
     under: 40,
@@ -37,7 +37,8 @@ const priceGroups: { under: number; title: Segment[]; intro: string }[] = [
   {
     under: Infinity,
     title: ["Something", { accent: "special" }],
-    intro: "Larger originals for the people you want to spoil.",
+    intro:
+      "One-of-a-kind oil paintings on glass in classic wooden frames, for the people you want to spoil.",
   },
 ];
 
@@ -55,10 +56,8 @@ const occasions: { title: string; body: string; link: OccasionLink; product?: st
   },
   {
     title: "Christmas cards that are gifts too",
-    body: "Each Christmas Gnome postcard is painted by hand in watercolour. Write your message on the back, or frame it.",
-    product: "christmas-gnome-postcard",
-    link: { href: "/products/christmas-gnome-postcard", label: "Christmas Gnome postcard" },
-    fallback: { href: "/collections/little-gifts", label: "Magnets and postcards" },
+    body: "A gnome, a snowman, a penguin or a cat in a red hat, or a little winter bird, each painted by hand in watercolour. Write your message on the back, or frame it.",
+    link: { href: "/collections/little-gifts", label: "Christmas cards and postcards" },
   },
   {
     title: "Housewarming and hostess gifts",
@@ -69,6 +68,11 @@ const occasions: { title: string; body: string; link: OccasionLink; product?: st
     title: "Teachers, coworkers and neighbours",
     body: "A night sky or a waterfall in a little wood frame is a thank-you that won't get re-gifted.",
     link: { href: "/collections/nature-and-sky", label: "Nature & Sky" },
+  },
+  {
+    title: "For cat lovers",
+    body: "A cat painted in oil on glass, in a classic wooden frame. Each one is an original, so no one else will have the same cat.",
+    link: { href: "/collections/cats", label: "Cats" },
   },
   {
     title: "For someone you love",

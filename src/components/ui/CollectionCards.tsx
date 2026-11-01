@@ -7,7 +7,7 @@ import { collections, productsIn } from "@/content/collections";
 export function CollectionCards({ headingLevel = "h3" }: { headingLevel?: "h2" | "h3" }) {
   const Heading = headingLevel;
   return (
-    <div className="grid gap-6 md:grid-cols-3">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       {collections.map((c, i) => (
         <Reveal key={c.slug} delay={i * 0.12}>
           <Link href={`/collections/${c.slug}`} className="group relative block aspect-[3/4] overflow-hidden rounded-t-[200px]">
@@ -16,7 +16,7 @@ export function CollectionCards({ headingLevel = "h3" }: { headingLevel?: "h2" |
               // The heading below names the link, so the image is decorative here.
               alt=""
               fill
-              sizes="(min-width: 768px) 33vw, 100vw"
+              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
               className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
