@@ -4,6 +4,7 @@ import { CartDrawer } from "@/features/cart/CartDrawer";
 import { CartProvider } from "@/features/cart/CartProvider";
 import { MotionPrefs } from "@/components/motion/MotionPrefs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { BackToTop } from "@/components/ui/BackToTop";
 import { shop } from "@/content/site";
 import { siteDescription, siteJsonLd, siteUrl } from "@/lib/seo";
 import "./globals.css";
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <CartProvider>
             {children}
             <CartDrawer />
+            <BackToTop />
           </CartProvider>
         </MotionPrefs>
       </body>
