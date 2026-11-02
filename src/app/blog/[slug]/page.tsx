@@ -28,12 +28,15 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
   });
 }
 
-/** Four unsold pieces for the end of a post: the post's own picks first, then any others. */
+/**
+ * Unsold pieces for the end of a post: the post's own picks first, then others to fill any
+ * that sold. Shows as many as the post picks, or four if it picks none.
+ */
 async function piecesFor(post: Post) {
   const available = (await withSales(products)).filter((p) => !p.sold);
   const picks = (post.featured ?? []).flatMap((slug) => available.filter((p) => p.slug === slug));
   const others = available.filter((p) => !picks.includes(p));
-  return [...picks, ...others].slice(0, 4);
+  return [...picks, ...others].slice(0, post.featured?.length || 4);
 }
 
 export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {

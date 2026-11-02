@@ -2,6 +2,7 @@
 
 import type { ComponentType } from "react";
 import ArtTherapyOttawa2026 from "@/content/posts/art-therapy-ottawa-2026";
+import HumanMadeArtVsAiArt from "@/content/posts/human-made-art-vs-ai-art";
 import HalloweenWeekendOttawa2026 from "@/content/posts/halloween-weekend-ottawa-2026";
 import HandmadeChristmasGiftsOttawa2026 from "@/content/posts/handmade-christmas-gifts-ottawa-2026";
 import OttawaChristmasMarkets2026 from "@/content/posts/ottawa-christmas-markets-2026";
@@ -33,6 +34,22 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    slug: "human-made-art-vs-ai-art",
+    title: "Why handmade art feels better than AI art (and what science says)",
+    description:
+      "What research says about human-made art versus AI images: how handmade art affects your brain, stress and mental health, why it's a better buy, and why it means more.",
+    date: "2026-11-02",
+    minutes: 5,
+    image: {
+      src: "/images/blog/handmade-vs-ai-art.jpg",
+      share: "/images/blog/handmade-vs-ai-art-share.jpg",
+      alt: "A hand painting a watercolour of a snowy cabin with glowing windows under a pink and purple winter sky, on textured paper beside a watercolour palette, a speckled mug of tea, a candle, pine branches with red berries and string lights",
+    },
+    featured: ["christmas-gnome-postcard", "winter-bird-christmas-card", "christmas-cat-card"],
+    mentions: ["folk-rooster", "wildflower-garden", "northern-lights-reflection", "moonlight-shadows"],
+    Body: HumanMadeArtVsAiArt,
+  },
   {
     slug: "art-therapy-ottawa-2026",
     title: "Art therapy in Ottawa: groups, drop-ins and calm art-making this winter",
