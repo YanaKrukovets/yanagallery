@@ -263,6 +263,30 @@ export const newArrivals: Product[] = [
     ],
   },
   {
+    slug: "blue-winter-dreams-magnet",
+    letterGrams: 40, // TODO: estimate — weigh a real magnet
+    collection: "little-gifts",
+    title: "Blue Winter Dreams",
+    medium: "Hand-painted oil fridge magnet",
+    price: 15,
+    image: "/images/products/blue-winter-dreams-magnet/main.jpg",
+    badge: "New",
+    original: true,
+    alts: {
+      "/images/products/blue-winter-dreams-magnet/main.jpg":
+        "Small square painted magnet of two snow-covered trees in shades of blue and white under a bright blue sky with birds, on a stainless steel fridge",
+    },
+    description:
+      "A charming miniature winter landscape featuring two snow-covered trees beneath a bright blue sky, with birds flying overhead. Beautiful shades of blue and white create a peaceful, magical winter atmosphere. Each magnet is individually hand-painted with oil paints and finished with a water-based glossy protective coating. A unique little piece of art, perfect for decorating your fridge, adding winter charm to your home, or giving as a thoughtful handmade gift.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted" },
+      { label: "Medium", value: "Oil paint" },
+      { label: "Finish", value: "Water-based glossy protective coating" },
+      { label: "Size", value: "3 × 3 in (7.5 × 7.5 cm)" },
+      { label: "Type", value: "Decorative fridge magnet" },
+    ],
+  },
+  {
     slug: "christmas-gnome-postcard",
     letterGrams: 15, // TODO: estimate — weigh a real postcard
     collection: "little-gifts",
