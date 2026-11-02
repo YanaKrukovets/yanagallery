@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CollectionTabs } from "@/components/ui/CollectionTabs";
-import { ProductGrid } from "@/components/ui/ProductGrid";
+import { ShowMoreGrid } from "@/components/ui/ShowMoreGrid";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { collections, getCollection, productsIn } from "@/content/collections";
@@ -56,7 +56,7 @@ export default async function CollectionPage({ params }: PageProps<"/collections
           />
         </div>
         <CollectionTabs active={collection.slug} />
-        <ProductGrid products={items} headingLevel="h2" />
+        <ShowMoreGrid products={items} headingLevel="h2" />
       </main>
       <Footer />
     </>

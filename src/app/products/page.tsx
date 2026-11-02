@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CollectionTabs } from "@/components/ui/CollectionTabs";
-import { ProductGrid } from "@/components/ui/ProductGrid";
+import { ShowMoreGrid } from "@/components/ui/ShowMoreGrid";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { availableFirst, products } from "@/content/products";
@@ -30,7 +30,7 @@ export default async function ProductsPage() {
           intro={`Everything in the shop, hand-painted in Ottawa. ${all.length} ${all.length === 1 ? "piece" : "pieces"}.`}
         />
         <CollectionTabs />
-        <ProductGrid products={all} headingLevel="h2" />
+        <ShowMoreGrid products={all} headingLevel="h2" />
       </main>
       <Footer />
     </>
