@@ -2,6 +2,8 @@
 
 import type { ComponentType } from "react";
 import ArtTherapyOttawa2026 from "@/content/posts/art-therapy-ottawa-2026";
+import WhatToWriteInAChristmasCard from "@/content/posts/what-to-write-in-a-christmas-card";
+import HowToHangSmallArt from "@/content/posts/how-to-hang-small-art";
 import HumanMadeArtVsAiArt from "@/content/posts/human-made-art-vs-ai-art";
 import HalloweenWeekendOttawa2026 from "@/content/posts/halloween-weekend-ottawa-2026";
 import HandmadeChristmasGiftsOttawa2026 from "@/content/posts/handmade-christmas-gifts-ottawa-2026";
@@ -34,6 +36,45 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    slug: "what-to-write-in-a-christmas-card",
+    title: "What to write in a Christmas card: 80 messages for family, friends and coworkers",
+    description:
+      "80 short Christmas card messages for parents, grandparents, partners, friends, coworkers, your boss, teachers and neighbours, plus funny, religious and happy holidays wishes and how to sign off.",
+    date: "2026-11-02",
+    minutes: 7,
+    image: {
+      src: "/images/blog/christmas-card-messages.jpg",
+      share: "/images/blog/christmas-card-messages-share.jpg",
+      alt: "A watercolour Christmas card of a snowy cabin at sunset next to a blank open card, a gold pen and an envelope with a gold tree seal, on a wooden table with pine branches, red berries, candy cane string, a mug of hot chocolate and string lights",
+    },
+    featured: ["christmas-gnome-postcard", "happy-snowman-postcard", "blue-winter-dreams-magnet", "twilight-tree"],
+    mentions: ["penguin-christmas-card", "winter-bird-christmas-card", "christmas-cat-card"],
+    Body: WhatToWriteInAChristmasCard,
+  },
+  {
+    slug: "how-to-hang-small-art",
+    title: "How to hang small art: gallery wall ideas for mini paintings",
+    description:
+      "How high to hang small paintings, how far apart, and five easy gallery wall layouts for mini art, plus where to put it, what hooks to use and what to avoid.",
+    date: "2026-11-02",
+    minutes: 6,
+    image: {
+      src: "/images/blog/how-to-hang-small-art.jpg",
+      share: "/images/blog/how-to-hang-small-art-share.jpg",
+      alt: "A gallery wall of seven small framed paintings in wood and white frames, including a rooster, a snowy cabin, a full moon over a lake, pink flowers, a chickadee on a berry branch and an autumn sunset, hung close together above a wooden sideboard with a candle, books, red berries and trailing plants",
+    },
+    featured: ["northern-lights-reflection", "cherry-blossom-serenity", "moonlight-shadows", "wildflower-garden"],
+    mentions: [
+      "folk-rooster",
+      "folk-flowers",
+      "midnight-blue-blossom",
+      "midnight-companion",
+      "quiet-companion",
+      "peaceful-waterfall-magnet",
+    ],
+    Body: HowToHangSmallArt,
+  },
   {
     slug: "human-made-art-vs-ai-art",
     title: "Why handmade art feels better than AI art (and what science says)",

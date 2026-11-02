@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SectionHead } from "@/components/ui/SectionHead";
+import { ShowMore } from "@/components/ui/ShowMore";
 import { postDate, posts } from "@/content/journal";
 import { shop } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
@@ -20,9 +21,13 @@ export default function BlogPage() {
       <Header />
       <main id="main" tabIndex={-1} className="mx-auto max-w-5xl px-5 pb-20 pt-28 outline-none md:px-8 md:pt-36">
         <SectionHead as="h1" title={["Stories from the", { accent: "studio" }]} />
-        <ul className="divide-y divide-ink/15 border-y border-ink/15">
-          {posts.map((p) => (
-            <li key={p.slug}>
+        <ShowMore
+          as="ul"
+          pageSize={5}
+          className="divide-y divide-ink/15 border-y border-ink/15"
+          items={posts.map((p) => ({
+            key: p.slug,
+            node: (
               <Link
                 href={`/blog/${p.slug}`}
                 className="group flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:gap-8"
@@ -49,9 +54,9 @@ export default function BlogPage() {
                   </p>
                 </div>
               </Link>
-            </li>
-          ))}
-        </ul>
+            ),
+          }))}
+        />
       </main>
       <Footer />
     </>
