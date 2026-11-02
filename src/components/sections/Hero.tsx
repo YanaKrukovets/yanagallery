@@ -19,14 +19,14 @@ export function Hero() {
   const smallY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "-40%"]);
 
   return (
-    <section ref={ref} id="top" className="relative overflow-hidden pt-28 md:pt-36">
+    <section ref={ref} id="top" className="relative overflow-hidden pt-[clamp(4.75rem,12svh,7rem)] md:pt-[clamp(6rem,14svh,9rem)]">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-12 md:px-8">
         <div className="flex flex-col justify-center md:col-span-6">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="mb-6 text-xs uppercase tracking-[0.25em] text-bronze"
+            className="mb-[clamp(0.75rem,2.5svh,1.5rem)] text-xs uppercase tracking-[0.25em] text-bronze"
           >
             {shop.tagline}
           </motion.p>
@@ -35,7 +35,7 @@ export function Hero() {
             as="h1"
             immediate
             delay={0.3}
-            className="font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
+            className="font-serif text-[clamp(2.25rem,min(11vw,6.5svh),3.75rem)] leading-[1.02] tracking-tight md:text-[clamp(2.5rem,min(5.4vw,8svh),4.5rem)]"
             segments={["Handmade art from", { accent: "Ottawa," }, "for the walls you", { accent: "come home to." }]}
           />
 
@@ -43,7 +43,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.1, ease: EASE }}
-            className="mt-8 max-w-md text-lg leading-relaxed text-ink-soft"
+            className="mt-[clamp(1rem,3svh,2rem)] max-w-md text-base leading-relaxed sm:text-lg text-ink-soft"
           >
             Original paintings and small handmade gifts, hand-painted by Ottawa artist Yana
             Krukovets. Affordable art for collectors and art lovers alike, delivered to your door.
@@ -53,11 +53,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.3, ease: EASE }}
-            className="mt-10 flex flex-wrap gap-4"
+            className="mt-[clamp(1.25rem,4svh,2.5rem)] flex flex-wrap gap-3 sm:gap-4"
           >
             <Link
               href="/products"
-              className="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.15em] text-cream transition-colors hover:bg-bronze"
+              className="group inline-flex items-center gap-3 rounded-full bg-ink px-5 py-3.5 text-xs sm:px-7 sm:py-4 sm:text-sm uppercase tracking-[0.15em] text-cream transition-colors hover:bg-bronze"
             >
               <RollText text="Shop the work" />
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
@@ -65,7 +65,7 @@ export function Hero() {
             {newArrivals.length > 0 && (
               <a
                 href="#new-arrivals"
-                className="inline-flex items-center rounded-full border border-ink/25 px-7 py-4 text-sm uppercase tracking-[0.15em] transition-colors hover:border-ink"
+                className="inline-flex items-center rounded-full border border-ink/25 px-5 py-3.5 text-xs sm:px-7 sm:py-4 sm:text-sm uppercase tracking-[0.15em] transition-colors hover:border-ink"
               >
                 <RollText text="See what's new" />
               </a>
@@ -79,7 +79,7 @@ export function Hero() {
             initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
             animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
             transition={{ duration: 1.4, delay: 0.4, ease: EASE }}
-            className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] md:ml-10"
+            className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] md:ml-10 md:max-h-[calc(100svh-clamp(6rem,14svh,9rem)-2rem)]"
           >
             <motion.div
               style={{ y: imgY }}
