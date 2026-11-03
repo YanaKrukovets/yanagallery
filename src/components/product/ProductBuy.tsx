@@ -25,14 +25,16 @@ export function ProductBuy({
   intro: ReactNode;
   /** Shown right under the button. */
   afterButton?: ReactNode;
-  /** Shown below everything: description, details… */
+  /** Shown below the description and details, e.g. blog links. */
   children?: ReactNode;
 }) {
   const designs = product.designs;
   const [designId, setDesignId] = useState(designs?.[0]?.id);
   const design = designs?.find((d) => d.id === designId);
-  const srcs = design ? [design.image, ...(product.gallery ?? [])] : photosOf(product);
-  const name = design ? `${alt}, ${design.name} design` : alt;
+  const srcs = design ? [design.image, ...(design.gallery ?? product.gallery ?? [])] : photosOf(product);
+  const description = design?.description ?? product.description;
+  const details = design?.details ?? product.details;
+  const name = design ?`${alt}, ${design.name} design` : alt;
   const photos = srcs.map((src, i) => ({
     src,
     alt: altOf(product, src, i === 0 ? name : `${name}, photo ${i + 1} of ${srcs.length}`),
@@ -93,6 +95,20 @@ export function ProductBuy({
           )}
           {afterButton}
         </div>
+
+        {/* A design can have its own description and details; otherwise the product's are shown. */}
+        {description && <p className="mt-10 leading-relaxed text-ink-soft">{description}</p>}
+
+        {details && details.length > 0 && (
+          <dl className="mt-10 divide-y divide-ink/10 border-y border-ink/10 text-sm">
+            {details.map((d) => (
+              <div key={d.label} className="flex justify-between gap-6 py-3">
+                <dt className="text-muted">{d.label}</dt>
+                <dd className="text-right">{d.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
 
         {children}
       </div>

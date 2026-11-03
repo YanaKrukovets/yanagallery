@@ -7,9 +7,9 @@ export function Collections() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHead
           title={["Shop by", { accent: "collection" }]}
-          intro="Folk florals, painted skies, and little gifts — find the pieces that speak to you."
+          intro="Christmas cards, folk florals, painted skies, and little gifts — find the pieces that speak to you."
         />
-        <CollectionCards />
+        <CollectionCards homeOnly />
       </div>
     </section>
   );

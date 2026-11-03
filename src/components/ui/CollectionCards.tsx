@@ -3,12 +3,13 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { collections, productsIn } from "@/content/collections";
 
-/** Arched collection cards, used on the home page section and on /collections. */
-export function CollectionCards({ headingLevel = "h3" }: { headingLevel?: "h2" | "h3" }) {
+/** Arched collection cards, used on the home page section (`homeOnly`) and on /collections. */
+export function CollectionCards({ headingLevel = "h3", homeOnly = false }: { headingLevel?: "h2" | "h3"; homeOnly?: boolean }) {
   const Heading = headingLevel;
+  const shown = homeOnly ? collections.filter((c) => c.onHome) : collections;
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-      {collections.map((c, i) => (
+      {shown.map((c, i) => (
         <Reveal key={c.slug} delay={i * 0.12}>
           <Link href={`/collections/${c.slug}`} className="group relative block aspect-[3/4] overflow-hidden rounded-t-[200px]">
             <Image

@@ -6,15 +6,18 @@
 import sharp from "sharp";
 
 const covers = {
+  "christmas": ["winter-forest-christmas-card/snowy-forest", "christmas-gnome-postcard/love-letter", "penguin-christmas-card/bright"],
   "folk-florals": ["folk-rooster/main", "folk-flowers/main", "midnight-blue-blossom/main"],
   "nature-and-sky": ["northern-lights-reflection/main", "twilight-tree/main", "cherry-blossom-serenity/main"],
   "cats": ["quiet-companion/main", "midnight-companion/main", "christmas-cat-card/main"],
-  "little-gifts": ["together-panda-postcard/together", "peaceful-waterfall-magnet/main", "christmas-gnome-postcard/love-letter"],
+  "little-gifts": ["together-panda-postcard/together", "peaceful-waterfall-magnet/main", "blue-winter-dreams-magnet/main"],
 };
 
 // Where the artwork sits in each photo: centre x, centre y (0–1), and how much of the
 // photo's width to keep. Lets the cover zoom in on the painting instead of the room around it.
 const focus = {
+  "winter-forest-christmas-card/snowy-forest": [0.5, 0.5, 0.88],
+  "penguin-christmas-card/bright": [0.5, 0.5, 0.88],
   "folk-rooster/main": [0.51, 0.42, 0.72],
   "folk-flowers/main": [0.52, 0.41, 0.72],
   "midnight-blue-blossom/main": [0.52, 0.4, 0.72],

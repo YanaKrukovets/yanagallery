@@ -112,19 +112,6 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             )
           }
         >
-          {product.description && <p className="mt-10 leading-relaxed text-ink-soft">{product.description}</p>}
-
-          {product.details && product.details.length > 0 && (
-            <dl className="mt-10 divide-y divide-ink/10 border-y border-ink/10 text-sm">
-              {product.details.map((d) => (
-                <div key={d.label} className="flex justify-between gap-6 py-3">
-                  <dt className="text-muted">{d.label}</dt>
-                  <dd className="text-right">{d.value}</dd>
-                </div>
-              ))}
-            </dl>
-          )}
-
           {stories.length > 0 && (
             <div className="mt-10">
               <p className="text-xs uppercase tracking-[0.2em] text-muted">On the blog</p>

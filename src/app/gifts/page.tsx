@@ -57,7 +57,7 @@ const occasions: { title: string; body: string; link: OccasionLink; product?: st
   {
     title: "Christmas cards that are gifts too",
     body: "A gnome, a snowman, a penguin or a cat in a red hat, or a little winter bird, each painted by hand in watercolour. Write your message on the back, or frame it.",
-    link: { href: "/collections/little-gifts", label: "Christmas cards and postcards" },
+    link: { href: "/collections/christmas", label: "Christmas cards and postcards" },
   },
   {
     title: "Housewarming and hostess gifts",

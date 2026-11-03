@@ -3,7 +3,7 @@
 
 import { products, availableFirst, type Product } from "./products";
 
-export type CollectionSlug = "folk-florals" | "nature-and-sky" | "cats" | "little-gifts";
+export type CollectionSlug = "christmas" | "folk-florals" | "nature-and-sky" | "cats" | "little-gifts";
 
 export type Collection = {
   slug: CollectionSlug;
@@ -13,15 +13,26 @@ export type Collection = {
   seoTitle: string;
   /** Cover for the "Shop by collection" card. Made from the product photos by scripts/collection-covers.mjs. */
   image: string;
+  /** Shown in the home page "Shop by collection" section (keep it to four). */
+  onHome?: boolean;
 };
 
 export const collections: Collection[] = [
+  {
+    slug: "christmas",
+    title: "Christmas",
+    seoTitle: "Hand-Painted Christmas Cards, Ottawa",
+    blurb: "Watercolour Christmas cards and postcards — snowy forests, gnomes, penguins and painted trees.",
+    image: "/images/collections/christmas.jpg",
+    onHome: true,
+  },
   {
     slug: "folk-florals",
     title: "Folk Florals",
     seoTitle: "Folk Art Florals, Painted in Ottawa",
     blurb: "Traditional folk patterns — bright blooms and a proud rooster on deep black.",
     image: "/images/collections/folk-florals.jpg",
+    onHome: true,
   },
   {
     slug: "nature-and-sky",
@@ -29,6 +40,7 @@ export const collections: Collection[] = [
     seoTitle: "Landscape & Night Sky Art, Ottawa",
     blurb: "Sunsets, northern lights, moonlight, and gardens in bloom.",
     image: "/images/collections/nature-and-sky.jpg",
+    onHome: true,
   },
   {
     slug: "cats",
@@ -43,6 +55,7 @@ export const collections: Collection[] = [
     seoTitle: "Handmade Magnets & Postcards, Ottawa",
     blurb: "Hand-painted fridge magnets and postcards — small handmade gifts, easy to give.",
     image: "/images/collections/little-gifts.jpg",
+    onHome: true,
   },
 ];
 
