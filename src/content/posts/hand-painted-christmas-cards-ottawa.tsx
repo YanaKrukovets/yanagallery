@@ -16,14 +16,14 @@ export default function HandPaintedChristmasCardsOttawa() {
       <p>
         People in Blackburn Hamlet sometimes ask me if the cards are prints. They aren&apos;t. Each
         one is painted by hand, one at a time, which is slow and a bit silly in a world where you
-        can order 50 printed cards with your dog on them in five minutes. But that&apos;s exactly
-        why I like doing it, and why I think a few handmade cards are worth more than a stack of
+        can order 50 printed cards with your dog on them in five minutes. I like it anyway, and I
+        think three or four cards painted by hand mean more to people than a whole stack of
         printed ones.
       </p>
 
       <PostH2>How to tell a hand-painted card from a printed one</PostH2>
       <p>
-        This is useful at any craft fair or Christmas market, not only at my table. Lots of
+        This works at any craft fair or Christmas market in Ottawa. Lots of
         &ldquo;handmade&rdquo; cards are really a painting that was scanned and printed many
         times. That&apos;s fine, as long as you know what you&apos;re paying for. Here&apos;s how
         I check:
@@ -69,7 +69,7 @@ export default function HandPaintedChristmasCardsOttawa() {
         cards have small trees drawn in black ink over patches of green, mint and turquoise. One
         design has a single tree, and three have nine little trees, each with its own pattern.
         These suit people who don&apos;t like too much sparkle at Christmas. I&apos;d send one to
-        a coworker, an architect, or my one friend who owns only grey sweaters.
+        a coworker, or to my one friend who owns only grey sweaters.
       </p>
       <p>
         The third is the smallest. The{" "}
@@ -101,16 +101,15 @@ export default function HandPaintedChristmasCardsOttawa() {
         just swap. That happens more often than you&apos;d think.
       </p>
       <p>
-        And buying from a neighbour is a small thing that adds up. The money stays here, and I
-        spend most of it on more paper and more paint, which turns into more cards. It&apos;s a
-        very short supply chain.
+        When you buy from a neighbour, the money stays here. Most of mine goes straight back into
+        paper and paint, so your $3 card pays for part of next year&apos;s batch.
       </p>
 
       <PostH2>How many cards do you actually need?</PostH2>
       <p>
-        Fewer than you think. Most people I talk to send printed cards to everyone and a
-        hand-painted one to three or four people who really matter: a grandmother, a teacher, the
-        neighbour who shovelled your driveway when you were away. Those are the cards that end up
+        Most people I talk to send printed cards to everyone and a hand-painted one to three or
+        four people, like a grandmother or the neighbour who shovelled your driveway while you
+        were away. Those are the cards that end up
         on a fridge until March.
       </p>
       <p>
@@ -141,8 +140,7 @@ export default function HandPaintedChristmasCardsOttawa() {
         mailing dates in November, so check those before you send anything out of province.
       </p>
       <p>
-        Thank you for choosing handmade, whether from me or from another local artist. A card that
-        someone painted for you is a small thing, but people keep them.
+        Thank you for choosing handmade this year, whether from me or from another local artist.
       </p>
     </>
   );
