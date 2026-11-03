@@ -24,7 +24,8 @@ export function ScrollHighlight({ text, className }: { text: string; className?:
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
   const reduce = useReducedMotion();
-  const opacity = useTransform(progress, range, reduce ? [1, 1] : [0.15, 1]);
+  // Start at 0.55, not lower: ink on cream at 0.55 is ~3.8:1, which passes WCAG for large text.
+  const opacity = useTransform(progress, range, reduce ? [1, 1] : [0.55, 1]);
   return (
     <m.span aria-hidden style={{ opacity }} className="inline-block">
       {children}&nbsp;

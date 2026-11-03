@@ -207,8 +207,38 @@ export const newArrivals: Product[] = [
           { label: "Back", value: "Postcard layout with a message area, “To:” address lines and a stamp box" },
         ],
       },
+      {
+        id: "winter-night",
+        name: "Magical Winter Night",
+        image: "/images/products/winter-forest-christmas-card/winter-night.jpg",
+        description:
+          "Capture the magic of winter with this original hand-painted watercolour Christmas card. Featuring a dreamy night sky in beautiful shades of blue and purple, delicate falling snow, and a peaceful forest of evergreen trees. Each card is individually hand-painted on paper, making it a unique piece of art and a lovely holiday greeting or keepsake. Perfect for Christmas greetings, winter wishes, or a thoughtful handmade gift.",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Snowy evergreen forest under a blue and purple night sky" },
+        ],
+      },
+      {
+        id: "happy-holidays",
+        name: "Happy Holidays Sunset",
+        image: "/images/products/winter-forest-christmas-card/happy-holidays.jpg",
+        description:
+          "Celebrate the magic of the holiday season with this original, hand-painted watercolour Christmas card. Featuring a peaceful snowy landscape, purple evergreen trees, and a beautiful pink, lavender, and golden sunset, this unique artwork captures the warmth and beauty of winter. Each card is individually painted on watercolour paper, making it a special keepsake for family, friends, or loved ones.",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Winter forest with “Happy Holidays” greeting" },
+        ],
+      },
     ],
     alts: {
+      "/images/products/winter-forest-christmas-card/happy-holidays.jpg":
+        "Hand-painted watercolour Christmas card of purple evergreen trees on a snowy hill under a pink, lavender and golden sunset sky with small stars, and “Happy Holidays” handwritten on the snow, on a wooden table with a pine branch, a pine cone, a star candle holder and red berries",
+      "/images/products/winter-forest-christmas-card/winter-night.jpg":
+        "Hand-painted watercolour Christmas card of dark blue evergreen trees under a glowing blue and purple night sky with white falling snow, on a wooden table with a lit candle, a pine branch and a pine cone",
       "/images/products/winter-forest-christmas-card/snowy-forest.jpg":
         "Hand-painted watercolour Christmas card of a snowy hill with evergreen trees under a soft blue sky with yellow splatter, and “Merry Christmas” handwritten below, on a wooden table with pine branches, a pine cone and a wooden star",
       "/images/products/winter-forest-christmas-card/pastel-wonderland.jpg":
@@ -219,12 +249,12 @@ export const newArrivals: Product[] = [
         "Back of the Pastel Winter Wonderland card: a message area above a line, “To:” address lines and a dashed stamp box, on a wooden table with dried flowers, a candle and eucalyptus",
     },
     description:
-      "Original hand-painted watercolour Christmas cards with peaceful snowy landscapes and evergreen trees. Choose a snowy blue forest with “Merry Christmas” lettering, or a dreamy pastel winter wonderland with purple trees. Each card is individually painted, so every one is a unique holiday greeting or a small piece of original art.",
+      "Original hand-painted watercolour Christmas cards with peaceful snowy landscapes and evergreen trees. Choose a snowy blue forest with “Merry Christmas” lettering, a dreamy pastel winter wonderland with purple trees, a magical blue and purple winter night, or a pink and golden sunset with “Happy Holidays” lettering. Each card is individually painted, so every one is a unique holiday greeting or a small piece of original art.",
     details: [
       { label: "Artwork", value: "Original, hand-painted (not a print)" },
       { label: "Medium", value: "Watercolour on paper" },
       { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
-      { label: "Designs", value: "Snowy Christmas Forest, Pastel Winter Wonderland" },
+      { label: "Designs", value: "Snowy Christmas Forest, Pastel Winter Wonderland, Magical Winter Night, Happy Holidays Sunset" },
     ],
   },
   {
