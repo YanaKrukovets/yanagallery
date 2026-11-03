@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import { AnimatePresence, m, useMotionValueEvent, useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { RollText } from "@/components/motion/RollText";
 import { navLinks, shop, type NavLink } from "@/content/site";
@@ -44,7 +44,7 @@ export function Header() {
   }, [menuOpen]);
 
   return (
-    <motion.header
+    <m.header
       animate={{ y: hidden ? "-110%" : "0%" }}
       transition={{ duration: 0.45, ease: EASE }}
       // Keyboard users tabbing through the header shouldn't have it slide away.
@@ -53,57 +53,62 @@ export function Header() {
         scrolled ? "border-b border-ink/10 bg-cream/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-8">
-        <DesktopNav links={leftLinks} label="Main" />
+      {/* One "Main" navigation landmark for the whole bar: both halves of the menu, the logo,
+          the bag and the mobile menu. */}
+      <nav aria-label="Main">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-8">
+          <DesktopNav links={leftLinks} />
 
-        <Link href="/#top" className="font-serif text-xl tracking-tight md:text-2xl lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-          {shop.artist}
-          <span aria-hidden className="accent">.</span>
-        </Link>
+          <Link href="/#top" className="font-serif text-xl tracking-tight md:text-2xl lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+            {shop.artist}
+            <span aria-hidden className="accent">.</span>
+          </Link>
 
-        <div className="flex items-center gap-6 text-xs uppercase tracking-[0.2em]">
-          <DesktopNav links={rightLinks} label="More" />
-          <button onClick={openCart} className="flex items-center gap-2" aria-label={`Open bag, ${count} ${count === 1 ? "item" : "items"}`}>
-            Bag
-            <BagCount count={count} />
-          </button>
-          <button
-            ref={menuButtonRef}
-            className="lg:hidden"
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-          >
-            {menuOpen ? "Close" : "Menu"}
-          </button>
+          <div className="flex items-center gap-6 text-xs uppercase tracking-[0.2em]">
+            <DesktopNav links={rightLinks} />
+            <button onClick={openCart} className="flex items-center gap-2" aria-label={`Open bag, ${count} ${count === 1 ? "item" : "items"}`}>
+              Bag
+              <BagCount count={count} />
+            </button>
+            <button
+              ref={menuButtonRef}
+              className="lg:hidden"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+            >
+              {menuOpen ? "Close" : "Menu"}
+            </button>
+          </div>
         </div>
-      </div>
 
-      <AnimatePresence>
-        {menuOpen && <MobileNav onNavigate={() => setMenuOpen(false)} />}
-      </AnimatePresence>
-    </motion.header>
+        <AnimatePresence>
+          {menuOpen && <MobileNav onNavigate={() => setMenuOpen(false)} />}
+        </AnimatePresence>
+      </nav>
+    </m.header>
   );
 }
 
-function DesktopNav({ links, label }: { links: NavLink[]; label: string }) {
+function DesktopNav({ links }: { links: NavLink[] }) {
   return (
-    <nav aria-label={label} className="hidden gap-8 text-xs uppercase tracking-[0.2em] lg:flex">
+    <ul className="hidden gap-8 text-xs uppercase tracking-[0.2em] lg:flex">
       {links.map((l) => (
-        <Link key={l.href} href={l.href} className="text-ink-soft hover:text-ink">
-          <RollText text={l.label} />
-        </Link>
+        <li key={l.href}>
+          <Link href={l.href} className="text-ink-soft hover:text-ink">
+            <RollText text={l.label} />
+          </Link>
+        </li>
       ))}
-    </nav>
+    </ul>
   );
 }
 
 function MobileNav({ onNavigate }: { onNavigate: () => void }) {
   return (
-    <motion.nav
+    <m.div
       id="mobile-nav"
-      aria-label="Mobile"
       initial={{ height: 0 }}
       animate={{ height: "auto" }}
       exit={{ height: 0 }}
@@ -111,7 +116,7 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
     >
       <ul className="flex flex-col gap-4 px-5 pb-8 pt-2">
         {navLinks.map((l, i) => (
-          <motion.li
+          <m.li
             key={l.href}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -120,10 +125,10 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
             <Link href={l.href} onClick={onNavigate} className="font-serif text-3xl">
               {l.label}
             </Link>
-          </motion.li>
+          </m.li>
         ))}
       </ul>
-    </motion.nav>
+    </m.div>
   );
 }
 
@@ -132,7 +137,7 @@ function BagCount({ count }: { count: number }) {
   return (
     <span className="relative grid h-6 w-6 place-items-center overflow-hidden rounded-full bg-ink text-[10px] text-cream">
       <AnimatePresence mode="popLayout" initial={false}>
-        <motion.span
+        <m.span
           key={count}
           initial={{ y: 14, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -140,7 +145,7 @@ function BagCount({ count }: { count: number }) {
           transition={{ duration: 0.3 }}
         >
           {count}
-        </motion.span>
+        </m.span>
       </AnimatePresence>
     </span>
   );

@@ -84,7 +84,7 @@ const occasions: { title: string; body: string; link: OccasionLink; product?: st
   {
     title: "Something made just for them",
     body: "Have a place or a memory in mind? I take commissions. Email me early, because hand-painted work takes time.",
-    link: { href: "/#commissions", label: "About commissions" },
+    link: { href: "/terms#commissions", label: "About commissions" },
   },
 ];
 

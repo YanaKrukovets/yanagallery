@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { useState } from "react";
 import { altOf, photosOf, sizeOf, type Product } from "@/content/products";
 import { shop } from "@/content/site";
@@ -28,7 +28,7 @@ export function ProductCard({
   const meta = [sizeOf(product), product.original && "One of a kind"].filter(Boolean).join(" · ");
 
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -86,6 +86,6 @@ export function ProductCard({
           {cad.format(product.price)}
         </p>
       </div>
-    </motion.article>
+    </m.article>
   );
 }

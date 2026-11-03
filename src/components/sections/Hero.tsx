@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useId, useRef } from "react";
 import { RollText } from "@/components/motion/RollText";
 import { SplitHeading } from "@/components/motion/SplitHeading";
@@ -17,19 +17,20 @@ export function Hero() {
   const reduce = useReducedMotion();
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "18%"]);
   const smallY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "-40%"]);
+  const badgeRotate = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 180]);
 
   return (
     <section ref={ref} id="top" className="relative overflow-hidden pt-[clamp(4.75rem,12svh,7rem)] md:pt-[clamp(6rem,14svh,9rem)]">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-12 md:px-8">
         <div className="flex flex-col justify-center md:col-span-6">
-          <motion.p
+          <m.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="mb-[clamp(0.75rem,2.5svh,1.5rem)] text-xs uppercase tracking-[0.25em] text-bronze"
           >
             {shop.tagline}
-          </motion.p>
+          </m.p>
 
           <SplitHeading
             as="h1"
@@ -39,7 +40,7 @@ export function Hero() {
             segments={["Handmade art from", { accent: "Ottawa," }, "for the walls you", { accent: "come home to." }]}
           />
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.1, ease: EASE }}
@@ -47,9 +48,9 @@ export function Hero() {
           >
             Original paintings and small handmade gifts, hand-painted by Ottawa artist Yana
             Krukovets. Affordable art for collectors and art lovers alike, delivered to your door.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.3, ease: EASE }}
@@ -70,37 +71,34 @@ export function Hero() {
                 <RollText text="See what's new" />
               </a>
             )}
-          </motion.div>
+          </m.div>
         </div>
 
         <div className="relative md:col-span-6">
-          {/* Main image wipes in from the bottom, then drifts on scroll */}
-          <motion.div
-            initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
-            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-            transition={{ duration: 1.4, delay: 0.4, ease: EASE }}
-            className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] md:ml-10 md:max-h-[calc(100svh-clamp(6rem,14svh,9rem)-2rem)]"
-          >
-            <motion.div
+          {/* Main image, visible from the first paint: it's the biggest thing on the page, so it
+              decides how fast Google thinks the page loads. It settles in, then drifts on scroll. */}
+          <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] md:ml-10 md:max-h-[calc(100svh-clamp(6rem,14svh,9rem)-2rem)]">
+            <m.div
               style={{ y: imgY }}
-              initial={{ scale: 1.25 }}
+              initial={{ scale: 1.15 }}
               animate={{ scale: 1.08 }}
-              transition={{ duration: 2, delay: 0.4, ease: EASE }}
+              transition={{ duration: 2, ease: EASE }}
               className="absolute inset-0"
             >
               <Image
                 src={images.hero}
                 alt="A gallery wall of Yana's hand-painted pieces in hexagon and square wood frames, with three more standing on a picture ledge"
                 fill
-                preload
+                loading="eager"
+                fetchPriority="high"
                 sizes="(min-width: 768px) 45vw, 100vw"
                 className="object-cover"
               />
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </div>
 
           {/* Small floating frame */}
-          <motion.div
+          <m.div
             style={{ y: smallY }}
             initial={{ opacity: 0, x: -30, rotate: -6 }}
             animate={{ opacity: 1, x: 0, rotate: -3 }}
@@ -110,21 +108,20 @@ export function Hero() {
             <div className="relative aspect-[3/4]">
               <Image src={images.heroSecondary} alt="The Folk Rooster and Cherry Blossom Serenity pieces hanging from rope hangers" fill sizes="200px" className="object-cover" />
             </div>
-          </motion.div>
+          </m.div>
 
-          {/* Rotating badge */}
-          <motion.div
+          {/* Badge that turns as you scroll (it never moves on its own, so nothing spins non-stop) */}
+          <m.div
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.6, ease: EASE }}
             className="absolute -top-4 right-2 grid h-28 w-28 place-items-center md:right-0"
           >
-            <motion.svg
+            <m.svg
               viewBox="0 0 100 100"
               aria-hidden
               className="absolute inset-0 h-full w-full"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              style={{ rotate: badgeRotate }}
             >
               <defs>
                 <path id={badgePathId} d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
@@ -132,9 +129,9 @@ export function Hero() {
               <text className="fill-ink text-[9.5px] uppercase tracking-[0.2em]">
                 <textPath href={`#${badgePathId}`}>Made in Ottawa · Fait à Ottawa ·</textPath>
               </text>
-            </motion.svg>
+            </m.svg>
             <span aria-hidden className="font-serif text-2xl text-bronze">✦</span>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

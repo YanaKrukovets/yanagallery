@@ -128,11 +128,17 @@ export const features = [
   },
 ];
 
-export const tickerItems = [
+/**
+ * Lines in the scrolling banner. A line can mix languages: list its parts and mark the
+ * non-English ones with `lang` so screen readers pronounce them right.
+ */
+export type TickerItem = string | (string | { text: string; lang: string })[];
+
+export const tickerItems: TickerItem[] = [
   "Original art by Yana Krukovets",
   "Painted in Ottawa",
   "Free pickup & delivery in Blackburn Hamlet",
-  "Bonjour · Hello",
+  [{ text: "Bonjour", lang: "fr" }, " · Hello"],
   "One-of-a-kind originals",
   "Affordable art for collectors & art lovers",
   "Shop online, delivered to your door",
@@ -140,13 +146,6 @@ export const tickerItems = [
 
 export const philosophy =
   "I think the best art isn't the loudest thing in the room. It's the piece that catches the light on a February afternoon and reminds you why you stayed.";
-
-// Placeholder numbers — replace with your real figures.
-export const stats = [
-  { value: 50, suffix: "+", label: "Original works" },
-  { value: 5, suffix: "+", label: "Years painting" },
-  { value: 100, suffix: "%", label: "Painted in Ottawa" },
-];
 
 export const commissionSteps = [
   { title: "Tell me about it", body: "Your space, the size, a place or a memory — send photos and a few words." },

@@ -5,7 +5,16 @@ import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Reveal } from "@/components/motion/Reveal";
 import { RollText } from "@/components/motion/RollText";
 import { SplitHeading } from "@/components/motion/SplitHeading";
-import { images, stats } from "@/content/site";
+import { collections } from "@/content/collections";
+import { products } from "@/content/products";
+import { images } from "@/content/site";
+
+// Counted from the shop, so the numbers stay true as pieces are added.
+const stats = [
+  { value: products.length, suffix: "", label: "Pieces in the shop" },
+  { value: collections.length, suffix: "", label: "Collections" },
+  { value: 100, suffix: "%", label: "Painted in Ottawa" },
+];
 
 export function Artist() {
   return (

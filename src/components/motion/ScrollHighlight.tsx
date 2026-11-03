@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
 
 /** Paragraph where each word brightens as you scroll through it. */
@@ -26,8 +26,8 @@ function Word({ children, progress, range }: { children: string; progress: Motio
   const reduce = useReducedMotion();
   const opacity = useTransform(progress, range, reduce ? [1, 1] : [0.15, 1]);
   return (
-    <motion.span aria-hidden style={{ opacity }} className="inline-block">
+    <m.span aria-hidden style={{ opacity }} className="inline-block">
       {children}&nbsp;
-    </motion.span>
+    </m.span>
   );
 }

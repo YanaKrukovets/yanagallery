@@ -18,7 +18,7 @@ export function Contact() {
         />
         <div className="p-8 md:p-14">
           <SplitHeading
-            segments={["Come say", { accent: "bonjour" }]}
+            segments={["Come say", { accent: "bonjour", lang: "fr" }]}
             className="font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl [&_.accent]:text-gold"
           />
           <Reveal delay={0.2}>

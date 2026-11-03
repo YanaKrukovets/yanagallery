@@ -18,7 +18,13 @@ export function Ticker() {
       >
         {items.map((t, i) => (
           <span key={i} aria-hidden={i >= tickerItems.length} className="flex items-center gap-12 font-serif text-xl italic md:text-2xl">
-            {t}
+            <span>
+              {typeof t === "string"
+                ? t
+                : t.map((part, j) =>
+                    typeof part === "string" ? part : <span key={j} lang={part.lang}>{part.text}</span>,
+                  )}
+            </span>
             <span aria-hidden className="not-italic text-gold">✦</span>
           </span>
         ))}

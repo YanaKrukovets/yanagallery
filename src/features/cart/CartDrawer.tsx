@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { RollText } from "@/components/motion/RollText";
 import { onlinePayments, shop } from "@/content/site";
@@ -59,14 +59,14 @@ export function CartDrawer() {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[60]">
-          <motion.div
+          <m.div
             className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={close}
           />
-          <motion.div
+          <m.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
@@ -111,7 +111,7 @@ export function CartDrawer() {
                 </div>
               </>
             )}
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>
@@ -345,7 +345,7 @@ function CartLineItem({ line }: { line: CartLine }) {
   const name = design ? `${product.title} (${design.name})` : product.title;
 
   return (
-    <motion.li
+    <m.li
       layout
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
@@ -397,6 +397,6 @@ function CartLineItem({ line }: { line: CartLine }) {
           </button>
         </div>
       </div>
-    </motion.li>
+    </m.li>
   );
 }

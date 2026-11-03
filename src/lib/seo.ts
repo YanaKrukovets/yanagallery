@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { collections } from "@/content/collections";
 import type { Post } from "@/content/journal";
 import { allPhotosOf, type Product } from "@/content/products";
-import { images, shop } from "@/content/site";
+import { images, lettermail, shippingOptions, shop } from "@/content/site";
 
 /** The live address. `SITE_URL` on the host overrides it (e.g. for a preview deploy). */
 export const siteUrl = (process.env.SITE_URL || "https://artistyana.com").replace(/\/$/, "");
@@ -159,6 +159,45 @@ export function breadcrumbJsonLd(trail: { name: string; path: string }[]) {
   };
 }
 
+// 1–7 days in all, as quoted at checkout (content/site.ts): up to a day to pack, then 1–6 on the way.
+const deliveryTime = {
+  "@type": "ShippingDeliveryTime",
+  handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 1, unitCode: "DAY" },
+  transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 6, unitCode: "DAY" },
+};
+
+/**
+ * What delivery costs for one piece, by area, from the options in content/site.ts: the local
+ * areas by postal code, then the rest of Canada. Postcards and magnets go by Lettermail.
+ */
+function shippingDetailsFor(product: Product) {
+  const rate = (price: number) => ({ "@type": "MonetaryAmount", value: price.toFixed(2), currency: "CAD" });
+  const local = shippingOptions.flatMap((o) =>
+    "postalPrefixes" in o
+      ? [
+          {
+            "@type": "OfferShippingDetails",
+            shippingRate: rate(o.price),
+            shippingDestination: { "@type": "DefinedRegion", addressCountry: "CA", postalCodePrefix: [...o.postalPrefixes] },
+            deliveryTime,
+          },
+        ]
+      : [],
+  );
+  const grams = product.letterGrams && product.letterGrams + lettermail.envelopeGrams;
+  const letterPrice = grams ? lettermail.tiers.find((t) => grams <= t.upToGrams)?.price : undefined;
+  const canada = shippingOptions.find((o) => o.id === "canada")!;
+  return [
+    ...local,
+    {
+      "@type": "OfferShippingDetails",
+      shippingRate: rate(letterPrice ?? canada.price),
+      shippingDestination: { "@type": "DefinedRegion", addressCountry: "CA" },
+      deliveryTime,
+    },
+  ];
+}
+
 /** One piece for sale, with its price, stock, delivery, and returns. */
 export function productJsonLd(product: Product) {
   const url = absoluteUrl(`/products/${product.slug}`);
@@ -193,15 +232,7 @@ export function productJsonLd(product: Product) {
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": ids.store },
       hasMerchantReturnPolicy: returnPolicy,
-      shippingDetails: {
-        "@type": "OfferShippingDetails",
-        shippingDestination: { "@type": "DefinedRegion", addressCountry: "CA" },
-        deliveryTime: {
-          "@type": "ShippingDeliveryTime",
-          // Matches the 1–7 days quoted at checkout (content/site.ts).
-          transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 7, unitCode: "DAY" },
-        },
-      },
+      shippingDetails: shippingDetailsFor(product),
     },
   };
 }

@@ -13,7 +13,7 @@ import { canadaPostEstimates, lettermail, shippingOptions, shop } from "@/conten
 // TODO before launch — confirm the placeholder marked "TODO" below: the commission
 // deposit. If sales pass $30,000 over four quarters, register for GST/HST, turn on
 // Stripe Tax in checkout.ts, and update the sales tax line.
-const LAST_UPDATED = "October 27, 2026";
+const LAST_UPDATED = "November 2, 2026";
 
 export const metadata: Metadata = pageMetadata({
   title: "Terms of Sale",
@@ -81,8 +81,9 @@ export default function TermsPage() {
                 once. Small marks, texture, and brushwork are part of the piece, not flaws.
               </li>
               <li>
-                <strong className="text-ink">Prints</strong> are giclée reproductions on archival
-                paper, made in small editions and signed by the artist.
+                <strong className="text-ink">Postcards, cards and magnets</strong> are painted by
+                hand one at a time too. There are no prints or copies, so yours may differ a little
+                from the photo.
               </li>
               <li>
                 Photos are taken with care, but colours can look a little different on every screen.
@@ -160,7 +161,7 @@ export default function TermsPage() {
           <Section id="returns" title="Returns">
             <ul className="list-disc space-y-3 pl-5">
               <li>
-                Any original or print bought from the shop can be returned within 14 days of
+                Any piece bought from the shop can be returned within 14 days of
                 delivery or pickup for a refund of the price you paid. It must come back in the
                 condition you received it and in its original packaging.
               </li>

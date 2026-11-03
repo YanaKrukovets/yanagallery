@@ -1,11 +1,11 @@
 export const faqs = [
   {
-    q: "What's the difference between an original and a print?",
-    a: "An original is the one and only painting, made by hand on canvas, paper, wood or glass. Prints are high-quality giclée reproductions in small editions, each signed by Yana.",
+    q: "Are these originals or prints?",
+    a: "Every piece is an original, painted by hand. There are no prints or copies. Even the postcards, cards and fridge magnets are painted one at a time, so no two are exactly alike.",
   },
   {
-    q: "Will my print fade over time?",
-    a: "No. Prints use archival pigment inks on acid-free cotton rag paper, rated for more than 100 years indoors. Keep it out of direct afternoon sun and it will outlast all of us.",
+    q: "Will the colours fade over time?",
+    a: "The framed acrylic pieces are sealed in glossy epoxy resin, which protects the paint. Like any painting, keep it out of strong direct sun and it will stay bright for years.",
   },
   {
     q: "Can I see a piece before I buy?",
@@ -21,10 +21,10 @@ export const faqs = [
   },
   {
     q: "What if it doesn't work in my space?",
-    a: "Any original or print can be returned within 14 days. Return shipping is paid by the buyer. Commissions are final sale, but Yana is happy to help you find the right fit first.",
+    a: "Any piece from the shop can be returned within 14 days. Return shipping is paid by the buyer. Commissions are final sale, but Yana is happy to help you find the right fit first.",
   },
   {
     q: "Can I order a custom size?",
-    a: "Most prints are available in custom sizes up to 40\" × 60\". Send a note with your wall measurements and you'll get a suggestion for what works.",
+    a: "The pieces in the shop are small and ready to hang. For a different size, ask about a commission: send a note with your wall measurements and you'll get a suggestion for what works.",
   },
 ];

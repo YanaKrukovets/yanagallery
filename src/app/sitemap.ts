@@ -28,7 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
       images: allPhotosOf(p).map((src) => absoluteUrl(src)),
     })),
-    { url: absoluteUrl("/blog"), changeFrequency: "weekly", priority: 0.6 },
+    {
+      url: absoluteUrl("/blog"),
+      // The blog index changes when a post is added, so it's as fresh as the newest post.
+      ...(posts.length > 0 && { lastModified: posts.map((p) => p.date).sort().at(-1) }),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
     ...posts.map((p) => ({
       url: absoluteUrl(`/blog/${p.slug}`),
       lastModified: p.date,

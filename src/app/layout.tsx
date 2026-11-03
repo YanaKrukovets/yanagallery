@@ -53,7 +53,8 @@ export const metadata: Metadata = {
     "handmade gifts Canada",
     shop.artist,
   ],
-  alternates: { canonical: "/" },
+  // The home page sets its own canonical link (app/page.tsx). Setting it here would hand it to
+  // every page that doesn't set one, like the 404 page.
   openGraph: {
     type: "website",
     siteName: shop.name,
@@ -75,6 +76,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-CA" className={`${fraunces.variable} ${hedvig.variable} antialiased`}>
       <body>
+        {/* Fade-in animations start hidden and need JavaScript to appear. If it's off or
+            blocked, show everything in place instead of leaving blank sections. */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important}[style*="translateY"]{transform:none!important}`}</style>
+        </noscript>
         <JsonLd data={siteJsonLd()} />
         <a
           href="#main"

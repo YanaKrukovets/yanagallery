@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
 type ParallaxImageProps = {
@@ -23,9 +23,9 @@ export function ParallaxImage({ src, alt, className, sizes = "100vw", strength =
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${className ?? ""}`}>
-      <motion.div style={{ y }} className="absolute inset-[-80px]">
+      <m.div style={{ y }} className="absolute inset-[-80px]">
         <Image src={src} alt={alt} fill sizes={sizes} preload={preload} className="object-cover" />
-      </motion.div>
+      </m.div>
     </div>
   );
 }
