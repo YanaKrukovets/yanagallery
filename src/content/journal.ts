@@ -1,6 +1,7 @@
 // Blog posts, newest first. Each post's text lives in its own file in content/posts/.
 
 import type { ComponentType } from "react";
+import HandPaintedChristmasCardsOttawa from "@/content/posts/hand-painted-christmas-cards-ottawa";
 import ArtTherapyOttawa2026 from "@/content/posts/art-therapy-ottawa-2026";
 import WhatToWriteInAChristmasCard from "@/content/posts/what-to-write-in-a-christmas-card";
 import HowToHangSmallArt from "@/content/posts/how-to-hang-small-art";
@@ -36,6 +37,22 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    slug: "hand-painted-christmas-cards-ottawa",
+    title: "Hand-painted Christmas cards in Ottawa, from a Blackburn Hamlet studio",
+    description:
+      "Where to buy local, hand-painted Christmas cards in Ottawa, how to tell a real watercolour card from a print, and free pickup in Blackburn Hamlet. Cards from $2.",
+    date: "2026-11-03",
+    minutes: 5,
+    image: {
+      src: "/images/blog/hand-painted-christmas-cards-ottawa.jpg",
+      share: "/images/blog/hand-painted-christmas-cards-ottawa-share.jpg",
+      alt: "A hand-painted watercolour Christmas card of purple evergreen trees on a snowy hill under a pink and golden sunset sky, with “Happy Holidays” handwritten in the snow, on a wooden table beside a pine cone and red berries",
+    },
+    featured: ["penguin-christmas-card", "winter-bird-christmas-card", "christmas-cat-card", "happy-snowman-postcard"],
+    mentions: ["winter-forest-christmas-card", "ink-christmas-tree-card", "watercolour-christmas-tree-card"],
+    Body: HandPaintedChristmasCardsOttawa,
+  },
   {
     slug: "what-to-write-in-a-christmas-card",
     title: "What to write in a Christmas card: 80 messages for family, friends and coworkers",
