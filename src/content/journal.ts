@@ -1,6 +1,7 @@
 // Blog posts, newest first. Each post's text lives in its own file in content/posts/.
 
 import type { ComponentType } from "react";
+import OnlineChristmasMarketOpen from "@/content/posts/online-christmas-market-open";
 import HandPaintedChristmasCardsOttawa from "@/content/posts/hand-painted-christmas-cards-ottawa";
 import ArtTherapyOttawa2026 from "@/content/posts/art-therapy-ottawa-2026";
 import WhatToWriteInAChristmasCard from "@/content/posts/what-to-write-in-a-christmas-card";
@@ -37,6 +38,22 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    slug: "online-christmas-market-open",
+    title: "My online Christmas market is open",
+    description:
+      "Hand-painted Christmas cards from $2, new designs this week, and free pickup in Blackburn Hamlet. Shop my little Ottawa Christmas market online, no mittens needed.",
+    date: "2026-11-06",
+    minutes: 3,
+    image: {
+      src: "/images/blog/online-christmas-market-open.jpg",
+      share: "/images/blog/online-christmas-market-open-share.jpg",
+      alt: "Three hand-painted watercolour Christmas cards laid out like prints: a turquoise tree on a pink sky with “Ho-Ho-Ho, Joy, Happy”, a pink ornament with gold ribbons and “Joy” in script, and a gingerbread man in a red scarf",
+    },
+    featured: ["winter-forest-christmas-card", "penguin-christmas-card", "peaceful-waterfall-magnet", "twilight-tree"],
+    mentions: ["pink-christmas-ornament-card", "gingerbread-man-christmas-card", "joyful-christmas-tree-card"],
+    Body: OnlineChristmasMarketOpen,
+  },
   {
     slug: "hand-painted-christmas-cards-ottawa",
     title: "Hand-painted Christmas cards in Ottawa, from a Blackburn Hamlet studio",
