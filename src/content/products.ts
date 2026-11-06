@@ -168,6 +168,34 @@ export const bestSellers: Product[] = [
 // Only the first 4 are shown on the home page, so put the newest at the top.
 export const newArrivals: Product[] = [
   {
+    slug: "festive-christmas-trees-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "christmas",
+    title: "Festive Christmas Trees",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/festive-christmas-trees-card/main.jpg",
+    // The blank back of the card, shown after the front.
+    gallery: ["/images/products/festive-christmas-trees-card/back.jpg"],
+    badge: "New",
+    alts: {
+      "/images/products/festive-christmas-trees-card/main.jpg":
+        "Hand-painted watercolour Christmas card of a forest of teal-green Christmas trees decorated with golden ornaments and topped with gold stars, under a pale sky with blue and gold speckles and little swirls, on a wooden table with pine branches, a pine cone and wooden stars",
+      "/images/products/festive-christmas-trees-card/back.jpg":
+        "Blank white back of the card on a wooden table, with green leaves, a candle, a knitted blanket and a black pen",
+    },
+    description:
+      "Celebrate the holiday season with this charming handmade Christmas card featuring a forest of festive green Christmas trees decorated with golden ornaments and stars. Each card is individually hand-painted with watercolours, making it a unique piece of original art. Perfect for sending warm holiday wishes, gifting to loved ones, or adding a festive touch to your Christmas decorations.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+      { label: "Design", value: "Forest of green Christmas trees with golden ornaments and stars" },
+      { label: "Style", value: "Handmade, festive Christmas art" },
+      { label: "Back", value: "Blank, with plenty of room for your own message" },
+    ],
+  },
+  {
     slug: "snowy-christmas-night-card",
     letterGrams: 15, // TODO: estimate — weigh a real card
     collection: "christmas",
