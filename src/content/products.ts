@@ -168,6 +168,33 @@ export const bestSellers: Product[] = [
 // Only the first 4 are shown on the home page, so put the newest at the top.
 export const newArrivals: Product[] = [
   {
+    slug: "snowy-christmas-night-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "christmas",
+    title: "Snowy Christmas Night",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/snowy-christmas-night-card/main.jpg",
+    // The blank back of the card, shown after the front.
+    gallery: ["/images/products/snowy-christmas-night-card/back.jpg"],
+    badge: "New",
+    alts: {
+      "/images/products/snowy-christmas-night-card/main.jpg":
+        "Hand-painted watercolour Christmas card of a little red cabin among snowy evergreen trees under a deep blue winter sky full of white snowflakes, with “Merry Christmas” written in the snow, on a wooden table with a snowy pine branch, a pine cone, a lit candle and a wooden snowflake",
+      "/images/products/snowy-christmas-night-card/back.jpg":
+        "Blank white back of the card on a wooden table, with green leaves, a candle, a knitted blanket and a black pen",
+    },
+    description:
+      "A beautiful hand-painted Christmas card featuring a cozy little cabin surrounded by snowy evergreen trees beneath a magical blue winter sky. Delicate snowflakes and soft winter colours create a peaceful holiday atmosphere. Each card is an original watercolour artwork, perfect for sharing warm Christmas wishes with loved ones.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+      { label: "Design", value: "Little red cabin and evergreens under a snowy blue sky, with “Merry Christmas” lettering" },
+      { label: "Back", value: "Blank, with plenty of room for your own message" },
+    ],
+  },
+  {
     slug: "christmas-cardinal-card",
     letterGrams: 15, // TODO: estimate — weigh a real card
     collection: "christmas",
