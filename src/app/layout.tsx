@@ -5,6 +5,7 @@ import { CartProvider } from "@/features/cart/CartProvider";
 import { MotionPrefs } from "@/components/motion/MotionPrefs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BackToTop } from "@/components/ui/BackToTop";
+import { BackToWorkTracker } from "@/components/ui/BackToWork";
 import { shop } from "@/content/site";
 import { siteDescription, siteJsonLd, siteUrl } from "@/lib/seo";
 import "./globals.css";
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
             <CartDrawer />
             <BackToTop />
+            <BackToWorkTracker />
           </CartProvider>
         </MotionPrefs>
       </body>

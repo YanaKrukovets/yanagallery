@@ -5,13 +5,17 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ProductBuy } from "@/components/product/ProductBuy";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { BackToWork } from "@/components/ui/BackToWork";
 import { ProductGrid } from "@/components/ui/ProductGrid";
+import { collections } from "@/content/collections";
 import { postsAbout } from "@/content/journal";
 import { availableFirst, getProduct, products } from "@/content/products";
 import { shop } from "@/content/site";
 import { withSales } from "@/features/cart/sales";
 import { cad } from "@/lib/format";
 import { breadcrumbJsonLd, pageMetadata, productJsonLd } from "@/lib/seo";
+
+const collectionTitles = Object.fromEntries(collections.map((c) => [c.slug, c.title]));
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -76,9 +80,10 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             { name: product.title, path: `/products/${product.slug}` },
           ])}
         />
-        <Link href="/products" className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink">
-          ← All work
-        </Link>
+        <BackToWork
+          titles={collectionTitles}
+          className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink"
+        />
 
         <ProductBuy
           product={product}
