@@ -168,6 +168,163 @@ export const bestSellers: Product[] = [
 // Only the first 4 are shown on the home page, so put the newest at the top.
 export const newArrivals: Product[] = [
   {
+    slug: "pink-christmas-ornament-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "christmas",
+    title: "Pink Christmas Ornament",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/pink-christmas-ornament-card/script-joy.jpg",
+    // The blank back of the card, shown after the chosen design.
+    gallery: ["/images/products/pink-christmas-ornament-card/back.jpg"],
+    badge: "New",
+    designs: [
+      {
+        id: "script-joy",
+        name: "Pink Ornament · Script Joy",
+        image: "/images/products/pink-christmas-ornament-card/script-joy.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper with gold accents" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Pink ornament with gold ribbons, black sparkles and handwritten “Joy” script" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+      {
+        id: "happy-holidays",
+        name: "Red Ornament · Happy Holidays",
+        image: "/images/products/pink-christmas-ornament-card/happy-holidays.jpg",
+        gallery: [
+          "/images/products/pink-christmas-ornament-card/happy-holidays-close.jpg",
+          "/images/products/pink-christmas-ornament-card/rounded-back.jpg",
+        ],
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper with gold accents" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Red ornament with gold streamers, blue splatter and “Happy Holidays”, with rounded corners" },
+          { label: "Back", value: "Postcard layout with a message area, “To:” address lines and a stamp box" },
+        ],
+      },
+      {
+        id: "joy",
+        name: "Red Ornament · Joy",
+        image: "/images/products/pink-christmas-ornament-card/joy.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper with gold accents" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Red ornament with gold streamers and stars, blue splatter and “JOY” with a little tree" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+    ],
+    alts: {
+      "/images/products/pink-christmas-ornament-card/script-joy.jpg":
+        "Hand-painted watercolour Christmas card of a pink ornament with gold accents, gold ribbons and black sparkles, with “Joy” in handwritten script, on a wooden table with a pine branch, a gold pine cone, red berries and a star lantern",
+      "/images/products/pink-christmas-ornament-card/happy-holidays.jpg":
+        "Hand-painted watercolour Christmas card with rounded corners: a red ornament with a gold outline, gold streamers and stars, blue splatter and “Happy Holidays” lettering, on a wooden table with pine branches, a snowy pine cone, red berries and a candle",
+      "/images/products/pink-christmas-ornament-card/happy-holidays-close.jpg":
+        "Another view of the rounded “Happy Holidays” red ornament card on a wooden table with pine branches, a pine cone, red berries and a snowflake candle holder",
+      "/images/products/pink-christmas-ornament-card/joy.jpg":
+        "Hand-painted watercolour Christmas card of a red ornament with gold streamers and stars, blue and gold splatter and “JOY” with a small Christmas tree, on a wooden table with pine branches, pine cones, red berries and a candle",
+      "/images/products/pink-christmas-ornament-card/back.jpg":
+        "Blank white back of the ornament card on a wooden table, with green leaves, a candle, a knitted blanket and a black pen",
+      "/images/products/pink-christmas-ornament-card/rounded-back.jpg":
+        "Back of the rounded-corner ornament card: a message area above a line, “To:” address lines and a dashed stamp box, on a wooden table with dried flowers, a candle and eucalyptus",
+    },
+    description:
+      "Celebrate the joy of Christmas with this charming hand-painted watercolour card featuring a beautiful pink ornament with delicate gold accents, festive sparkles, and elegant handwritten “Joy” lettering. Each card is individually painted, making it a unique and thoughtful holiday greeting for family, friends, or someone special.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper with gold accents" },
+      { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+      { label: "Designs", value: "Script Joy, Happy Holidays, Joy" },
+    ],
+  },
+  {
+    slug: "gingerbread-man-christmas-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "christmas",
+    title: "Gingerbread Man Christmas Card",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/gingerbread-man-christmas-card/red-scarf.jpg",
+    // The blank back of the card, shown after the chosen design.
+    gallery: ["/images/products/gingerbread-man-christmas-card/back.jpg"],
+    badge: "New",
+    designs: [
+      {
+        id: "red-scarf",
+        name: "Merry Christmas Gingerbread",
+        image: "/images/products/gingerbread-man-christmas-card/red-scarf.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Gingerbread man in a red scarf with a handwritten Christmas greeting" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+      {
+        id: "pine-branches",
+        name: "Gingerbread with Pine Branches",
+        image: "/images/products/gingerbread-man-christmas-card/pine-branches.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Gingerbread man in a red scarf between pine branches with red ornaments" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+    ],
+    alts: {
+      "/images/products/gingerbread-man-christmas-card/red-scarf.jpg":
+        "Hand-painted watercolour Christmas card of a smiling gingerbread man with rosy cheeks and a red scarf, with a handwritten Christmas greeting below, on a wooden table with a pine branch, red berries, a pine cone, a lit candle and a wooden star",
+      "/images/products/gingerbread-man-christmas-card/pine-branches.jpg":
+        "Hand-painted watercolour Christmas card of a smiling gingerbread man in a red scarf between two green pine branches hung with red ornaments, on a wooden table with a pine cone, a red bauble and pine branches",
+      "/images/products/gingerbread-man-christmas-card/back.jpg":
+        "Blank white back of the gingerbread man card on a wooden table, with green leaves, a candle, a knitted blanket and a black pen",
+    },
+    description:
+      "Adorable hand-painted Christmas card featuring a cheerful gingerbread man wearing a red scarf. Created with watercolour on textured paper, this original artwork brings a warm, playful touch to holiday greetings. Each card is individually painted by hand, making it a unique little piece of art. Perfect for Christmas gifts, holiday wishes, or festive decorations.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+      { label: "Designs", value: "Merry Christmas Gingerbread, Gingerbread with Pine Branches" },
+    ],
+  },
+  {
+    slug: "joyful-christmas-tree-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "christmas",
+    title: "Ho Ho Ho! Joyful Christmas Tree",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/joyful-christmas-tree-card/main.jpg",
+    // The blank inside of the folded card, shown after the front.
+    gallery: ["/images/products/joyful-christmas-tree-card/inside.jpg"],
+    badge: "New",
+    alts: {
+      "/images/products/joyful-christmas-tree-card/main.jpg":
+        "Hand-painted watercolour Christmas card of a turquoise Christmas tree with red and gold ornaments, a golden star and little presents underneath, on a pink and purple background with gold splatter and the words “Ho-Ho-Ho”, “Joy” and “Happy” in ink, on a wooden table",
+      "/images/products/joyful-christmas-tree-card/inside.jpg":
+        "The blank white inside of the folded card, opened flat on a wooden table",
+    },
+    description:
+      "Celebrate the magic of Christmas with this original hand-painted watercolour card featuring a festive turquoise Christmas tree decorated with colourful ornaments, a golden star, and tiny presents. The soft pink and purple background, shimmering gold accents, and cheerful holiday lettering create a playful, joyful design. Each card is individually hand-painted, making it a unique Christmas greeting or thoughtful handmade gift.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper with gold accents" },
+      { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+      { label: "Design", value: "Turquoise Christmas tree with “Ho-Ho-Ho”, “Joy” and “Happy” lettering" },
+      { label: "Inside", value: "Folded card, blank inside for your own message" },
+    ],
+  },
+  {
     slug: "winter-forest-christmas-card",
     letterGrams: 15, // TODO: estimate — weigh a real card
     collection: "christmas",
