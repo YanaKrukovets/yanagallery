@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { m } from "motion/react";
 import { useState } from "react";
-import { altOf, photosOf, sizeOf, type Product } from "@/content/products";
+import { altOf, photosOf, sizeOf, type Design, type Product } from "@/content/products";
 import { shop } from "@/content/site";
 import { useAddToBag } from "@/features/cart/useAddToBag";
 import { cad } from "@/lib/format";
@@ -13,17 +13,21 @@ import { PhotoDots } from "./PhotoDots";
 
 export function ProductCard({
   product,
+  design,
   index = 0,
   headingLevel: Heading = "h3",
 }: {
   product: Product;
+  /** Show this one design of the product: its photo, its name, and "Add to bag" adds it directly. */
+  design?: Design;
   index?: number;
   headingLevel?: "h2" | "h3";
 }) {
-  const { onAdd, label, disabled } = useAddToBag(product);
-  const photos = photosOf(product);
+  const { onAdd, label, disabled } = useAddToBag(product, design?.id);
+  const photos = design ? [design.image, ...(design.gallery ?? product.gallery ?? [])] : photosOf(product);
   const [shown, setShown] = useState(0);
-  const href = `/products/${product.slug}`;
+  const href = design ? `/products/${product.slug}?design=${design.id}` : `/products/${product.slug}`;
+  const name = design ? `${product.title}, ${design.name} design` : product.title;
   const badge = product.sold ? "Sold" : product.badge;
   const meta = [sizeOf(product), product.original && "One of a kind"].filter(Boolean).join(" · ");
 
@@ -47,7 +51,7 @@ export function ProductCard({
             <Image
               key={src}
               src={src}
-              alt={altOf(product, src, i === 0 ? `${product.title} by ${shop.artist}` : `${product.title}, photo ${i + 1}`)}
+              alt={altOf(product, src, i === 0 ? `${name} by ${shop.artist}` : `${name}, photo ${i + 1}`)}
               fill
               sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
               className={`object-cover transition-[opacity,transform] duration-[1.2s] ease-out group-hover:scale-105 ${
@@ -65,7 +69,7 @@ export function ProductCard({
         <button
           onClick={onAdd}
           disabled={disabled}
-          aria-label={`${label}: ${product.title}`}
+          aria-label={`${label}: ${name}`}
           className="absolute inset-x-3 bottom-3 translate-y-3 rounded-full bg-ink py-2 text-[10px] uppercase tracking-[0.18em] text-cream opacity-0 transition-all duration-500 hover:bg-bronze focus:translate-y-0 focus:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 disabled:bg-ink/70 sm:inset-x-4 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100"
         >
           {label}
@@ -76,9 +80,10 @@ export function ProductCard({
         <div>
           <Heading className="font-serif text-base leading-tight sm:text-lg">
             <Link href={href} className="hover:text-bronze">
-              {product.title}
+              {design?.name ?? product.title}
             </Link>
           </Heading>
+          {design && <p className="mt-1 text-sm text-ink-soft">{product.title}</p>}
           <p className="mt-1 text-xs text-muted">{product.medium}</p>
           {meta && <p className="mt-0.5 text-xs text-muted">{meta}</p>}
         </div>

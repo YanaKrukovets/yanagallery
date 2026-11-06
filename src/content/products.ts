@@ -168,6 +168,115 @@ export const bestSellers: Product[] = [
 // Only the first 4 are shown on the home page, so put the newest at the top.
 export const newArrivals: Product[] = [
   {
+    slug: "christmas-cardinal-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "christmas",
+    title: "Christmas Cardinal",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/christmas-cardinal-card/ornaments-below.jpg",
+    // The blank back of the card, shown after the chosen design.
+    gallery: ["/images/products/christmas-cardinal-card/back.jpg"],
+    badge: "New",
+    designs: [
+      {
+        id: "ornaments-below",
+        name: "Cardinal with Ornament Cluster",
+        image: "/images/products/christmas-cardinal-card/ornaments-below.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Red cardinal on an evergreen branch, with three red ornaments clustered at the end of the branch" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+      {
+        id: "ornaments-hanging",
+        name: "Cardinal with Hanging Ornaments",
+        image: "/images/products/christmas-cardinal-card/ornaments-hanging.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Wide-eyed red cardinal on an evergreen branch, with three red ornaments hanging along the branch" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+    ],
+    alts: {
+      "/images/products/christmas-cardinal-card/ornaments-below.jpg":
+        "Hand-painted watercolour Christmas card of a red cardinal perched on an evergreen branch with three red ornaments hanging at its tip, on a wooden table with a pine branch, a snowy pine cone, twine, a knitted blanket and red berries",
+      "/images/products/christmas-cardinal-card/ornaments-hanging.jpg":
+        "Hand-painted watercolour Christmas card of a wide-eyed red cardinal perched on an evergreen branch with three red ornaments hanging along it, on a wooden table with snowy pine branches and a pine cone",
+      "/images/products/christmas-cardinal-card/back.jpg":
+        "Blank white back of the cardinal card on a wooden table, with green leaves, a candle, a knitted blanket and a black pen",
+    },
+    description:
+      "A charming handmade Christmas card featuring a cheerful red cardinal perched on an evergreen branch decorated with red Christmas ornaments. Each card is individually hand-painted with watercolours, making it a unique and thoughtful holiday greeting for family and friends.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+      { label: "Designs", value: "Ornament Cluster, Hanging Ornaments" },
+    ],
+  },
+  {
+    slug: "snowy-winter-cottage-card",
+    letterGrams: 15, // TODO: estimate — weigh a real card
+    collection: "christmas",
+    title: "Snowy Winter Cottage",
+    medium: "Hand-painted watercolour Christmas card",
+    price: 3,
+    image: "/images/products/snowy-winter-cottage-card/bare-tree.jpg",
+    // The blank back of the card, shown after the chosen design.
+    gallery: ["/images/products/snowy-winter-cottage-card/back.jpg"],
+    badge: "New",
+    designs: [
+      {
+        id: "bare-tree",
+        name: "Cottage with Bare Tree",
+        image: "/images/products/snowy-winter-cottage-card/bare-tree.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Snow-covered cottage and evergreens under a deep blue and purple sky, with a winding path and a bare winter tree" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+      {
+        id: "fence",
+        name: "Cottage with Snowy Fence",
+        image: "/images/products/snowy-winter-cottage-card/fence.jpg",
+        details: [
+          { label: "Artwork", value: "Original, hand-painted" },
+          { label: "Medium", value: "Watercolour on paper" },
+          { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+          { label: "Design", value: "Snow-covered cottage among evergreens under a soft blue and purple sky, with a wooden fence across the snow" },
+          { label: "Back", value: "Blank, with plenty of room for your own message" },
+        ],
+      },
+    ],
+    alts: {
+      "/images/products/snowy-winter-cottage-card/bare-tree.jpg":
+        "Hand-painted watercolour Christmas card of a snow-covered cottage and evergreen trees under a speckled blue and purple night sky, with a fence, a winding snowy path and a bare tree, on a wooden table with a snowy pine branch, a pine cone and a lit candle",
+      "/images/products/snowy-winter-cottage-card/fence.jpg":
+        "Hand-painted watercolour Christmas card of a snow-covered cottage among evergreen trees under a soft blue and purple sky with falling snow and a wooden fence across the snow, on a wooden table with snowy pine branches and a pine cone",
+      "/images/products/snowy-winter-cottage-card/back.jpg":
+        "Blank white back of the snowy cottage card on a wooden table, with green leaves, a candle, a knitted blanket and a black pen",
+    },
+    description:
+      "A beautiful hand-painted watercolour Christmas card featuring a cozy snow-covered cottage surrounded by evergreen trees, a peaceful snowy landscape, and a dreamy blue and purple winter sky. Each card is an original, one-of-a-kind artwork, perfect for sending warm holiday wishes or gifting to someone special. Handmade with care, bringing a little winter magic to the holiday season.",
+    details: [
+      { label: "Artwork", value: "Original, hand-painted (not a print)" },
+      { label: "Medium", value: "Watercolour on paper" },
+      { label: "Size", value: "3.94 × 5.91 in (10 × 15 cm)" },
+      { label: "Style", value: "Winter landscape, Christmas, handmade art" },
+      { label: "Designs", value: "Cottage with Bare Tree, Cottage with Snowy Fence" },
+    ],
+  },
+  {
     slug: "pink-christmas-ornament-card",
     letterGrams: 15, // TODO: estimate — weigh a real card
     collection: "christmas",

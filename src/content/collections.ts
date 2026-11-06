@@ -15,6 +15,8 @@ export type Collection = {
   image: string;
   /** Shown in the home page "Shop by collection" section (keep it to four). */
   onHome?: boolean;
+  /** Show each design of a product as its own card on the collection page. */
+  showDesigns?: boolean;
 };
 
 export const collections: Collection[] = [
@@ -25,6 +27,7 @@ export const collections: Collection[] = [
     blurb: "Watercolour Christmas cards and postcards — snowy forests, gnomes, penguins and painted trees.",
     image: "/images/collections/christmas.jpg",
     onHome: true,
+    showDesigns: true,
   },
   {
     slug: "folk-florals",

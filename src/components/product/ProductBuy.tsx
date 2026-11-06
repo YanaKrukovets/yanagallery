@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type ReactNode } from "react";
+import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { altOf, photosOf, type Product } from "@/content/products";
 import { onlinePayments, shop } from "@/content/site";
 import { mailtoHref } from "@/lib/format";
@@ -29,8 +29,12 @@ export function ProductBuy({
   children?: ReactNode;
 }) {
   const designs = product.designs;
-  const [designId, setDesignId] = useState(designs?.[0]?.id);
-  const design = designs?.find((d) => d.id === designId);
+  // A link like /products/x?design=joy (from a collection card) opens on that design.
+  // Read in the browser only, so the page can stay static.
+  const linked = useSyncExternalStore(noSubscribe, linkedDesign, () => null);
+  const [picked, setDesignId] = useState<string>();
+  const design =
+    designs?.find((d) => d.id === picked) ?? designs?.find((d) => d.id === linked) ?? designs?.[0];
   const srcs = design ? [design.image, ...(design.gallery ?? product.gallery ?? [])] : photosOf(product);
   const description = design?.description ?? product.description;
   const details = design?.details ?? product.details;
@@ -115,3 +119,6 @@ export function ProductBuy({
     </div>
   );
 }
+
+const noSubscribe = () => () => {};
+const linkedDesign = () => new URLSearchParams(window.location.search).get("design");

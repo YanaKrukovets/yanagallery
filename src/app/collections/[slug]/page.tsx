@@ -32,6 +32,7 @@ export default async function CollectionPage({ params }: PageProps<"/collections
   const collection = getCollection((await params).slug);
   if (!collection) notFound();
   const items = availableFirst(await withSales(productsIn(collection.slug)));
+  const count = collection.showDesigns ? items.reduce((n, p) => n + (p.designs?.length ?? 1), 0) : items.length;
 
   return (
     <>
@@ -52,11 +53,11 @@ export default async function CollectionPage({ params }: PageProps<"/collections
           <SectionHead
           as="h1"
             title={[{ accent: collection.title }]}
-            intro={`${collection.blurb} Hand-painted in Ottawa. ${items.length} ${items.length === 1 ? "piece" : "pieces"}.`}
+            intro={`${collection.blurb} Hand-painted in Ottawa. ${count} ${count === 1 ? "piece" : "pieces"}.`}
           />
         </div>
         <CollectionTabs active={collection.slug} />
-        <ShowMoreGrid products={items} headingLevel="h2" />
+        <ShowMoreGrid products={items} headingLevel="h2" expandDesigns={collection.showDesigns} />
       </main>
       <Footer />
     </>

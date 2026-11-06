@@ -58,28 +58,32 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
             { name: post.title, path: `/blog/${post.slug}` },
           ])}
         />
-        <article className="mx-auto max-w-3xl">
-          <Link href="/blog" className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink">
-            ← All posts
-          </Link>
-          <p className="mt-10 text-xs uppercase tracking-[0.2em] text-muted">
-            <time dateTime={post.date}>{postDate(post.date)}</time> · {post.minutes} min read
-          </p>
-          <h1 className="mt-4 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">{post.title}</h1>
+        <article>
+          <div className="mx-auto max-w-[1000px]">
+            <Link href="/blog" className="text-xs uppercase tracking-[0.2em] text-ink-soft hover:text-ink">
+              ← All posts
+            </Link>
+            <p className="mt-10 text-xs uppercase tracking-[0.2em] text-muted">
+              <time dateTime={post.date}>{postDate(post.date)}</time> · {post.minutes} min read
+            </p>
+          </div>
           {post.image && (
-            <div className="relative mt-10 aspect-[4/3] overflow-hidden bg-sand/60">
+            <div className="relative mt-6 aspect-[760/320] overflow-hidden rounded-xl bg-sand/60">
               <Image
                 src={post.image.src}
                 alt={post.image.alt}
                 fill
                 priority
-                sizes="(min-width: 768px) 768px, 100vw"
+                sizes="(min-width: 1280px) 1216px, 100vw"
                 className="object-cover"
               />
             </div>
           )}
-          <div className="mt-10 space-y-5 text-lg leading-relaxed text-ink-soft">
-            <Body />
+          <div className="mx-auto max-w-[1000px]">
+            <h1 className="mt-10 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">{post.title}</h1>
+            <div className="mt-10 space-y-5 text-lg leading-relaxed text-ink-soft">
+              <Body />
+            </div>
           </div>
         </article>
 
